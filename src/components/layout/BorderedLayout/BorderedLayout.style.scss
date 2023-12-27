@@ -1,0 +1,8 @@
+.borderedLayout {
+	display: flex;
+	position: relative;
+	width: 100%;
+	background: var(--white);
+	border: var(--border);
+	border-radius: var(--borderRadius-wide);
+}

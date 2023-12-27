@@ -1,0 +1,18 @@
+.MuiAlert-message {
+	padding: 0 !important;
+	font-size: 20px !important;
+	font-weight: 700 !important;
+	line-height: 32px !important;
+	color: var(--white) !important;
+}
+.MuiAlert-icon {
+	padding: 0 !important;
+	margin: 0 !important;
+}
+.MuiAlert-root {
+	display: flex !important;
+	gap: 8px !important;
+	padding: 8px 16px 8px 8px !important;
+	background: var(--primary-dark-transparent-50) !important;
+	border-radius: var(--borderRadius-wide) !important;
+}

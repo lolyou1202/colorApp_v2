@@ -1,0 +1,15 @@
+.picker {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: calc(100vh - 208px);
+	&__wrap {
+		display: flex;
+		flex-direction: column;
+		gap: 32px;
+	}
+	&__buttons {
+		display: flex;
+		justify-content: space-between;
+	}
+}

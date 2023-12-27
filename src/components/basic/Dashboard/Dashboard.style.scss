@@ -1,0 +1,26 @@
+.palette {
+	display: flex;
+	flex-direction: column;
+	gap: 48px;
+	height: calc(100vh - 208px);
+	&__buttons {
+		position: relative;
+		display: flex;
+		justify-content: center;
+		&-center {
+			display: flex;
+			gap: 32px;
+		}
+		&-right {
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			display: flex;
+			gap: 32px;
+		}
+	}
+}
+.dashboard {
+	display: flex;
+	height: 100%;
+}

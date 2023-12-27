@@ -1,0 +1,52 @@
+.primaryButton {
+	position: relative;
+	display: flex;
+	width: 160px;
+	background: linear-gradient(180deg, #b6b6b6 86.66%, #8c8c8c 100%);
+	border: var(--border);
+	border-radius: var(--borderRadius-wide);
+	cursor: pointer;
+	&__platform {
+		position: absolute;
+		left: -4px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+		width: calc(100% + 8px);
+		background: var(--white);
+		border: var(--border);
+		border-radius: var(--borderRadius-wide);
+		transition: all .2s ease-in;
+		&-content {
+			font-weight: 700;
+			color: var(--primary-dark);
+			text-transform: capitalize;
+		}
+		&.onPress {
+			bottom: 2px !important;
+		}
+	}
+	&.large {
+		height: 64px;
+		.primaryButton__platform {
+			bottom: 12px;
+			height: 64px;
+		}
+		.primaryButton__platform-content {
+			font-size: 24px;
+			line-height: 32px;
+		}
+	}
+	&.small {
+		height: 48px;
+		.primaryButton__platform {
+			bottom: 6px;
+			height: 48px;
+		}
+		.primaryButton__platform-content {
+			font-size: 20px;
+			line-height: 24px;
+		}
+	}
+}
