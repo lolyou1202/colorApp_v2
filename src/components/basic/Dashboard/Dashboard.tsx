@@ -1,7 +1,7 @@
 import './Dashboard.style.scss'
 import { BorderedLayout } from '../../layout/BorderedLayout/BorderedLayout'
 import { useAppSelector } from '../../../redux/hooks/useAppRedux'
-import { SingleColorInPalette } from '../ColorInPalette/ColorInPalette'
+import { ColorInDashboard } from '../ColorInPalette/ColorInDashboard'
 
 export const Dashboard = () => {
 	const palette = useAppSelector(state => state.paletteReducer.palette)
@@ -9,9 +9,9 @@ export const Dashboard = () => {
 	return (
 		<BorderedLayout className='dashboard'>
 			{palette.map(colorInPalette => (
-				<SingleColorInPalette
+				<ColorInDashboard
 					key={colorInPalette.id}
-					colorInPalette={colorInPalette}
+					colorInDashboard={colorInPalette}
 				/>
 			))}
 		</BorderedLayout>

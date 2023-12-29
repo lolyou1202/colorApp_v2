@@ -3,14 +3,9 @@
 	flex-direction: column;
 	gap: 48px;
 	height: calc(100vh - 208px);
-	
 }
 .dashboard {
 	display: flex;
 	height: 100%;
 	overflow: hidden;
-	&-SingleColor {
-		width: 100%;
-		height: 100%;
-	}
 }

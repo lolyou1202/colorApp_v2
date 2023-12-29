@@ -1,0 +1,18 @@
+.buttonInColor {
+	display: flex;
+	border: none;
+	border-radius: var(--borderRadius-wide);
+	background: var(--primary-dark-transparent-10);
+	cursor: pointer;
+	p {
+		font-size: 40px;
+		font-weight: 700;
+		line-height: 40px;
+	}
+	&.withIcon {
+		padding: 8px;
+	}
+	&.withText {
+		padding: 16px 24px;
+	}
+}
