@@ -3,8 +3,9 @@ import './PrimaryButton.style.scss'
 import classNames from 'classnames'
 
 interface IPrimaryButton {
-	size?: 'large' | 'small'
 	onClickRule?: 'localState' | 'controllState'
+	size?: 'large' | 'small'
+	width?: string
 	pressed?: boolean
 	content?: string
 	ico?: ReactNode
@@ -12,8 +13,9 @@ interface IPrimaryButton {
 }
 
 export const PrimaryButton: FC<IPrimaryButton> = ({
-	size = 'large',
 	onClickRule = 'localState',
+	size = 'large',
+	width = '160px',
 	pressed,
 	content,
 	ico,
@@ -40,7 +42,10 @@ export const PrimaryButton: FC<IPrimaryButton> = ({
 	})
 
 	return (
-		<button className={primaryButtonClassNames} onClick={onPressButton}>
+		<button
+			className={primaryButtonClassNames}
+			style={{ width: width }}
+			onClick={onPressButton}>
 			<div className={platformClassNames}>
 				{content && (
 					<p className='primaryButton__platform-content'>{content}</p>
