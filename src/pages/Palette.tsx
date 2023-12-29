@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useAppDispatch } from '../redux/hooks/useAppRedux'
+import { useAppDispatch, useAppSelector } from '../redux/hooks/useAppRedux'
 import { EnumLocation, setLocation } from '../redux/slices/locationSlice'
 import { Dashboard } from '../components/basic/Dashboard/Dashboard'
 import { PaletteButtons } from '../components/basic/PaletteButtons/PaletteButtons'
@@ -8,6 +8,8 @@ import { useGenerateMatrixOfPalette } from '../hooks/useGenerateMatrixOfPalette'
 import { fetchPalette } from '../redux/slices/paletteSlice'
 
 export const Palette = () => {
+	const palette = useAppSelector(store => store.paletteReducer.palette)
+
 	const dispatch = useAppDispatch()
 
 	const fetchPaletteTemplate = useGeneratePaletteTemplate()
@@ -18,14 +20,27 @@ export const Palette = () => {
 	}, [])
 
 	const onClickGenerate = () => {
-		dispatch(
-			fetchPalette({
-				numColors: 5,
-				mode: 'diffusion',
-				adjacency: fetchPaletteAdjacency([0, 0, 0, 0, 0], 30),
-				palette: fetchPaletteTemplate([]),
-			})
-		)
+		if (palette.length < 2) {
+			dispatch(
+				fetchPalette({
+					numColors: 5,
+					mode: 'diffusion',
+					temperature: '0.2',
+					adjacency: fetchPaletteAdjacency(5, 50),
+					palette: fetchPaletteTemplate([]),
+				})
+			)
+		} else {
+			dispatch(
+				fetchPalette({
+					numColors: palette.length,
+					mode: 'diffusion',
+					temperature: '0.2',
+					adjacency: fetchPaletteAdjacency(palette.length, 50),
+					palette: fetchPaletteTemplate(palette),
+				})
+			)
+		}
 	}
 
 	return (
