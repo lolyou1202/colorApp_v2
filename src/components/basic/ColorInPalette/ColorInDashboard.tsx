@@ -1,6 +1,5 @@
 import { FC, useState } from 'react'
 import './ColorInDashboard.style.scss'
-import { IColorInPalette } from '../../../redux/slices/paletteSlice'
 import { ButtonInColor } from '../../ui/ButtonInColor/ButtonInColor'
 import { Copy } from '../../icons/Copy'
 import { ArrowLeft } from '../../icons/ArrowLeft'
@@ -9,9 +8,10 @@ import { LockOpen } from '../../icons/LockOpen'
 import { Import } from '../../icons/Import'
 import { Heart } from '../../icons/Heart'
 import { Cross } from '../../icons/Cross'
+import { IColor } from '../../../types/types'
 
 interface IColorInDashboard {
-	colorInDashboard: IColorInPalette
+	colorInDashboard: IColor
 }
 
 export const ColorInDashboard: FC<IColorInDashboard> = ({
@@ -24,16 +24,18 @@ export const ColorInDashboard: FC<IColorInDashboard> = ({
 			className='colorInDashboard'
 			onMouseEnter={() => setVisible(true)}
 			onMouseLeave={() => setVisible(false)}
-			style={{ backgroundColor: `#${colorInDashboard.HEX}` }}>
+			style={{ backgroundColor: `#${colorInDashboard.HEX}` }}
+		>
 			<ButtonInColor
 				type='withIcon'
 				icon={
 					<Cross
 						size={32}
-						stroke={colorInDashboard.contrastHEX}
+						stroke={colorInDashboard.variant.contrastHEX}
 						strokeWidth={3}
 					/>
 				}
+				colorVariant={colorInDashboard.variant}
 				isVisible={visible}
 			/>
 			<ButtonInColor
@@ -41,10 +43,11 @@ export const ColorInDashboard: FC<IColorInDashboard> = ({
 				icon={
 					<Heart
 						size={32}
-						stroke={colorInDashboard.contrastHEX}
+						stroke={colorInDashboard.variant.contrastHEX}
 						strokeWidth={3}
 					/>
 				}
+				colorVariant={colorInDashboard.variant}
 				isVisible={visible}
 			/>
 			<ButtonInColor
@@ -52,10 +55,11 @@ export const ColorInDashboard: FC<IColorInDashboard> = ({
 				icon={
 					<Import
 						size={32}
-						stroke={colorInDashboard.contrastHEX}
+						stroke={colorInDashboard.variant.contrastHEX}
 						strokeWidth={3}
 					/>
 				}
+				colorVariant={colorInDashboard.variant}
 				isVisible={visible}
 			/>
 			<ButtonInColor
@@ -63,10 +67,11 @@ export const ColorInDashboard: FC<IColorInDashboard> = ({
 				icon={
 					<Copy
 						size={32}
-						stroke={colorInDashboard.contrastHEX}
+						stroke={colorInDashboard.variant.contrastHEX}
 						strokeWidth={3}
 					/>
 				}
+				colorVariant={colorInDashboard.variant}
 				isVisible={visible}
 			/>
 			<ButtonInColor
@@ -74,16 +79,17 @@ export const ColorInDashboard: FC<IColorInDashboard> = ({
 				icon={
 					<LockOpen
 						size={32}
-						stroke={colorInDashboard.contrastHEX}
+						stroke={colorInDashboard.variant.contrastHEX}
 						strokeWidth={3}
 					/>
 				}
+				colorVariant={colorInDashboard.variant}
 				isVisible={visible}
 			/>
 			<ButtonInColor
 				type='withText'
 				text={colorInDashboard.HEX}
-				contrastColor={colorInDashboard.contrastHEX}
+				colorVariant={colorInDashboard.variant}
 				isVisible
 			/>
 			<div className='colorInDashboard-arrows'>
@@ -92,10 +98,11 @@ export const ColorInDashboard: FC<IColorInDashboard> = ({
 					icon={
 						<ArrowLeft
 							size={32}
-							stroke={colorInDashboard.contrastHEX}
+							stroke={colorInDashboard.variant.contrastHEX}
 							strokeWidth={3}
 						/>
 					}
+					colorVariant={colorInDashboard.variant}
 					isVisible={visible}
 				/>
 				<ButtonInColor
@@ -103,10 +110,11 @@ export const ColorInDashboard: FC<IColorInDashboard> = ({
 					icon={
 						<ArrowRight
 							size={32}
-							stroke={colorInDashboard.contrastHEX}
+							stroke={colorInDashboard.variant.contrastHEX}
 							strokeWidth={3}
 						/>
 					}
+					colorVariant={colorInDashboard.variant}
 					isVisible={visible}
 				/>
 			</div>

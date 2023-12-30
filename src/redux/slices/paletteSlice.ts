@@ -2,17 +2,10 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { API_Huemint } from '../api/api'
 import { useContrast } from '../../hooks/useContrast'
-
-export interface IColorInPalette {
-	id: number
-	HEX: string
-	contrastHEX: string
-	lock?: boolean
-	saved?: boolean
-}
+import { IColor } from '../../types/types'
 
 interface IInitialState {
-	palette: IColorInPalette[]
+	palette: IColor[]
 	loading: boolean
 }
 
@@ -82,13 +75,16 @@ const paletteSlice = createSlice({
 		})
 		builder.addCase(fetchPalette.fulfilled, (state, { payload }) => {
 			state.loading = false
-			state.palette = payload.results[0].palette.map((color, index) => ({
-				id: index,
-				HEX: color.replace(/[^a-zA-Z0-9]/g, '').toUpperCase(),
-				contrastHEX: useContrast(color).toUpperCase(),
-				lock: false,
-				saved: false,
-			}))
+
+			state.palette = payload.results[0].palette.map((color, index) => {
+				return {
+					id: index,
+					HEX: color.replace(/[^a-zA-Z0-9]/g, '').toUpperCase(),
+					variant: useContrast(color),
+					lock: false,
+					saved: false,
+				}
+			})
 		})
 	},
 })

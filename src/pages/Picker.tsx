@@ -107,7 +107,6 @@ export const Picker = () => {
 		event?: React.SyntheticEvent | Event,
 		reason?: string
 	) => {
-		console.log(reason)
 		if (reason === 'clickaway') {
 			setAlertState(prevState => ({ ...prevState, open: false }))
 			return
@@ -139,10 +138,11 @@ export const Picker = () => {
 					onChange={HEXToRGB}
 					placeholder='HEX'
 					backgroundColor={color.HEX}
-					contrastColor={color.contrast}>
+					colorVariant={color.variant}
+				>
 					<Hash
 						size={40}
-						stroke={color.contrast}
+						stroke={color.variant.contrastHEX}
 						strokeWidth={4}
 					/>
 				</PickerInput>
@@ -152,10 +152,11 @@ export const Picker = () => {
 					onClickCopy={onClickCopy}
 					placeholder='RGB'
 					backgroundColor={color.HEX}
-					contrastColor={color.contrast}>
+					colorVariant={color.variant}
+				>
 					<Drop
 						size={40}
-						stroke={color.contrast}
+						stroke={color.variant.contrastHEX}
 						strokeWidth={4}
 					/>
 				</PickerInput>

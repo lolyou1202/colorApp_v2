@@ -2,12 +2,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { useContrast } from '../../hooks/useContrast'
 import axios from 'axios'
 import { useRGBtoHEX } from '../../hooks/useRGBtoHex'
-
-export interface IColor {
-	type: 'light' | 'dark' | ''
-	HEX: string
-	contrast: string
-}
+import { IColor } from '../../types/types'
 
 interface IInitialState {
 	color: IColor
@@ -16,9 +11,11 @@ interface IInitialState {
 
 const initialState: IInitialState = {
 	color: {
-		type: '',
 		HEX: '',
-		contrast: '#353535',
+		variant: {
+			brightness: 'light',
+			contrastHEX: '#353535',
+		},
 	},
 	loading: false,
 }
@@ -49,7 +46,7 @@ const colorSlice = createSlice({
 	reducers: {
 		setColor(state, { payload }: PayloadAction<{ color: string }>) {
 			state.color.HEX = payload.color
-			state.color.contrast = useContrast(payload.color)
+			state.color.variant = useContrast(payload.color)
 		},
 	},
 	extraReducers: builder => {
@@ -64,10 +61,10 @@ const colorSlice = createSlice({
 					payload.result[0][1],
 					payload.result[0][2]
 				)
-				state.color.HEX = HEX
 
-				state.color.contrast = useContrast(
-					HEX.replace(/[^a-zA-Z0-9]/g, '').toUpperCase()
+				state.color.HEX = HEX
+				state.color.variant = useContrast(
+					HEX.replace(/[^a-zA-Z0-9]/g, '')
 				)
 			})
 			.addCase(fetchRandom.rejected, state => {
