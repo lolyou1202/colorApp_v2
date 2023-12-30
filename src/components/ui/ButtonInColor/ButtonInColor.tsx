@@ -7,6 +7,7 @@ interface IButtonInColor {
 	text?: string
 	icon?: ReactNode
 	contrastColor?: string
+	isVisible?: boolean
 	onClick?: () => void
 }
 
@@ -15,11 +16,13 @@ export const ButtonInColor: FC<IButtonInColor> = ({
 	icon,
 	text,
 	contrastColor,
+	isVisible,
 	onClick,
 }) => {
 	const buttonInColorClassNames = classNames({
 		buttonInColor: true,
 		[type]: true,
+		visible: isVisible,
 	})
 
 	return (

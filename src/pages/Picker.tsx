@@ -13,7 +13,7 @@ import { PickerButtons } from '../components/basic/PickerButtons/PickerButtons'
 import { CustomAlert } from '../components/ui/CustomAlert/CustomAlert'
 
 export const Picker = () => {
-	const pickerColor = useAppSelector(store => store.pickerReducer)
+	const { color } = useAppSelector(store => store.pickerReducer)
 
 	const { colorId } = useParams()
 
@@ -50,13 +50,13 @@ export const Picker = () => {
 				navigate(`/picker/${validValue}`)
 			}
 
-			if (validValue !== pickerColor.color) {
+			if (validValue !== color.HEX) {
 				dispatch(setColor({ color: validValue }))
 			}
 
 			setRGBInputState(`${r}, ${g}, ${b}`)
 		},
-		[pickerColor.color]
+		[color]
 	)
 
 	const RGBToHEX = useCallback((value: string) => {
@@ -120,16 +120,16 @@ export const Picker = () => {
 	}, [])
 
 	useEffect(() => {
-		if (colorId !== pickerColor.color) {
-			if (pickerColor.color) {
-				HEXToRGB(pickerColor.color)
+		if (colorId !== color.HEX) {
+			if (color.HEX) {
+				HEXToRGB(color.HEX)
 			} else {
 				HEXToRGB(colorId || '')
 			}
 		} else {
-			HEXToRGB(pickerColor.color)
+			HEXToRGB(color.HEX)
 		}
-	}, [HEXToRGB, pickerColor.color, colorId])
+	}, [HEXToRGB, color.HEX, colorId])
 
 	return (
 		<div className='picker'>
@@ -138,11 +138,11 @@ export const Picker = () => {
 					inputValue={HEXInputState}
 					onChange={HEXToRGB}
 					placeholder='HEX'
-					backgroundColor={pickerColor.color}
-					contrastColor={pickerColor.contrastColor}>
+					backgroundColor={color.HEX}
+					contrastColor={color.contrast}>
 					<Hash
 						size={40}
-						stroke={pickerColor.contrastColor}
+						stroke={color.contrast}
 						strokeWidth={4}
 					/>
 				</PickerInput>
@@ -151,11 +151,11 @@ export const Picker = () => {
 					onChange={RGBToHEX}
 					onClickCopy={onClickCopy}
 					placeholder='RGB'
-					backgroundColor={pickerColor.color}
-					contrastColor={pickerColor.contrastColor}>
+					backgroundColor={color.HEX}
+					contrastColor={color.contrast}>
 					<Drop
 						size={40}
-						stroke={pickerColor.contrastColor}
+						stroke={color.contrast}
 						strokeWidth={4}
 					/>
 				</PickerInput>

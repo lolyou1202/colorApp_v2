@@ -2,8 +2,12 @@
 	display: flex;
 	border: none;
 	border-radius: var(--borderRadius-wide);
-	background: var(--primary-dark-transparent-10);
+	background: transparent;
 	cursor: pointer;
+	opacity: 0;
+	transition:
+		background 0.2s ease-in-out,
+		opacity 0.2s ease-in-out;
 	p {
 		font-size: 40px;
 		font-weight: 700;
@@ -14,5 +18,11 @@
 	}
 	&.withText {
 		padding: 16px 24px;
+	}
+	&:hover {
+		background: var(--primary-dark-transparent-10);
+	}
+	&.visible {
+		opacity: 1;
 	}
 }
