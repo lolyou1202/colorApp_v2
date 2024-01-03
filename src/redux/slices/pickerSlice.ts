@@ -1,8 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { useContrast } from '../../hooks/useContrast'
-import axios from 'axios'
-import { useRGBtoHEX } from '../../hooks/useRGBtoHex'
 import { IColor } from '../../types/types'
+import chroma from 'chroma-js'
 
 interface IInitialState {
 	color: IColor
@@ -24,16 +23,12 @@ export interface fetchRandomResults {
 	result: number[][]
 }
 
-export const fetchRandom = createAsyncThunk<fetchRandomResults>(
+export const fetchRandom = createAsyncThunk<string>(
 	'openedColor/fetchRandom',
 	async (_, { rejectWithValue }) => {
 		try {
-			const response = await axios({
-				method: 'post',
-				url: 'http://colormind.io/api/',
-				data: JSON.stringify({ model: 'default' }),
-			})
-			return response.data
+			const response = chroma.random()
+			return response.hex()
 		} catch (err) {
 			return rejectWithValue(err)
 		}
@@ -56,15 +51,10 @@ const colorSlice = createSlice({
 			})
 			.addCase(fetchRandom.fulfilled, (state, { payload }) => {
 				state.loading = false
-				const HEX = useRGBtoHEX(
-					payload.result[0][0],
-					payload.result[0][1],
-					payload.result[0][2]
-				)
 
-				state.color.HEX = HEX
+				state.color.HEX = payload.toUpperCase()
 				state.color.variant = useContrast(
-					HEX.replace(/[^a-zA-Z0-9]/g, '')
+					payload.replace(/[^a-zA-Z0-9]/g, '')
 				)
 			})
 			.addCase(fetchRandom.rejected, state => {

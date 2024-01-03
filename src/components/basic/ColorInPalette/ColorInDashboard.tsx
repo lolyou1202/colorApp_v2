@@ -8,14 +8,16 @@ import { LockOpen } from '../../icons/LockOpen'
 import { Import } from '../../icons/Import'
 import { Heart } from '../../icons/Heart'
 import { Cross } from '../../icons/Cross'
-import { IColor } from '../../../types/types'
+import { IColor, ISwapColors } from '../../../types/types'
 
 interface IColorInDashboard {
 	colorInDashboard: IColor
+	onClickArrows: ({ colorPosition, direction }: ISwapColors) => void
 }
 
 export const ColorInDashboard: FC<IColorInDashboard> = ({
 	colorInDashboard,
+	onClickArrows,
 }) => {
 	const [visible, setVisible] = useState(false)
 
@@ -24,8 +26,7 @@ export const ColorInDashboard: FC<IColorInDashboard> = ({
 			className='colorInDashboard'
 			onMouseEnter={() => setVisible(true)}
 			onMouseLeave={() => setVisible(false)}
-			style={{ backgroundColor: `#${colorInDashboard.HEX}` }}
-		>
+			style={{ backgroundColor: `#${colorInDashboard.HEX}` }}>
 			<ButtonInColor
 				type='withIcon'
 				icon={
@@ -102,6 +103,12 @@ export const ColorInDashboard: FC<IColorInDashboard> = ({
 							strokeWidth={3}
 						/>
 					}
+					onClick={() =>
+						onClickArrows({
+							direction: 'left',
+							colorPosition: colorInDashboard.id!,
+						})
+					}
 					colorVariant={colorInDashboard.variant}
 					isVisible={visible}
 				/>
@@ -113,6 +120,12 @@ export const ColorInDashboard: FC<IColorInDashboard> = ({
 							stroke={colorInDashboard.variant.contrastHEX}
 							strokeWidth={3}
 						/>
+					}
+					onClick={() =>
+						onClickArrows({
+							direction: 'right',
+							colorPosition: colorInDashboard.id!,
+						})
 					}
 					colorVariant={colorInDashboard.variant}
 					isVisible={visible}

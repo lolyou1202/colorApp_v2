@@ -1,8 +1,9 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { API_Huemint } from '../api/api'
 import { useContrast } from '../../hooks/useContrast'
-import { IColor } from '../../types/types'
+import { IColor, ISwapColors } from '../../types/types'
+import { useId } from 'react'
 
 interface IInitialState {
 	palette: IColor[]
@@ -68,7 +69,9 @@ export const fetchPalette = createAsyncThunk<
 const paletteSlice = createSlice({
 	name: 'palette',
 	initialState,
-	reducers: {},
+	reducers: {
+		swapColors(state, { payload }: PayloadAction<ISwapColors>) {},
+	},
 	extraReducers(builder) {
 		builder.addCase(fetchPalette.pending, state => {
 			state.loading = true
@@ -76,19 +79,17 @@ const paletteSlice = createSlice({
 		builder.addCase(fetchPalette.fulfilled, (state, { payload }) => {
 			state.loading = false
 
-			state.palette = payload.results[0].palette.map((color, index) => {
-				return {
-					id: index,
-					HEX: color.replace(/[^a-zA-Z0-9]/g, '').toUpperCase(),
-					variant: useContrast(color),
-					lock: false,
-					saved: false,
-				}
-			})
+			state.palette = payload.results[0].palette.map((color, index) => ({
+				id: index,
+				HEX: color.replace(/[^a-zA-Z0-9]/g, '').toUpperCase(),
+				variant: useContrast(color),
+				lock: false,
+				saved: false,
+			}))
 		})
 	},
 })
 
 const { actions, reducer } = paletteSlice
-export const {} = actions
+export const { swapColors } = actions
 export default reducer

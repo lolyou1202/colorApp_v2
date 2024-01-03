@@ -16,3 +16,8 @@ export interface IColor {
 	lock?: boolean
 	inCollection?: boolean
 }
+
+export interface ISwapColors {
+	direction: 'right' | 'left'
+	colorPosition: number
+}

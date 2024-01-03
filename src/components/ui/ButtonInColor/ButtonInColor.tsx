@@ -9,6 +9,9 @@ interface IButtonInColor {
 	icon?: ReactNode
 	colorVariant: IColorVariant
 	isVisible?: boolean
+	className?: string
+	style?: React.CSSProperties | undefined
+	disabled?: boolean
 	onClick?: () => void
 }
 
@@ -18,17 +21,25 @@ export const ButtonInColor: FC<IButtonInColor> = ({
 	text,
 	colorVariant,
 	isVisible,
+	className,
+	style,
 	onClick,
+	...props
 }) => {
 	const buttonInColorClassNames = classNames({
 		buttonInColor: true,
+		[className || '']: true,
 		[type]: true,
 		[colorVariant.brightness]: colorVariant,
 		visible: isVisible,
 	})
 
 	return (
-		<button className={buttonInColorClassNames} onClick={onClick}>
+		<button
+			className={buttonInColorClassNames}
+			onClick={onClick}
+			style={style}
+			{...props}>
 			{icon}
 			{text && <p style={{ color: colorVariant.contrastHEX }}>{text}</p>}
 		</button>

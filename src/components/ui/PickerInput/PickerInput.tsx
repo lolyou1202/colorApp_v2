@@ -40,6 +40,8 @@ export const PickerInput: FC<IPickerInput> = ({
 		'pickerInput-placeholder': true,
 		visible: placeholderState,
 		invisible: !placeholderState,
+		light: colorVariant.brightness === 'light',
+		dark: colorVariant.brightness === 'dark',
 	})
 
 	useEffect(() => {
@@ -55,8 +57,7 @@ export const PickerInput: FC<IPickerInput> = ({
 			<BorderedLayout
 				style={{
 					background: backgroundColor ? `#${backgroundColor}` : '',
-				}}
-			>
+				}}>
 				<input
 					className='pickerInput-input'
 					type='text'
@@ -67,25 +68,23 @@ export const PickerInput: FC<IPickerInput> = ({
 				/>
 				<span className={placeholderClassNames}>{placeholder}</span>
 				<div className='pickerInput-ico'>{children}</div>
-				{/*<button
-					className={'pickerInput-copy'}
-					disabled={!inputValue}
-					onClick={onCopyClick}
-				>
-					<Copy size={32} stroke={contrastColor} strokeWidth={4} />
-				</button>*/}
-				<ButtonInColor
-					type='withIcon'
-					icon={
-						<Copy
-							size={32}
-							stroke={colorVariant.contrastHEX}
-							strokeWidth={3}
-						/>
-					}
-					colorVariant={colorVariant}
-					isVisible
-				/>
+				<div className='pickerInput-copy'>
+					<ButtonInColor
+						type='withIcon'
+						icon={
+							<Copy
+								size={32}
+								stroke={colorVariant.contrastHEX}
+								strokeWidth={3}
+							/>
+						}
+						style={{ padding: '4px' }}
+						onClick={onCopyClick}
+						colorVariant={colorVariant}
+						disabled={!inputValue}
+						isVisible
+					/>
+				</div>
 			</BorderedLayout>
 		</div>
 	)

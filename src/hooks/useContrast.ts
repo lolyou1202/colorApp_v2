@@ -10,7 +10,7 @@ export const useContrast = (
 		return { brightness: 'light', contrastHEX: '#353535' }
 	}
 
-	const rgb: RGB | undefined = useHEXtoRGB(colorHex.toLocaleUpperCase())
+	const rgb: RGB | undefined = useHEXtoRGB(colorHex.toUpperCase())
 
 	if (rgb === undefined) {
 		return { brightness: 'light', contrastHEX: '#353535' }

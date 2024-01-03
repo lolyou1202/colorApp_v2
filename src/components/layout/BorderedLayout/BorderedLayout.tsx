@@ -15,7 +15,7 @@ export const BorderedLayout: FC<IBorderedLayout> = ({
 }) => {
 	const borderedLayoutClassNames = classNames({
 		borderedLayout: true,
-		[`${className}`]: true,
+		[className || '']: true,
 	})
 
 	return (

@@ -13,7 +13,7 @@ import { PickerButtons } from '../components/basic/PickerButtons/PickerButtons'
 import { CustomAlert } from '../components/ui/CustomAlert/CustomAlert'
 
 export const Picker = () => {
-	const { color } = useAppSelector(store => store.pickerReducer)
+	const color = useAppSelector(store => store.pickerReducer.color)
 
 	const { colorId } = useParams()
 
@@ -42,7 +42,10 @@ export const Picker = () => {
 
 			const RGB = useHEXtoRGB(validValue)
 
-			if (!RGB) return setRGBInputState('')
+			if (!RGB) {
+				setRGBInputState('')
+				return
+			}
 
 			const { r, g, b } = RGB
 
@@ -56,7 +59,7 @@ export const Picker = () => {
 
 			setRGBInputState(`${r}, ${g}, ${b}`)
 		},
-		[color]
+		[color.HEX]
 	)
 
 	const RGBToHEX = useCallback((value: string) => {
@@ -104,7 +107,7 @@ export const Picker = () => {
 		setAlertState({ open: true, text: 'Сolor copied to the clipboard' })
 	}
 	const handleCloseAlert = (
-		event?: React.SyntheticEvent | Event,
+		_?: React.SyntheticEvent | Event,
 		reason?: string
 	) => {
 		if (reason === 'clickaway') {
@@ -138,8 +141,7 @@ export const Picker = () => {
 					onChange={HEXToRGB}
 					placeholder='HEX'
 					backgroundColor={color.HEX}
-					colorVariant={color.variant}
-				>
+					colorVariant={color.variant}>
 					<Hash
 						size={40}
 						stroke={color.variant.contrastHEX}
@@ -152,8 +154,7 @@ export const Picker = () => {
 					onClickCopy={onClickCopy}
 					placeholder='RGB'
 					backgroundColor={color.HEX}
-					colorVariant={color.variant}
-				>
+					colorVariant={color.variant}>
 					<Drop
 						size={40}
 						stroke={color.variant.contrastHEX}
