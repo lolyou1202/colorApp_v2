@@ -2,7 +2,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { API_Huemint } from '../api/api'
 import { useContrast } from '../../hooks/useContrast'
-import { IColor, ISwapColors } from '../../types/types'
+import { IColor, ISwapColors } from '../../types'
 import { useId } from 'react'
 
 interface IInitialState {
@@ -70,7 +70,34 @@ const paletteSlice = createSlice({
 	name: 'palette',
 	initialState,
 	reducers: {
-		swapColors(state, { payload }: PayloadAction<ISwapColors>) {},
+		swapColors(state, { payload }: PayloadAction<ISwapColors>) {
+			console.log(payload)
+			const currentPosition = payload.colorPosition
+			const swapPosition =
+				payload.direction === 'left'
+					? currentPosition - 1
+					: currentPosition + 1
+
+			;[
+				{
+					position: state.palette[swapPosition].position,
+					...state.palette[currentPosition]
+				},
+				{
+					position: state.palette[currentPosition].position,
+					...state.palette[swapPosition]
+				},
+			] = [
+				{
+					...state.palette[swapPosition],
+					position: state.palette[currentPosition].position,
+				},
+				{
+					...state.palette[currentPosition],
+					position: state.palette[swapPosition].position,
+				},
+			]
+		},
 	},
 	extraReducers(builder) {
 		builder.addCase(fetchPalette.pending, state => {
@@ -79,13 +106,29 @@ const paletteSlice = createSlice({
 		builder.addCase(fetchPalette.fulfilled, (state, { payload }) => {
 			state.loading = false
 
-			state.palette = payload.results[0].palette.map((color, index) => ({
-				id: index,
-				HEX: color.replace(/[^a-zA-Z0-9]/g, '').toUpperCase(),
-				variant: useContrast(color),
-				lock: false,
-				saved: false,
-			}))
+			state.palette = payload.results[0].palette.map(
+				(color, index, array) => {
+					const position = () => {
+						switch (index) {
+							case 0:
+								return 'first'
+							case array.length - 1:
+								return 'last'
+							default:
+								return 'between'
+						}
+					}
+					const HEX = color.replace(/[^a-zA-Z0-9]/g, '').toUpperCase()
+
+					return {
+						HEX: HEX,
+						variant: useContrast(color),
+						position: position(),
+						lock: false,
+						inCollection: false,
+					}
+				}
+			)
 		})
 	},
 })

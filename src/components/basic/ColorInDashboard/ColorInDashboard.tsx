@@ -2,20 +2,21 @@ import { FC, useState } from 'react'
 import './ColorInDashboard.style.scss'
 import { ButtonInColor } from '../../ui/ButtonInColor/ButtonInColor'
 import { Copy } from '../../icons/Copy'
-import { ArrowLeft } from '../../icons/ArrowLeft'
-import { ArrowRight } from '../../icons/ArrowRight'
 import { LockOpen } from '../../icons/LockOpen'
 import { Import } from '../../icons/Import'
 import { Heart } from '../../icons/Heart'
 import { Cross } from '../../icons/Cross'
-import { IColor, ISwapColors } from '../../../types/types'
+import { IColor, ISwapColors } from '../../../types'
+import { ArrowsSwap } from '../../ui/ArrowsSwap/ArrowsSwap'
 
 interface IColorInDashboard {
+	position: number
 	colorInDashboard: IColor
-	onClickArrows: ({ colorPosition, direction }: ISwapColors) => void
+	onClickArrows: (swapColorsArgs: ISwapColors) => void
 }
 
 export const ColorInDashboard: FC<IColorInDashboard> = ({
+	position,
 	colorInDashboard,
 	onClickArrows,
 }) => {
@@ -26,7 +27,8 @@ export const ColorInDashboard: FC<IColorInDashboard> = ({
 			className='colorInDashboard'
 			onMouseEnter={() => setVisible(true)}
 			onMouseLeave={() => setVisible(false)}
-			style={{ backgroundColor: `#${colorInDashboard.HEX}` }}>
+			style={{ backgroundColor: `#${colorInDashboard.HEX}` }}
+		>
 			<ButtonInColor
 				type='withIcon'
 				icon={
@@ -93,44 +95,12 @@ export const ColorInDashboard: FC<IColorInDashboard> = ({
 				colorVariant={colorInDashboard.variant}
 				isVisible
 			/>
-			<div className='colorInDashboard-arrows'>
-				<ButtonInColor
-					type='withIcon'
-					icon={
-						<ArrowLeft
-							size={32}
-							stroke={colorInDashboard.variant.contrastHEX}
-							strokeWidth={3}
-						/>
-					}
-					onClick={() =>
-						onClickArrows({
-							direction: 'left',
-							colorPosition: colorInDashboard.id!,
-						})
-					}
-					colorVariant={colorInDashboard.variant}
-					isVisible={visible}
-				/>
-				<ButtonInColor
-					type='withIcon'
-					icon={
-						<ArrowRight
-							size={32}
-							stroke={colorInDashboard.variant.contrastHEX}
-							strokeWidth={3}
-						/>
-					}
-					onClick={() =>
-						onClickArrows({
-							direction: 'right',
-							colorPosition: colorInDashboard.id!,
-						})
-					}
-					colorVariant={colorInDashboard.variant}
-					isVisible={visible}
-				/>
-			</div>
+			<ArrowsSwap
+				position={position}
+				colorInDashboard={colorInDashboard}
+				visible={visible}
+				onClickArrows={onClickArrows}
+			/>
 		</div>
 	)
 }

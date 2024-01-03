@@ -14,6 +14,7 @@ export interface IColor {
 	HEX: string
 	variant: IColorVariant
 	lock?: boolean
+	position?: 'first' | 'between' | 'last'
 	inCollection?: boolean
 }
 

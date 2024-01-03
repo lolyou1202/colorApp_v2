@@ -4,7 +4,7 @@ import { BorderedLayout } from '../../layout/BorderedLayout/BorderedLayout'
 import { Copy } from '../../icons/Copy'
 import classNames from 'classnames'
 import { ButtonInColor } from '../ButtonInColor/ButtonInColor'
-import { IColorVariant } from '../../../types/types'
+import { IColorVariant } from '../../../types'
 
 interface IPickerInput {
 	inputValue: string

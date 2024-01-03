@@ -4,8 +4,8 @@ import {
 	useAppDispatch,
 	useAppSelector,
 } from '../../../redux/hooks/useAppRedux'
-import { ColorInDashboard } from '../ColorInPalette/ColorInDashboard'
-import { ISwapColors } from '../../../types/types'
+import { ColorInDashboard } from '../ColorInDashboard/ColorInDashboard'
+import { ISwapColors } from '../../../types'
 import { swapColors } from '../../../redux/slices/paletteSlice'
 
 export const Dashboard = () => {
@@ -19,9 +19,10 @@ export const Dashboard = () => {
 
 	return (
 		<BorderedLayout className='dashboard'>
-			{palette.map(colorInPalette => (
+			{palette.map((colorInPalette, index) => (
 				<ColorInDashboard
-					key={colorInPalette.id}
+					key={index}
+					position={index}
 					colorInDashboard={colorInPalette}
 					onClickArrows={onClickArrows}
 				/>

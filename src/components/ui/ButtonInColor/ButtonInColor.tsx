@@ -1,7 +1,7 @@
 import { FC, ReactNode } from 'react'
 import './ButtonInColor.style.scss'
 import classNames from 'classnames'
-import { IColorVariant } from '../../../types/types'
+import { IColorVariant } from '../../../types'
 
 interface IButtonInColor {
 	type: 'withIcon' | 'withText'

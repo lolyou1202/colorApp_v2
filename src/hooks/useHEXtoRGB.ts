@@ -1,4 +1,4 @@
-import { RGB } from "../types/types"
+import { RGB } from "../types"
 import { useValidateHEX } from "./useValidateHEX"
 
 export const useHEXtoRGB = (HEX: string): RGB | undefined => {

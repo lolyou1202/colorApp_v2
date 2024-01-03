@@ -1,4 +1,4 @@
-import { RGB } from '../types/types'
+import { RGB } from '../types'
 import { useHEXtoRGB } from './useHEXtoRGB'
 import { useRGBtoYIQ } from './useRGBtoYIQ'
 

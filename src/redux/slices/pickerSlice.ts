@@ -1,6 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { useContrast } from '../../hooks/useContrast'
-import { IColor } from '../../types/types'
+import { IColor } from '../../types'
 import chroma from 'chroma-js'
 
 interface IInitialState {
