@@ -5,21 +5,21 @@ import { IColor, ISwapColors } from '../../../types'
 import { ArrowRight } from '../../icons/ArrowRight'
 
 interface Props {
-	position: number
 	colorInDashboard: IColor
 	onClickArrows: (swapColorsArgs: ISwapColors) => void
 	visible: boolean
 }
 
 export const ArrowsSwap: FC<Props> = ({
-	position,
 	colorInDashboard,
 	onClickArrows,
 	visible,
 }) => {
 	return (
 		<div className='colorInDashboard-arrows'>
-			{['last', 'between'].includes(colorInDashboard.position!) && (
+			{['last', 'between'].includes(
+				colorInDashboard.position!.positionType
+			) && (
 				<ButtonInColor
 					type='withIcon'
 					icon={
@@ -32,14 +32,17 @@ export const ArrowsSwap: FC<Props> = ({
 					onClick={() =>
 						onClickArrows({
 							direction: 'left',
-							colorPosition: position,
+							colorPosition:
+								colorInDashboard.position!.positionIndex,
 						})
 					}
 					colorVariant={colorInDashboard.variant}
 					isVisible={visible}
 				/>
 			)}
-			{['first', 'between'].includes(colorInDashboard.position!) && (
+			{['first', 'between'].includes(
+				colorInDashboard.position!.positionType
+			) && (
 				<ButtonInColor
 					type='withIcon'
 					icon={
@@ -52,7 +55,8 @@ export const ArrowsSwap: FC<Props> = ({
 					onClick={() =>
 						onClickArrows({
 							direction: 'right',
-							colorPosition: position,
+							colorPosition:
+								colorInDashboard.position!.positionIndex,
 						})
 					}
 					colorVariant={colorInDashboard.variant}

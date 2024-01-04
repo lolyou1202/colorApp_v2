@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../redux/hooks/useAppRedux'
 import { EnumLocation, setLocation } from '../redux/slices/locationSlice'
 import { Dashboard } from '../components/basic/Dashboard/Dashboard'
@@ -6,9 +6,11 @@ import { PaletteButtons } from '../components/basic/PaletteButtons/PaletteButton
 import { useGeneratePaletteTemplate } from '../hooks/useGeneratePaletteTemplate'
 import { useGenerateMatrixOfPalette } from '../hooks/useGenerateMatrixOfPalette'
 import { fetchPalette } from '../redux/slices/paletteSlice'
+import { CustomAlert } from '../components/ui/CustomAlert/CustomAlert'
 
 export const Palette = () => {
 	const palette = useAppSelector(store => store.paletteReducer.palette)
+	const alert = useAppSelector(store => store.alertReducer)
 
 	const dispatch = useAppDispatch()
 
@@ -52,6 +54,11 @@ export const Palette = () => {
 				onClickRedo={() => {}}
 				onClickSave={() => {}}
 				onClickSettings={() => {}}
+			/>
+			<CustomAlert
+				open={alert.open}
+				text={alert.text}
+				onClose={handleCloseAlert}
 			/>
 		</div>
 	)

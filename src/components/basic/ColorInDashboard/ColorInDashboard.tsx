@@ -8,17 +8,18 @@ import { Heart } from '../../icons/Heart'
 import { Cross } from '../../icons/Cross'
 import { IColor, ISwapColors } from '../../../types'
 import { ArrowsSwap } from '../../ui/ArrowsSwap/ArrowsSwap'
+import { LockClose } from '../../icons/LockClose'
 
 interface IColorInDashboard {
-	position: number
 	colorInDashboard: IColor
 	onClickArrows: (swapColorsArgs: ISwapColors) => void
+	onClickLock: (positionIndex: number) => void
 }
 
 export const ColorInDashboard: FC<IColorInDashboard> = ({
-	position,
 	colorInDashboard,
 	onClickArrows,
+	onClickLock,
 }) => {
 	const [visible, setVisible] = useState(false)
 
@@ -77,18 +78,39 @@ export const ColorInDashboard: FC<IColorInDashboard> = ({
 				colorVariant={colorInDashboard.variant}
 				isVisible={visible}
 			/>
-			<ButtonInColor
-				type='withIcon'
-				icon={
-					<LockOpen
-						size={32}
-						stroke={colorInDashboard.variant.contrastHEX}
-						strokeWidth={3}
-					/>
-				}
-				colorVariant={colorInDashboard.variant}
-				isVisible={visible}
-			/>
+			{colorInDashboard.lock! ? (
+				<ButtonInColor
+					type='withIcon'
+					icon={
+						<LockClose
+							size={32}
+							stroke={colorInDashboard.variant.contrastHEX}
+							strokeWidth={3}
+						/>
+					}
+					onClick={() =>
+						onClickLock(colorInDashboard.position!.positionIndex)
+					}
+					colorVariant={colorInDashboard.variant}
+					isVisible={true}
+				/>
+			) : (
+				<ButtonInColor
+					type='withIcon'
+					icon={
+						<LockOpen
+							size={32}
+							stroke={colorInDashboard.variant.contrastHEX}
+							strokeWidth={3}
+						/>
+					}
+					onClick={() =>
+						onClickLock(colorInDashboard.position!.positionIndex)
+					}
+					colorVariant={colorInDashboard.variant}
+					isVisible={visible}
+				/>
+			)}
 			<ButtonInColor
 				type='withText'
 				text={colorInDashboard.HEX}
@@ -96,7 +118,6 @@ export const ColorInDashboard: FC<IColorInDashboard> = ({
 				isVisible
 			/>
 			<ArrowsSwap
-				position={position}
 				colorInDashboard={colorInDashboard}
 				visible={visible}
 				onClickArrows={onClickArrows}
