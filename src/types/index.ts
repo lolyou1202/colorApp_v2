@@ -13,7 +13,6 @@ export interface IColor {
 	id?: number
 	HEX: string
 	variant: IColorVariant
-	position?: IPosition
 	lock?: boolean
 	inCollection?: boolean
 }
@@ -22,7 +21,10 @@ export interface ISwapColors {
 	direction: 'right' | 'left'
 	colorPosition: number
 }
+export type IPositionType = 'first' | 'between' | 'last'
+export type IPositionIndex = number
+
 export interface IPosition {
-	positionIndex: number
-	positionType: 'first' | 'between' | 'last'
+	positionIndex: IPositionIndex
+	positionType: IPositionType
 }

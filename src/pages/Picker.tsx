@@ -11,19 +11,16 @@ import { useRGBtoHEX } from '../hooks/useRGBtoHex'
 import { useStringRGBtoObjectRGB } from '../hooks/useStringRGBtoObjectRGB'
 import { PickerButtons } from '../components/basic/PickerButtons/PickerButtons'
 import { CustomAlert } from '../components/ui/CustomAlert/CustomAlert'
+import { closeAlert, viewAlert } from '../redux/slices/alertSlice'
 
 export const Picker = () => {
 	const color = useAppSelector(store => store.pickerReducer.color)
+	const alert = useAppSelector(store => store.alertReducer)
 
 	const { colorId } = useParams()
 
 	const [HEXInputState, setHEXInputState] = useState(colorId || '')
 	const [RGBInputState, setRGBInputState] = useState('')
-
-	const [alertState, setAlertState] = useState<{
-		open: boolean
-		text: string
-	}>({ open: false, text: '' })
 
 	const location = useLocation()
 	const navigate = useNavigate()
@@ -31,7 +28,7 @@ export const Picker = () => {
 
 	const HEXToRGB = useCallback(
 		(value: string) => {
-			const validValue = value.replace(/[^\d\w]/g, '').toLocaleUpperCase()
+			const validValue = value.replace(/[^\d\w]/g, '').toUpperCase()
 			setHEXInputState(validValue)
 
 			if (!validValue) {
@@ -93,7 +90,7 @@ export const Picker = () => {
 		dispatch(fetchRandom())
 	}
 	const onClickSave = () => {
-		setAlertState({ open: true, text: 'Сolor added to the collection' })
+		dispatch(viewAlert({ alertText: 'Сolor added to the collection' }))
 	}
 	const onClickClear = () => {
 		if (HEXInputState) {
@@ -104,17 +101,13 @@ export const Picker = () => {
 		}
 	}
 	const onClickCopy = () => {
-		setAlertState({ open: true, text: 'Сolor copied to the clipboard' })
+		dispatch(viewAlert({ alertText: 'Сolor copied to the clipboard' }))
 	}
 	const handleCloseAlert = (
 		_?: React.SyntheticEvent | Event,
 		reason?: string
 	) => {
-		if (reason === 'clickaway') {
-			setAlertState(prevState => ({ ...prevState, open: false }))
-			return
-		}
-		setAlertState(prevState => ({ ...prevState, open: false }))
+		dispatch(closeAlert({ reason: reason }))
 	}
 
 	useEffect(() => {
@@ -139,6 +132,7 @@ export const Picker = () => {
 				<PickerInput
 					inputValue={HEXInputState}
 					onChange={HEXToRGB}
+					onClickCopy={onClickCopy}
 					placeholder='HEX'
 					backgroundColor={color.HEX}
 					colorVariant={color.variant}>
@@ -167,8 +161,8 @@ export const Picker = () => {
 					onClickClear={onClickClear}
 				/>
 				<CustomAlert
-					open={alertState.open}
-					text={alertState.text}
+					open={alert.open}
+					text={alert.text}
 					onClose={handleCloseAlert}
 				/>
 			</div>

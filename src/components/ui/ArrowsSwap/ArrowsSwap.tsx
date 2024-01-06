@@ -1,25 +1,26 @@
 import { FC } from 'react'
 import { ButtonInColor } from '../../ui/ButtonInColor/ButtonInColor'
 import { ArrowLeft } from '../../icons/ArrowLeft'
-import { IColor, ISwapColors } from '../../../types'
+import { IColor, IPosition, ISwapColors } from '../../../types'
 import { ArrowRight } from '../../icons/ArrowRight'
 
 interface Props {
 	colorInDashboard: IColor
-	onClickArrows: (swapColorsArgs: ISwapColors) => void
+	positionInList: IPosition
 	visible: boolean
+	onClickArrows: (swapColorsArgs: ISwapColors) => void
 }
 
 export const ArrowsSwap: FC<Props> = ({
 	colorInDashboard,
-	onClickArrows,
+	positionInList,
 	visible,
+	onClickArrows,
 }) => {
+	const { positionIndex, positionType } = positionInList
 	return (
 		<div className='colorInDashboard-arrows'>
-			{['last', 'between'].includes(
-				colorInDashboard.position!.positionType
-			) && (
+			{['last', 'between'].includes(positionType) && (
 				<ButtonInColor
 					type='withIcon'
 					icon={
@@ -32,17 +33,14 @@ export const ArrowsSwap: FC<Props> = ({
 					onClick={() =>
 						onClickArrows({
 							direction: 'left',
-							colorPosition:
-								colorInDashboard.position!.positionIndex,
+							colorPosition: positionIndex,
 						})
 					}
 					colorVariant={colorInDashboard.variant}
 					isVisible={visible}
 				/>
 			)}
-			{['first', 'between'].includes(
-				colorInDashboard.position!.positionType
-			) && (
+			{['first', 'between'].includes(positionType) && (
 				<ButtonInColor
 					type='withIcon'
 					icon={
@@ -55,8 +53,7 @@ export const ArrowsSwap: FC<Props> = ({
 					onClick={() =>
 						onClickArrows({
 							direction: 'right',
-							colorPosition:
-								colorInDashboard.position!.positionIndex,
+							colorPosition: positionIndex,
 						})
 					}
 					colorVariant={colorInDashboard.variant}

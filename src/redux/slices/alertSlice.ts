@@ -9,10 +9,17 @@ const alertSlice = createSlice({
 	name: 'palette',
 	initialState,
 	reducers: {
-		viewAlert() {},
-		closeAlert(state, { payload }: PayloadAction<{reason: string}>) {
+		viewAlert(state, { payload }: PayloadAction<{ alertText: string }>) {
+			state.text = payload.alertText
+			state.open = true
+		},
+		closeAlert(
+			state,
+			{ payload }: PayloadAction<{ reason: string | undefined }>
+		) {
 			if (payload.reason === 'clickaway') {
 				state.open = false
+				return
 			}
 			state.open = false
 		},
@@ -20,5 +27,5 @@ const alertSlice = createSlice({
 })
 
 const { actions, reducer } = alertSlice
-export const {} = actions
+export const { viewAlert, closeAlert } = actions
 export default reducer

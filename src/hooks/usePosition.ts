@@ -1,10 +1,15 @@
-export const usePosition = (positionIndex: number, arrayLength: number) => {
+import { IPosition } from '../types'
+
+export const usePosition = (
+	positionIndex: number,
+	arrayLength: number
+): IPosition => {
 	switch (positionIndex) {
 		case 0:
-			return 'first'
+			return { positionIndex: positionIndex, positionType: 'first' }
 		case arrayLength - 1:
-			return 'last'
+			return { positionIndex: positionIndex, positionType: 'last' }
 		default:
-			return 'between'
+			return { positionIndex: positionIndex, positionType: 'between' }
 	}
 }

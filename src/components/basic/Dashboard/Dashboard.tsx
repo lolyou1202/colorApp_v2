@@ -1,37 +1,42 @@
+import { FC } from 'react'
 import './Dashboard.style.scss'
 import { BorderedLayout } from '../../layout/BorderedLayout/BorderedLayout'
-import {
-	useAppDispatch,
-	useAppSelector,
-} from '../../../redux/hooks/useAppRedux'
 import { ColorInDashboard } from '../ColorInDashboard/ColorInDashboard'
-import { ISwapColors } from '../../../types'
-import { lockColor, swapColors } from '../../../redux/slices/paletteSlice'
+import { IColor, ISwapColors } from '../../../types'
+import { usePosition } from '../../../hooks/usePosition'
 
-export const Dashboard = () => {
-	const palette = useAppSelector(state => state.paletteReducer.palette)
+interface Props {
+	palette: IColor[]
+	onClickArrows: (swapColorsArgs: ISwapColors) => void
+	onClickLock: (positionIndex: number) => void
+	onClickSave: (positionIndex: number) => void
+	onClickRemove: (positionIndex: number) => void
+	onClickCopy: (HEX: string) => void
+	onClickImport: (HEX: string) => void
+}
 
-	const dispatch = useAppDispatch()
-
-	const onClickArrows = (swapColorsArgs: ISwapColors) => {
-		dispatch(swapColors(swapColorsArgs))
-	}
-	const onClickLock = (positionIndex: number) => {
-		dispatch(lockColor({ positionIndex: positionIndex }))
-	}
-	const onClickCopy = (HEX: string) => {
-		navigator.clipboard.writeText(HEX)
-		setAlertState({ open: true, text: 'Сolor copied to the clipboard' })
-	}
-
+export const Dashboard: FC<Props> = ({
+	palette,
+	onClickArrows,
+	onClickLock,
+	onClickCopy,
+	onClickSave,
+	onClickRemove,
+	onClickImport,
+}) => {
 	return (
 		<BorderedLayout className='dashboard'>
 			{palette.map((colorInPalette, index) => (
 				<ColorInDashboard
 					key={index}
+					positionInList={usePosition(index, palette.length)}
 					colorInDashboard={colorInPalette}
 					onClickArrows={onClickArrows}
 					onClickLock={onClickLock}
+					onClickCopy={onClickCopy}
+					onClickSave={onClickSave}
+					onClickRemove={onClickRemove}
+					onClickImport={onClickImport}
 				/>
 			))}
 		</BorderedLayout>

@@ -77,16 +77,10 @@ const paletteSlice = createSlice({
 					? currentPosition - 1
 					: currentPosition + 1
 
-			const paletteClone = [...state.palette]
-
-			state.palette[currentPosition] = {
-				...paletteClone[swapPosition],
-				position: paletteClone[currentPosition].position,
-			}
-			state.palette[swapPosition] = {
-				...paletteClone[currentPosition],
-				position: paletteClone[swapPosition].position,
-			}
+			;[state.palette[currentPosition], state.palette[swapPosition]] = [
+				state.palette[swapPosition],
+				state.palette[currentPosition],
+			]
 		},
 		lockColor(
 			state,
@@ -94,6 +88,19 @@ const paletteSlice = createSlice({
 		) {
 			state.palette[payload.positionIndex].lock =
 				!state.palette[payload.positionIndex].lock
+		},
+		saveColor(
+			state,
+			{ payload }: PayloadAction<{ positionIndex: number }>
+		) {
+			state.palette[payload.positionIndex].inCollection =
+				!state.palette[payload.positionIndex].inCollection
+		},
+		removeColor(
+			state,
+			{ payload }: PayloadAction<{ positionIndex: number }>
+		) {
+			state.palette.splice(payload.positionIndex, 1)
 		},
 	},
 	extraReducers(builder) {
@@ -103,22 +110,16 @@ const paletteSlice = createSlice({
 		builder.addCase(fetchPalette.fulfilled, (state, { payload }) => {
 			state.loading = false
 
-			state.palette = payload.results[0].palette.map(
-				(color, index, array) => ({
-					HEX: color.replace(/[^a-zA-Z0-9]/g, '').toUpperCase(),
-					variant: useContrast(color),
-					position: {
-						positionIndex: index,
-						positionType: usePosition(index, array.length),
-					},
-					lock: false,
-					inCollection: false,
-				})
-			)
+			state.palette = payload.results[0].palette.map(color => ({
+				HEX: color.replace(/[^a-zA-Z0-9]/g, '').toUpperCase(),
+				variant: useContrast(color),
+				lock: false,
+				inCollection: false,
+			}))
 		})
 	},
 })
 
 const { actions, reducer } = paletteSlice
-export const { swapColors, lockColor } = actions
+export const { swapColors, lockColor, saveColor, removeColor } = actions
 export default reducer
