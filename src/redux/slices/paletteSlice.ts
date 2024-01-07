@@ -4,6 +4,7 @@ import { API_Huemint } from '../api/api'
 import { useContrast } from '../../hooks/useContrast'
 import { IColor, ISwapColors } from '../../types'
 import { usePosition } from '../../hooks/usePosition'
+import chroma from 'chroma-js'
 
 interface IInitialState {
 	palette: IColor[]
@@ -42,7 +43,7 @@ export const fetchPalette = createAsyncThunk<
 			adjacency,
 			palette,
 		},
-		{ rejectWithValue }
+		{ rejectWithValue, dispatch }
 	) => {
 		try {
 			const response = await axios<fetchHuemintResults>({
@@ -58,7 +59,7 @@ export const fetchPalette = createAsyncThunk<
 				},
 			})
 			console.log(response.data)
-
+			dispatch(fillPalette(response.data.results[0].palette))
 			return response.data
 		} catch (err) {
 			return rejectWithValue(err)
@@ -102,6 +103,21 @@ const paletteSlice = createSlice({
 		) {
 			state.palette.splice(payload.positionIndex, 1)
 		},
+		fillPalette(state, { payload }: PayloadAction<string[]>) {
+			state.palette = payload
+				.filter(color => chroma.valid(color))
+				.map(color => {
+					return {
+						HEX: chroma(color)
+							.hex()
+							.replace(/[^a-zA-Z0-9]/g, '')
+							.toUpperCase(),
+						variant: useContrast(color),
+						lock: false,
+						inCollection: false,
+					}
+				})
+		},
 	},
 	extraReducers(builder) {
 		builder.addCase(fetchPalette.pending, state => {
@@ -109,17 +125,11 @@ const paletteSlice = createSlice({
 		})
 		builder.addCase(fetchPalette.fulfilled, (state, { payload }) => {
 			state.loading = false
-
-			state.palette = payload.results[0].palette.map(color => ({
-				HEX: color.replace(/[^a-zA-Z0-9]/g, '').toUpperCase(),
-				variant: useContrast(color),
-				lock: false,
-				inCollection: false,
-			}))
 		})
 	},
 })
 
 const { actions, reducer } = paletteSlice
-export const { swapColors, lockColor, saveColor, removeColor } = actions
+export const { swapColors, lockColor, saveColor, removeColor, fillPalette } =
+	actions
 export default reducer

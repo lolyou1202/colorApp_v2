@@ -7,6 +7,7 @@ import { useGeneratePaletteTemplate } from '../hooks/useGeneratePaletteTemplate'
 import { useGenerateMatrixOfPalette } from '../hooks/useGenerateMatrixOfPalette'
 import {
 	fetchPalette,
+	fillPalette,
 	lockColor,
 	removeColor,
 	saveColor,
@@ -15,12 +16,13 @@ import {
 import { CustomAlert } from '../components/ui/CustomAlert/CustomAlert'
 import { closeAlert, viewAlert } from '../redux/slices/alertSlice'
 import { ISwapColors } from '../types'
-import { useNavigate } from 'react-router-dom'
-import { HexColorPicker } from 'react-colorful'
+import { useNavigate, useParams } from 'react-router-dom'
 
 export const Palette = () => {
 	const palette = useAppSelector(store => store.paletteReducer.palette)
 	const alert = useAppSelector(store => store.alertReducer)
+
+	const { paletteId } = useParams()
 
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
@@ -81,6 +83,16 @@ export const Palette = () => {
 	useEffect(() => {
 		dispatch(setLocation({ locationType: EnumLocation.palette }))
 	}, [])
+
+	useEffect(() => {
+		if (palette.length !== 0) {
+			navigate(`/palette/${palette.map(color => color.HEX).join('-')}`)
+		} else {
+			if (paletteId) {
+				dispatch(fillPalette(paletteId?.split('-') || []))
+			}
+		}
+	}, [dispatch, navigate, palette])
 
 	return (
 		<div className='palette'>

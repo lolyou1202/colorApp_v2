@@ -9,6 +9,7 @@ import { IColor, IPosition, ISwapColors } from '../../../types'
 import { ArrowsSwap } from '../../ui/ArrowsSwap/ArrowsSwap'
 import { LockColorButton } from '../ColorButtonsOnPalette/LockColorButton'
 import { HexColorPicker } from 'react-colorful'
+import { RemoveColorButton } from '../ColorButtonsOnPalette/RemoveColorButton'
 
 interface IColorInDashboard {
 	colorInDashboard: IColor
@@ -40,19 +41,13 @@ export const ColorInDashboard: FC<IColorInDashboard> = ({
 			className='colorInDashboard'
 			onMouseEnter={() => setVisible(true)}
 			onMouseLeave={() => setVisible(false)}
-			style={{ backgroundColor: `#${colorInDashboard.HEX}` }}>
-			<ButtonInColor
-				type='withIcon'
-				icon={
-					<Cross
-						size={32}
-						stroke={colorInDashboard.variant.contrastHEX}
-						strokeWidth={3}
-					/>
-				}
-				onClick={() => onClickRemove(positionIndex)}
-				colorVariant={colorInDashboard.variant}
-				isVisible={visible}
+			style={{ backgroundColor: `#${colorInDashboard.HEX}` }}
+		>
+			<RemoveColorButton
+				colorInDashboard={colorInDashboard}
+				positionIndex={positionIndex}
+				visible={visible}
+				onClickRemove={onClickRemove}
 			/>
 			<ButtonInColor
 				type='withIcon'
