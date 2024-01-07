@@ -33,7 +33,7 @@ export const PickerInput: FC<IPickerInput> = ({
 	}
 
 	const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-		onChange(event.target.value)
+		onChange(event.target.value.toUpperCase())
 	}
 
 	const placeholderClassNames = classNames({

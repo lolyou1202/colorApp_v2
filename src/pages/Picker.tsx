@@ -26,69 +26,44 @@ export const Picker = () => {
 	const navigate = useNavigate()
 	const dispatch = useAppDispatch()
 
-	//const HEXToRGB = useCallback(
-	//	(value: string) => {
-	//		const validValue = value.replace(/[^\d\w]/g, '').toUpperCase()
-	//		setHEXInputState(validValue)
+	const HEXToRGB = useCallback(
+		(value: string) => {
+			const validValue = value.replace(/[^\d\w]/g, '')
+			setHEXInputState(validValue)
 
-	//		if (!validValue) {
-	//			dispatch(setColor({ color: '' }))
-	//			navigate('/picker')
-	//			return
-	//		}
+			if (!validValue && color.HEX) {
+				dispatch(setColor({ color: '' }))
+				navigate('/picker')
+				return
+			}
 
-	//		const RGB = useHEXtoRGB(validValue)
+			const RGB = useHEXtoRGB(validValue)
 
-	//		if (!RGB) {
-	//			setRGBInputState('')
-	//			return
-	//		}
+			if (!RGB) {
+				setRGBInputState('')
+				return
+			}
 
-	//		const { r, g, b } = RGB
+			const { r, g, b } = RGB
 
-	//		if (location.pathname !== `/picker/${validValue}`) {
-	//			navigate(`/picker/${validValue}`)
-	//		}
+			if (location.pathname !== `/picker/${validValue}`) {
+				navigate(`/picker/${validValue}`)
+			}
 
-	//		if (validValue !== color.HEX) {
-	//			dispatch(setColor({ color: validValue }))
-	//		}
+			if (validValue !== color.HEX) {
+				dispatch(setColor({ color: validValue }))
+			}
 
-	//		setRGBInputState(`${r}, ${g}, ${b}`)
-	//	},
-	//	[color.HEX]
-	//)
-	const HEXToRGB = useCallback((value: string) => {
-		const validValue = value.replace(/[^\d\w]/g, '').toUpperCase()
-		setHEXInputState(validValue)
-
-		if (!validValue) {
-			dispatch(setColor({ color: '' }))
-			navigate('/picker')
-			return
-		}
-
-		const RGB = useHEXtoRGB(validValue)
-
-		if (!RGB) {
-			setRGBInputState('')
-			return
-		}
-
-		const { r, g, b } = RGB
-
-		if (validValue !== color.HEX) {
-			dispatch(setColor({ color: validValue }))
-		}
-
-		setRGBInputState(`${r}, ${g}, ${b}`)
-	}, [])
+			setRGBInputState(`${r}, ${g}, ${b}`)
+		},
+		[color.HEX]
+	)
 
 	const RGBToHEX = useCallback((value: string) => {
 		const validValue = value.replace(/[^\d, ]/g, '')
 		setRGBInputState(validValue)
 
-		if (!validValue) {
+		if (!validValue && color.HEX) {
 			dispatch(setColor({ color: '' }))
 			navigate('/picker')
 			return
@@ -139,29 +114,13 @@ export const Picker = () => {
 		dispatch(setLocation({ locationType: EnumLocation.picker }))
 	}, [])
 
-	//useEffect(() => {
-	//	if (colorId !== color.HEX) {
-	//		if (color.HEX) {
-	//			HEXToRGB(color.HEX)
-	//		} else {
-	//			HEXToRGB(colorId || '')
-	//		}
-	//	} else {
-	//		HEXToRGB(color.HEX)
-	//	}
-	//}, [HEXToRGB, color.HEX, colorId])
 	useEffect(() => {
-		//HEXToRGB(color.HEX || '')
-		setHEXInputState(color.HEX || '')
-		navigate(`/picker/${color.HEX.replace(/[^\d\w]/g, '')}`)
-	}, [color.HEX])
-	useEffect(() => {
-		if (color.HEX !== colorId) {
-			//console.log(typeof color.HEX != typeof colorId)
-			console.log('HEX:',typeof color.HEX, 'colorID:', typeof colorId)
-			dispatch(setColor({ color: colorId || '' }))
+		if (color.HEX) {
+			HEXToRGB(color.HEX)
+		} else {
+			HEXToRGB(colorId || '')
 		}
-	}, [])
+	}, [HEXToRGB, color.HEX, colorId])
 
 	return (
 		<div className='picker'>
@@ -172,8 +131,7 @@ export const Picker = () => {
 					onClickCopy={onClickCopy}
 					placeholder='HEX'
 					backgroundColor={color.HEX}
-					colorVariant={color.variant}
-				>
+					colorVariant={color.variant}>
 					<Hash
 						size={40}
 						stroke={color.variant.contrastHEX}
@@ -186,8 +144,7 @@ export const Picker = () => {
 					onClickCopy={onClickCopy}
 					placeholder='RGB'
 					backgroundColor={color.HEX}
-					colorVariant={color.variant}
-				>
+					colorVariant={color.variant}>
 					<Drop
 						size={40}
 						stroke={color.variant.contrastHEX}

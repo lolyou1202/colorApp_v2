@@ -32,9 +32,10 @@ const colorSlice = createSlice({
 				.random()
 				.hex()
 				.replace(/[^\d\w]/g, '')
+				.toUpperCase()
 			state.color = {
 				HEX: HEX,
-				variant: useContrast(HEX.toUpperCase()),
+				variant: useContrast(HEX),
 			}
 		},
 	},
