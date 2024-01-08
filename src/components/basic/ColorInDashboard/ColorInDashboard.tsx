@@ -49,7 +49,7 @@ export const ColorInDashboard: FC<IColorInDashboard> = ({
 				visible={visible}
 				onClickRemove={onClickRemove}
 			/>
-			<ButtonInColor
+			{/*<ButtonInColor
 				type='withIcon'
 				icon={
 					<Heart
@@ -66,7 +66,7 @@ export const ColorInDashboard: FC<IColorInDashboard> = ({
 				onClick={() => onClickSave(positionIndex)}
 				colorVariant={colorInDashboard.variant}
 				isVisible={visible}
-			/>
+			/>*/}
 			<ButtonInColor
 				type='withIcon'
 				icon={

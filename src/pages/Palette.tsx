@@ -31,13 +31,17 @@ export const Palette = () => {
 	const fetchPaletteAdjacency = useGenerateMatrixOfPalette()
 
 	const onClickGenerate = () => {
+		const mode = 'transformer'
+		const temperature = '1.2'
+		const maxContrastValue = 100
+
 		if (palette.length < 2) {
 			dispatch(
 				fetchPalette({
 					numColors: 5,
-					mode: 'diffusion',
-					temperature: '0.2',
-					adjacency: fetchPaletteAdjacency(5, 50),
+					mode: mode,
+					temperature: temperature,
+					adjacency: fetchPaletteAdjacency(5, maxContrastValue),
 					palette: fetchPaletteTemplate([]),
 				})
 			)
@@ -45,9 +49,12 @@ export const Palette = () => {
 			dispatch(
 				fetchPalette({
 					numColors: palette.length,
-					mode: 'diffusion',
-					temperature: '0.2',
-					adjacency: fetchPaletteAdjacency(palette.length, 50),
+					mode: mode,
+					temperature: temperature,
+					adjacency: fetchPaletteAdjacency(
+						palette.length,
+						maxContrastValue
+					),
 					palette: fetchPaletteTemplate(palette),
 				})
 			)

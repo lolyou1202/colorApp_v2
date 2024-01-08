@@ -20,11 +20,11 @@ export const PickerButtons: FC<IPickerButtons> = ({
 				content='Random'
 				onClick={onClickRandom}
 			/>
-			<PrimaryButton
+			{/*<PrimaryButton
 				onClickRule='localState'
 				content='Save'
 				onClick={onClickSave}
-			/>
+			/>*/}
 			<PrimaryButton
 				onClickRule='localState'
 				content='Clear'

@@ -9,7 +9,7 @@ export const Navigation = () => {
 		<div className='navigation'>
 			<NavigationLink location={location.picker} />
 			<NavigationLink location={location.palette} />
-			<NavigationLink location={location.collection} />
+			{/*<NavigationLink location={location.collection} />*/}
 		</div>
 	)
 }

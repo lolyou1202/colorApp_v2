@@ -63,12 +63,12 @@ export const PaletteButtons: FC<IPaletteButtons> = ({
 				/>
 			</div>
 			<div className='palette__buttons-right'>
-				<PrimaryButton
+				{/*<PrimaryButton
 					onClickRule='localState'
 					content='Save'
 					width='120px'
 					onClick={onClickSave}
-				/>
+				/>*/}
 				<PrimaryButton
 					onClickRule='controllState'
 					width='64px'

@@ -19,17 +19,12 @@ function App() {
 						<Route index element={<Palette />} />
 						<Route path=':paletteId' element={<Palette />} />
 					</Route>
-					<Route path='/collection'>
+					{/*<Route path='/collection'>
 						<Route index element={<Collection />} />
-						{/*<Route path='colors' element={<CollectionColors />} />
-						<Route
-							path='palettes'
-							element={<CollectionPalettes />}
-						/>*/}
-					</Route>
+					</Route>*/}
 					<Route
 						path='*'
-						element={<div>Страницы не существует</div>}
+						element={<div>The page does not exist</div>}
 					/>
 				</Routes>
 			</div>
