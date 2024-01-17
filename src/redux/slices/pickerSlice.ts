@@ -12,7 +12,7 @@ const initialState: IInitialState = {
 		HEX: '',
 		variant: {
 			brightness: 'light',
-			contrastHEX: '#353535',
+			contrastHEX: '353535',
 		},
 	},
 }
@@ -21,26 +21,26 @@ const colorSlice = createSlice({
 	name: 'color',
 	initialState,
 	reducers: {
-		setColor(state, { payload }: PayloadAction<{ color: string }>) {
-			state.color = {
-				HEX: payload.color,
-				variant: useContrast(payload.color),
-			}
-		},
-		getRandom(state) {
-			const HEX = chroma
-				.random()
-				.hex()
-				.replace(/[^\d\w]/g, '')
-				.toUpperCase()
-			state.color = {
-				HEX: HEX,
-				variant: useContrast(HEX),
-			}
-		},
+		//setColor(state, { payload }: PayloadAction<{ color: string }>) {
+		//	state.color = {
+		//		HEX: payload.color,
+		//		variant: useContrast(payload.color),
+		//	}
+		//},
+		//getRandom(state) {
+		//	const HEX = chroma
+		//		.random()
+		//		.hex()
+		//		.replace(/[^\d\w]/g, '')
+		//		.toUpperCase()
+		//	state.color = {
+		//		HEX: HEX,
+		//		variant: useContrast(HEX),
+		//	}
+		//},
 	},
 })
 
 const { actions, reducer } = colorSlice
-export const { setColor, getRandom } = actions
+export const {} = actions
 export default reducer

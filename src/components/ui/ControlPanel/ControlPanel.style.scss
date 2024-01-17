@@ -1,0 +1,14 @@
+.controlPanel {
+	padding: 6px;
+	gap: 6px;
+	&__option {
+		display: flex;
+		gap: 6px;
+		&-name {
+			font-size: 16px;
+			font-weight: 500;
+			line-height: 24px;
+			margin-right: 4px;
+		}
+	}
+}

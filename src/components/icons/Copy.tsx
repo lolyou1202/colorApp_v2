@@ -1,6 +1,6 @@
-import { FC } from "react"
+import { FC } from 'react'
 
-interface ICopy {
+interface Props {
 	className?: string
 	size?: number
 	stroke?: string
@@ -8,25 +8,25 @@ interface ICopy {
 	fill?: string
 }
 
-export const Copy: FC<ICopy> = ({
+export const Copy: FC<Props> = ({
 	className,
-	size = 32,
+	size = 24,
 	stroke,
-	strokeWidth,
-	fill = "none",
+	strokeWidth = 2,
+	fill = 'none',
 }) => {
 	return (
 		<svg
 			className={className}
-			width={`${size}`}
-			height={`${size}`}
-			viewBox='0 0 32 32'
+			width={size}
+			height={size}
+			viewBox='0 0 24 24'
 			fill={fill}
 			xmlns='http://www.w3.org/2000/svg'>
 			<path
-				d='M8.3 19.3H7.2C6.61652 19.3 6.05695 19.0682 5.64436 18.6556C5.23178 18.2431 5 17.6835 5 17.1V7.2C5 6.61652 5.23178 6.05695 5.64436 5.64436C6.05695 5.23178 6.61652 5 7.2 5H17.1C17.6835 5 18.2431 5.23178 18.6556 5.64436C19.0682 6.05695 19.3 6.61652 19.3 7.2V8.3M14.9 12.7H24.8C26.015 12.7 27 13.685 27 14.9V24.8C27 26.015 26.015 27 24.8 27H14.9C13.685 27 12.7 26.015 12.7 24.8V14.9C12.7 13.685 13.685 12.7 14.9 12.7Z'
-				stroke={stroke}
-				strokeWidth={`${strokeWidth}`}
+				d='M6.225 14.475H5.4C4.96239 14.475 4.54271 14.3012 4.23327 13.9917C3.92384 13.6823 3.75 13.2626 3.75 12.825V5.4C3.75 4.96239 3.92384 4.54271 4.23327 4.23327C4.54271 3.92384 4.96239 3.75 5.4 3.75H12.825C13.2626 3.75 13.6823 3.92384 13.9917 4.23327C14.3012 4.54271 14.475 4.96239 14.475 5.4V6.225M11.175 9.525H18.6C19.5113 9.525 20.25 10.2637 20.25 11.175V18.6C20.25 19.5113 19.5113 20.25 18.6 20.25H11.175C10.2637 20.25 9.525 19.5113 9.525 18.6V11.175C9.525 10.2637 10.2637 9.525 11.175 9.525Z'
+				stroke={`#${stroke}`}
+				strokeWidth={strokeWidth}
 				strokeLinecap='round'
 				strokeLinejoin='round'
 			/>

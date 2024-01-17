@@ -1,0 +1,79 @@
+.header {
+	display: flex;
+	gap: 32px;
+	&__navigation {
+		position: relative;
+		&-pointButton {
+			padding: 8px 20px;
+			cursor: pointer;
+			user-select: none;
+			&-text {
+				font-weight: 700;
+				font-size: 24px;
+				line-height: 28px;
+				color: var(--text-dark);
+			}
+		}
+	}
+	&-page {
+		font-weight: 700;
+		font-size: 40px;
+		line-height: 48px;
+		color: var(--text-dark);
+		user-select: none;
+	}
+	&__menuPopover {
+		padding: 8px;
+		gap: 8px;
+		&-pages {
+			display: flex;
+			flex-direction: column;
+			list-style: none;
+			&.firstPages {
+				.menuPopover__pageLink {
+					display: flex;
+					align-items: center;
+					gap: 8px;
+					padding: 8px;
+					border-radius: var(--borderRadius-short);
+					transition: background 0.2s ease-in-out;
+					&:hover {
+						background: var(--primary-dark-transparent-10);
+					}
+					&-ico {
+						width: 32px;
+						height: 32px;
+						border-radius: var(--borderRadius-short);
+						background: var(--primary-dark-transparent-10);
+					}
+					&-name {
+						white-space: nowrap;
+						font-size: 20px;
+						line-height: 24px;
+						color: var(--text-dark);
+					}
+				}
+			}
+			&.secondPages {
+				.menuPopover__pageLink {
+					display: flex;
+					padding: 4px;
+					&-name {
+						white-space: nowrap;
+						font-size: 14px;
+						line-height: 16px;
+						color: var(--text-dark);
+					}
+				}
+			}
+		}
+	}
+}
+.MuiPopover-root {
+	pointer-events: all !important;
+}
+.MuiPopover-paper {
+	background: none !important;
+	box-shadow: none !important;
+	
+}

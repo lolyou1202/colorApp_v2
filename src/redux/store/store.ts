@@ -8,7 +8,7 @@ export const store = configureStore({
 	reducer: {
 		locationReducer,
 		pickerReducer,
-		paletteReducer,
+		//paletteReducer,
 		alertReducer,
 	},
 })

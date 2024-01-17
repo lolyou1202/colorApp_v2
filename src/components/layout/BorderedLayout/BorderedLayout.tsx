@@ -1,17 +1,18 @@
-import { FC, ReactNode } from 'react'
+import { CSSProperties, ComponentProps, FC, ReactNode } from 'react'
 import './BorderedLayout.style.scss'
 import classNames from 'classnames'
 
-interface IBorderedLayout {
+interface Props extends ComponentProps<'div'> {
 	children?: ReactNode
 	className?: string
-	style?: React.CSSProperties | undefined
+	style?: CSSProperties | undefined
 }
 
-export const BorderedLayout: FC<IBorderedLayout> = ({
+export const BorderedLayout: FC<Props> = ({
 	children,
 	className,
 	style,
+	...rest
 }) => {
 	const borderedLayoutClassNames = classNames({
 		borderedLayout: true,
@@ -19,7 +20,7 @@ export const BorderedLayout: FC<IBorderedLayout> = ({
 	})
 
 	return (
-		<div className={borderedLayoutClassNames} style={style}>
+		<div className={borderedLayoutClassNames} style={style} {...rest}>
 			{children}
 		</div>
 	)

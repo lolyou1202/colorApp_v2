@@ -3,7 +3,6 @@ import axios from 'axios'
 import { API_Huemint } from '../api/api'
 import { useContrast } from '../../hooks/useContrast'
 import { IColor, ISwapColors } from '../../types'
-import { usePosition } from '../../hooks/usePosition'
 import chroma from 'chroma-js'
 
 interface IInitialState {

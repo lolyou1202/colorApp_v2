@@ -1,0 +1,71 @@
+.customColorPicker {
+	flex-direction: column;
+	height: 100%;
+	&__interactive {
+		height: 100%;
+		padding: 16px 16px 16px 16px;
+	}
+	&__info {
+		display: flex;
+		gap: 24px;
+		justify-content: space-between;
+		padding: 12px;
+		&-currentColor {
+			display: flex;
+			gap: 12px;
+		}
+		&-view {
+			width: 32px;
+			height: 32px;
+			border-radius: var(--borderRadius-short);
+		}
+		&-value {
+			width: 100%;
+			font-size: 20px;
+			font-weight: 500;
+			line-height: 32px;
+			color: var(--text-dark);
+			text-transform: uppercase;
+			border: none;
+			background: transparent;
+			outline: none;
+		}
+		& > div {
+			display: flex;
+		}
+		& p {
+			font-size: 20px;
+			font-weight: 500;
+			line-height: 32px;
+			color: var(--text-dark);
+		}
+	}
+	.react-colorful {
+		width: 100%;
+		height: 100%;
+		gap: 16px;
+		&__saturation {
+			height: 100%;
+			border: 2px solid var(--primary-dark);
+			border-radius: var(--borderRadius-short);
+			cursor: pointer;
+		}
+		&__pointer {
+			width: 20px;
+			height: 20px;
+			background-color: var(--primary-dark);
+			border: 4px solid var(--primary-dark);
+			box-shadow: none;
+			cursor: pointer;
+		}
+		&__hue {
+			height: 12px;
+			border-radius: 8px;
+			border: var(--border);
+			cursor: pointer;
+		}
+	}
+}
+.react-colorful__interactive:focus .react-colorful__pointer {
+	transform: translate(-50%, -50%);
+}
