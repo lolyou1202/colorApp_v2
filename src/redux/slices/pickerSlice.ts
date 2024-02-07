@@ -1,32 +1,30 @@
-import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { useContrast } from '../../hooks/useContrast'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { IColor } from '../../types'
-import chroma from 'chroma-js'
+import { useContrast } from '../../hooks/useContrast'
 
-interface IInitialState {
-	color: IColor
-}
-
-const initialState: IInitialState = {
-	color: {
-		HEX: '',
+const initialState: { colorState: IColor } = {
+	colorState: {
+		color: '#FFFFFF',
 		variant: {
 			brightness: 'light',
-			contrastHEX: '353535',
+			contrastColor: '#353535',
 		},
 	},
 }
 
-const colorSlice = createSlice({
-	name: 'color',
+const pickerSlice = createSlice({
+	name: 'picker',
 	initialState,
 	reducers: {
-		//setColor(state, { payload }: PayloadAction<{ color: string }>) {
-		//	state.color = {
-		//		HEX: payload.color,
-		//		variant: useContrast(payload.color),
-		//	}
-		//},
+		setColor(
+			state,
+			{ payload }: PayloadAction<{ newColor: string }>
+		) {
+			state.colorState = {
+				color: payload.newColor,
+				variant: useContrast(payload.newColor),
+			}
+		},
 		//getRandom(state) {
 		//	const HEX = chroma
 		//		.random()
@@ -41,6 +39,6 @@ const colorSlice = createSlice({
 	},
 })
 
-const { actions, reducer } = colorSlice
-export const {} = actions
+const { actions, reducer } = pickerSlice
+export const { setColor } = actions
 export default reducer

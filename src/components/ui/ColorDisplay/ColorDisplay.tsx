@@ -1,5 +1,4 @@
 import './ColorDisplay.style.scss'
-import chroma from 'chroma-js'
 import classNames from 'classnames'
 import { FC } from 'react'
 import { Expand } from '../../icons/Expand'
@@ -7,33 +6,45 @@ import { BorderedLayout } from '../../layout/BorderedLayout/BorderedLayout'
 import { DefaultHoveredButton } from '../DefaultHoveredButton/DefaultHoveredButton'
 import { IColorVariant } from '../../../types'
 import { useGetColorName } from '../../../hooks/useGetColorName'
+import { useValidateHEX } from '../../../hooks/useValidateHEX'
 
 interface Props {
+	colorState: string
+	inputState: string
 	colorVariant: IColorVariant
-	background: chroma.Color
 }
 
-export const ColorDisplay: FC<Props> = ({ colorVariant, background }) => {
+export const ColorDisplay: FC<Props> = ({
+	colorState,
+	inputState,
+	colorVariant,
+}) => {
+	const { brightness, contrastColor } = colorVariant
+
 	const colorDisplayHEXClassNames = classNames({
 		'colorDisplay-HEX': true,
-		[colorVariant.brightness]: true,
+		[brightness]: true,
 	})
+
+	const validHEX = useValidateHEX(inputState)
+
+	const validColor = validHEX ? validHEX : colorState
 
 	return (
 		<BorderedLayout
 			className='colorDisplay'
-			style={{ background: background.hex() }}>
+			style={{ background: validColor }}>
 			<p className={colorDisplayHEXClassNames}>
-				{background.hex().toUpperCase().replace(/[^0-9A-Z]/g, '')}
+				{validColor.toUpperCase().replace(/[^0-9A-Z]/g, '')}
 			</p>
 			<p
 				className='colorDisplay-colorName'
-				style={{ color: `#${colorVariant.contrastHEX}` }}>
-				{useGetColorName(background.hex())}
+				style={{ color: contrastColor }}>
+				{useGetColorName(validColor)}
 			</p>
 			<div className='colorDisplay-iconBar'>
-				<DefaultHoveredButton brightness={colorVariant.brightness}>
-					<Expand stroke={colorVariant.contrastHEX} />
+				<DefaultHoveredButton brightness={brightness}>
+					<Expand stroke={contrastColor} />
 				</DefaultHoveredButton>
 			</div>
 		</BorderedLayout>

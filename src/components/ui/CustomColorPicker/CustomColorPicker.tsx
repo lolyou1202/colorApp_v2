@@ -1,5 +1,5 @@
 import './CustomColorPicker.style.scss'
-import { FC, useState } from 'react'
+import { FC, useEffect } from 'react'
 import { HexColorPicker } from 'react-colorful'
 import { BorderedLayout } from '../../layout/BorderedLayout/BorderedLayout'
 import { DefaultHoveredButton } from '../DefaultHoveredButton/DefaultHoveredButton'
@@ -8,72 +8,73 @@ import { IColorVariant } from '../../../types'
 import { useValidateHEX } from '../../../hooks/useValidateHEX'
 import { useAppDispatch } from '../../../redux/hooks/useAppRedux'
 import { viewAlert } from '../../../redux/slices/alertSlice'
+import { setColor } from '../../../redux/slices/pickerSlice'
+import { useDebounce } from '../../../hooks/useDebounce'
 
 interface Props {
-	color: string
-	setColor: React.Dispatch<React.SetStateAction<string>>
+	colorState: string
+	inputState: string
+	setInputState: React.Dispatch<React.SetStateAction<string>>
 }
 
-export const CustomColorPicker: FC<Props> = ({ color, setColor }) => {
-	const [inputState, setInputState] = useState(color.toUpperCase())
+export const CustomColorPicker: FC<Props> = ({
+	colorState,
+	inputState,
+	setInputState,
+}) => {
+	const debouncedValue = useDebounce<string>(inputState, 100)
 
 	const dispatch = useAppDispatch()
 
-	const colorVariant: IColorVariant = {
+	const validHEX = useValidateHEX(inputState)
+
+	const { brightness, contrastColor }: IColorVariant = {
 		brightness: 'light',
-		contrastHEX: '353535',
-	}
-
-	const onChangeInput = (value: string) => {
-		setInputState(value)
-		const validHEX = useValidateHEX(value)
-		if (validHEX) {
-			setColor(validHEX[0])
-		}
-	}
-
-	const onChangePicker = (newColor: string) => {
-		setInputState(newColor)
-		setColor(newColor)
+		contrastColor: '#353535',
 	}
 
 	const onCopyClick = () => {
-		navigator.clipboard.writeText(color)
-		dispatch(viewAlert({ alertText: 'Сolor added to the collection' }))
+		navigator.clipboard.writeText(colorState.toUpperCase())
+		dispatch(viewAlert({ alertText: 'Сolor copied to the clipboard' }))
 	}
+
+	useEffect(() => {
+		if (validHEX) {
+			dispatch(setColor({ newColor: validHEX }))
+		}
+	}, [debouncedValue])
 
 	return (
 		<BorderedLayout className='customColorPicker'>
 			<div className='customColorPicker__interactive'>
 				<HexColorPicker
-					color={color}
-					onChange={newColor =>
-						onChangePicker(
-							newColor.toUpperCase().replace(/[^0-9A-Z]/g, '')
-						)
-					}
+					color={colorState}
+					onChange={newColor => setInputState(newColor.toUpperCase())}
 				/>
 			</div>
 			<div className='divider horizontal'></div>
 			<div className='customColorPicker__info'>
-				<div>
-					<p>#</p>
-					<input
-						type='text'
-						className='customColorPicker__info-value'
-						value={inputState}
-						onChange={e => onChangeInput(e.target.value)}
-					/>
-				</div>
+				<input
+					type='text'
+					className='customColorPicker__info-value'
+					value={inputState}
+					onChange={e =>
+						setInputState(
+							e.target.value.replace(/[^#0-9A-Fa-f]/g, '')
+						)
+					}
+				/>
 				<div className='customColorPicker__info-currentColor'>
 					<BorderedLayout
 						className='customColorPicker__info-view'
-						style={{ background: `#${color}` }}
+						style={{
+							background: validHEX ? validHEX : colorState,
+						}}
 					/>
 					<DefaultHoveredButton
-						brightness={colorVariant.brightness}
+						brightness={brightness}
 						onClick={() => onCopyClick()}>
-						<Copy stroke={colorVariant.contrastHEX} />
+						<Copy stroke={contrastColor} />
 					</DefaultHoveredButton>
 				</div>
 			</div>

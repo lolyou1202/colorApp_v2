@@ -5,8 +5,10 @@ export const useValidateHEX = (stringHEX: string) => {
 		return r + r + g + g + b + b
 	})
 
-	const result: RegExpExecArray | null =
+	const RegExpExecArray: RegExpExecArray | null =
 		/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(HEX)
 
-	return result
+	return RegExpExecArray
+		? `#${RegExpExecArray[0].toUpperCase().replace(/[^0-9A-Z]/g, '')}`
+		: null
 }

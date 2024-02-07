@@ -1,20 +1,10 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { Picker } from './pages/Picker/Picker'
 import { CustomAlert } from './components/ui/CustomAlert/CustomAlert'
-import { useAppDispatch, useAppSelector } from './redux/hooks/useAppRedux'
-import { closeAlert } from './redux/slices/alertSlice'
+import { useAppSelector } from './redux/hooks/useAppRedux'
 
 function App() {
 	const alert = useAppSelector(store => store.alertReducer)
-
-	const dispatch = useAppDispatch()
-
-	const handleCloseAlert = (
-		_?: React.SyntheticEvent | Event,
-		reason?: string
-	) => {
-		dispatch(closeAlert({ reason: reason }))
-	}
 
 	return (
 		<div className='App'>
@@ -30,11 +20,7 @@ function App() {
 					</Route>*/}
 				<Route path='*' element={<div>The page does not exist</div>} />
 			</Routes>
-			<CustomAlert
-				open={alert.open}
-				text={alert.text}
-				onClose={handleCloseAlert}
-			/>
+			<CustomAlert open={alert.open} text={alert.text} />
 		</div>
 	)
 }

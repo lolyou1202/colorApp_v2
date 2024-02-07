@@ -13,14 +13,7 @@ const alertSlice = createSlice({
 			state.text = payload.alertText
 			state.open = true
 		},
-		closeAlert(
-			state,
-			{ payload }: PayloadAction<{ reason: string | undefined }>
-		) {
-			if (payload.reason === 'clickaway') {
-				state.open = false
-				return
-			}
+		closeAlert(state) {
 			state.open = false
 		},
 	},

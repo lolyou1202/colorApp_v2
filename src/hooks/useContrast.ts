@@ -1,22 +1,19 @@
-import { RGB } from '../types'
-import { useHEXtoRGB } from './useHEXtoRGB'
+import chroma from 'chroma-js'
 import { useRGBtoYIQ } from './useRGBtoYIQ'
 
 export const useContrast = (
 	colorHex: string | undefined,
 	threshold: number = 128
-): { brightness: 'light' | 'dark'; contrastHEX: string } => {
-	if (colorHex === undefined) {
-		return { brightness: 'light', contrastHEX: '#353535' }
+): { brightness: 'light' | 'dark'; contrastColor: string } => {
+	if (colorHex === undefined || !chroma.valid(colorHex)) {
+		return { brightness: 'light', contrastColor: '#353535' }
 	}
 
-	const rgb: RGB | undefined = useHEXtoRGB(colorHex.toUpperCase())
+	const [r, g, b] = chroma(colorHex).rgb()
 
-	if (rgb === undefined) {
-		return { brightness: 'light', contrastHEX: '#353535' }
-	}
+	const rgb = { r: r, g: g, b: b }
 
 	return useRGBtoYIQ(rgb) >= threshold
-		? { brightness: 'light', contrastHEX: '#353535' }
-		: { brightness: 'dark', contrastHEX: '#FFFFFF' }
+		? { brightness: 'light', contrastColor: '#353535' }
+		: { brightness: 'dark', contrastColor: '#FFFFFF' }
 }

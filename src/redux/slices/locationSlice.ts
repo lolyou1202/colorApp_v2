@@ -2,12 +2,12 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 export enum EnumLocation {
 	picker = 'picker',
-	palette = 'palette',
+	generator = 'generator',
 }
 
 export interface ILocationState {
 	[EnumLocation.picker]: ILocation
-	[EnumLocation.palette]: ILocation
+	[EnumLocation.generator]: ILocation
 }
 
 export interface ILocation {
@@ -22,9 +22,9 @@ const locationState: ILocationState = {
 		path: '/picker',
 		active: false,
 	},
-	[EnumLocation.palette]: {
-		type: EnumLocation.palette,
-		path: '/palette',
+	[EnumLocation.generator]: {
+		type: EnumLocation.generator,
+		path: '/generator',
 		active: false,
 	},
 }

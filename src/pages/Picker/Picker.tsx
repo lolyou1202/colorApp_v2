@@ -1,22 +1,18 @@
 import { useEffect } from 'react'
 import './Picker.style.scss'
-import { useAppDispatch, useAppSelector } from '../../redux/hooks/useAppRedux'
+import { useAppDispatch } from '../../redux/hooks/useAppRedux'
 import { EnumLocation, setLocation } from '../../redux/slices/locationSlice'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
-import { CustomAlert } from '../../components/ui/CustomAlert/CustomAlert'
-import { closeAlert } from '../../redux/slices/alertSlice'
-import { BorderedLayout } from '../../components/layout/BorderedLayout/BorderedLayout'
 import { HeaderNavigation } from '../../components/ui/HeaderNavigation/HeaderNavigation'
 import { PickerMain } from '../../components/basic/PickerMain/PickerMain'
 
 export const Picker = () => {
-	const color = useAppSelector(store => store.pickerReducer.color)
 	
 
-	const { pickerID } = useParams()
+	//const { pickerID } = useParams()
 
-	const location = useLocation()
-	const navigate = useNavigate()
+	//const location = useLocation()
+	//const navigate = useNavigate()
 	const dispatch = useAppDispatch()
 
 	//const HEXToRGB = useCallback(

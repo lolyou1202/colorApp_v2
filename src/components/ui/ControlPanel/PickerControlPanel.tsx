@@ -8,46 +8,47 @@ import { MoreHorizontal } from '../../icons/MoreHorizontal'
 interface Props {}
 
 export const PickerControlPanel: FC<Props> = () => {
-	const colorVariant: IColorVariant = {
+	const { brightness, contrastColor }: IColorVariant = {
 		brightness: 'light',
-		contrastHEX: '353535',
+		contrastColor: '#353535',
 	}
+
 	return (
 		<BorderedLayout className='controlPanel'>
 			<DefaultHoveredButton
 				className='controlPanel__option'
-				brightness={colorVariant.brightness}>
-				<MoreHorizontal stroke={colorVariant.contrastHEX} />
+				brightness={brightness}>
+				<MoreHorizontal stroke={contrastColor} />
 			</DefaultHoveredButton>
 			<div className='divider vertical'></div>
 			<DefaultHoveredButton
 				className='controlPanel__option'
-				brightness={colorVariant.brightness}>
-				<MoreHorizontal stroke={colorVariant.contrastHEX} />
+				brightness={brightness}>
+				<MoreHorizontal stroke={contrastColor} />
 			</DefaultHoveredButton>
 			<DefaultHoveredButton
 				className='controlPanel__option'
-				brightness={colorVariant.brightness}>
-				<MoreHorizontal stroke={colorVariant.contrastHEX} />
+				brightness={brightness}>
+				<MoreHorizontal stroke={contrastColor} />
 				<p
 					className='controlPanel__option-name'
-					style={{ color: `#${colorVariant.contrastHEX}` }}>
+					style={{ color: contrastColor }}>
 					Generate
 				</p>
 			</DefaultHoveredButton>
 			<DefaultHoveredButton
 				className='controlPanel__option'
-				brightness={colorVariant.brightness}>
-				<MoreHorizontal stroke={colorVariant.contrastHEX} />
+				brightness={brightness}>
+				<MoreHorizontal stroke={contrastColor} />
 			</DefaultHoveredButton>
 			<div className='divider vertical'></div>
 			<DefaultHoveredButton
 				className='controlPanel__option'
-				brightness={colorVariant.brightness}>
-				<MoreHorizontal stroke={colorVariant.contrastHEX} />
+				brightness={brightness}>
+				<MoreHorizontal stroke={contrastColor} />
 				<p
 					className='controlPanel__option-name'
-					style={{ color: `#${colorVariant.contrastHEX}` }}>
+					style={{ color: contrastColor }}>
 					Export
 				</p>
 			</DefaultHoveredButton>

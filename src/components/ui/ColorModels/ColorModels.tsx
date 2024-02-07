@@ -1,25 +1,47 @@
 import './ColorModels.style.scss'
-import { FC } from 'react'
-import { IColorVariant } from '../../../types'
 import { BorderedLayout } from '../../layout/BorderedLayout/BorderedLayout'
-import { DefaultHoveredButton } from '../DefaultHoveredButton/DefaultHoveredButton'
+import { PickerBlock } from '../PickerBlock/PickerBlock'
+import {
+	useAppDispatch,
+	useAppSelector,
+} from '../../../redux/hooks/useAppRedux'
+import { useColorModels } from '../../../hooks/useColorModels'
+import { viewAlert } from '../../../redux/slices/alertSlice'
+import { ColorModelHalf } from './ColorModelHalf'
 
-interface Props {
-	colorVariant: IColorVariant
-}
+export const ColorModels = ({}) => {
+	const colorState = useAppSelector(state => state.pickerReducer.colorState)
 
-export const ColorModels: FC<Props> = ({ colorVariant }) => {
+	const dispatch = useAppDispatch()
+
+	const colorModelsArr = useColorModels(colorState.color)
+
+	const onClickColorModel = (value: string) => {
+		navigator.clipboard.writeText(value)
+		dispatch(viewAlert({ alertText: 'Сolor copied to the clipboard' }))
+	}
+
 	return (
-		<BorderedLayout className='colorModels'>
-			<div className='colorModels-list'>
-				<DefaultHoveredButton
-					className='colorModels__option'
-					brightness={colorVariant.brightness}>
-					<p className='colorModels__option-title'>HEX</p>
-					<p className='colorModels__option-value'>D7FF01</p>
-				</DefaultHoveredButton>
-			</div>
-			<div className='divider vertical'></div>
-		</BorderedLayout>
+		<PickerBlock classNameBlock='colorModels__block' title='Conversion'>
+			<BorderedLayout className='colorModels'>
+				<div className='colorModels-list'>
+					<div>
+						<ColorModelHalf
+							colorModelsArr={colorModelsArr}
+							onClickColorModel={onClickColorModel}
+							arrHalf='first'
+						/>
+					</div>
+					<div className='divider vertical' />
+					<div>
+						<ColorModelHalf
+							colorModelsArr={colorModelsArr}
+							onClickColorModel={onClickColorModel}
+							arrHalf='last'
+						/>
+					</div>
+				</div>
+			</BorderedLayout>
+		</PickerBlock>
 	)
 }
