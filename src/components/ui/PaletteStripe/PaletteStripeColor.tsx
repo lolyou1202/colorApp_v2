@@ -8,7 +8,7 @@ import { Check } from '../../icons/Check'
 interface Props {
 	color: string
 	variant: IColorVariant
-	isCurrentColor?: boolean
+	isCurrentColor: boolean
 	howerWidth: string
 }
 
@@ -25,11 +25,10 @@ export const PaletteStripeColor: FC<Props> = ({
 
 	const paletteStripeColorClassNames = classNames({
 		paletteStripe__color: true,
-		current: isCurrentColor,
 	})
 	const paletteStripeDotClassNames = classNames({
 		'paletteStripe__color-dot': true,
-		show: !hover && isCurrentColor && !isChecked,
+		show: !hover && isCurrentColor,
 	})
 	const paletteStripeHexClassNames = classNames({
 		'paletteStripe__color-hex': true,

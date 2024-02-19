@@ -5,14 +5,15 @@ import { useContrast } from '../../../hooks/useContrast'
 import classNames from 'classnames'
 
 interface Props {
-	curentColor: string
-	listColors: string[]
+	listColors: {
+		color: string
+		current: boolean
+	}[]
 	howerWidth?: string
 	className?: string
 }
 
 export const PaletteStripe: FC<Props> = ({
-	curentColor,
 	listColors,
 	howerWidth = '80px',
 	className,
@@ -26,9 +27,9 @@ export const PaletteStripe: FC<Props> = ({
 			{listColors.map((color, index) => (
 				<PaletteStripeColor
 					key={index}
-					isCurrentColor={color === curentColor}
-					color={color}
-					variant={useContrast(color)}
+					isCurrentColor={color.current}
+					color={color.color}
+					variant={useContrast(color.color)}
 					howerWidth={howerWidth}
 				/>
 			))}

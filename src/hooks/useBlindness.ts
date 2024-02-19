@@ -1,34 +1,33 @@
+import chroma from 'chroma-js'
+import { getBlindnessColor } from './getBlindnessColor'
 import { blindnessScheme } from '../constants/blindnessScheme'
-import { BlindnessScheme } from '../types'
 
-export const useBlindness = (
-	rgbaObj: { r: number; g: number; b: number; a: number },
-	matrixArr: BlindnessScheme
-): { r: number; g: number; b: number } => {
-	const currentMatrix = blindnessScheme[matrixArr]
+export const useBlindness = (currentColor: string) =>
+	Object.values(blindnessScheme).map(blindness => {
+		const colorStateRgb = chroma(currentColor).rgb()
 
-	function fu(n: number) {
-		return n < 0 ? 0 : n < 255 ? n : 255
-	}
+		const blindnessColorHex = chroma(
+			Object.values(
+				getBlindnessColor(
+					{
+						r: colorStateRgb[0],
+						g: colorStateRgb[1],
+						b: colorStateRgb[2],
+						a: 100,
+					},
+					blindness.scheme
+				)
+			).map(color => Math.round(color))
+		).hex()
 
-	const r =
-		rgbaObj.r * currentMatrix[0] +
-		rgbaObj.g * currentMatrix[1] +
-		rgbaObj.b * currentMatrix[2] +
-		rgbaObj.a * currentMatrix[3] +
-		currentMatrix[4]
-	const g =
-		rgbaObj.r * currentMatrix[5] +
-		rgbaObj.g * currentMatrix[6] +
-		rgbaObj.b * currentMatrix[7] +
-		rgbaObj.a * currentMatrix[8] +
-		currentMatrix[9]
-	const b =
-		rgbaObj.r * currentMatrix[10] +
-		rgbaObj.g * currentMatrix[11] +
-		rgbaObj.b * currentMatrix[12] +
-		rgbaObj.a * currentMatrix[13] +
-		currentMatrix[14]
+		const similarPercent = `${
+			100 - Math.round(chroma.deltaE(currentColor, blindnessColorHex))
+		}% similar`
 
-	return { r: fu(r), g: fu(g), b: fu(b) }
-}
+		return {
+			name: blindness.name,
+			description: blindness.description,
+			color: blindnessColorHex,
+			similar: similarPercent,
+		}
+	})

@@ -1,30 +1,6 @@
-export interface IColor {
-	color: string
-	variant: IColorVariant
-	lock?: boolean
-	inCollection?: boolean
-}
-
-export type IBrightness = 'light' | 'dark'
-
-export interface IColorVariant {
-	brightness: IBrightness
-	contrastColor: string
-}
-export interface ISwapColors {
-	direction: 'right' | 'left'
-	colorPosition: number
-}
-
-export type IPositionType = 'first' | 'between' | 'last'
-export type IPositionIndex = number
-
-export interface IPosition {
-	positionIndex: IPositionIndex
-	positionType: IPositionType
-}
-
-
+export type PositionType = 'first' | 'between' | 'last'
+export type BrightnessType = 'light' | 'dark'
+export type DirectionType = 'right' | 'left'
 export type BlindnessScheme =
 	| 'Normal'
 	| 'Protanopia'
@@ -36,3 +12,23 @@ export type BlindnessScheme =
 	| 'Tritanomaly'
 	| 'Achromatopsia'
 	| 'Achromatomaly'
+
+export interface IColor {
+	color: string
+	variant: IColorVariant
+	lock?: boolean
+}
+
+export interface IColorVariant {
+	brightness: BrightnessType
+	contrastColor: string
+}
+export interface ISwapColors {
+	direction: DirectionType
+	colorPosition: number
+}
+
+export interface IPosition {
+	positionType: PositionType
+	positionIndex: number
+}

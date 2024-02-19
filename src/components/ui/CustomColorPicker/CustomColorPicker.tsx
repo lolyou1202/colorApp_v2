@@ -23,7 +23,7 @@ export const CustomColorPicker: FC<Props> = ({
 	setInputState,
 }) => {
 	const debouncedValue = useDebounce<string>(inputState, 100)
-
+    
 	const dispatch = useAppDispatch()
 
 	const validHEX = useValidateHEX(inputState)
@@ -39,7 +39,7 @@ export const CustomColorPicker: FC<Props> = ({
 	}
 
 	useEffect(() => {
-		if (validHEX) {
+		if (validHEX && validHEX !== colorState) {
 			dispatch(setColor({ newColor: validHEX }))
 		}
 	}, [debouncedValue])

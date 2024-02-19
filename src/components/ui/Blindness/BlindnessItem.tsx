@@ -4,7 +4,7 @@ import { Bage } from '../Bage/Bage'
 
 interface Props {
 	colorState: string
-	listColors: string[]
+	listColors: { color: string; current: boolean }[]
 	info: { title: string; subtitle: string; bageInfo: string }
 }
 
@@ -18,13 +18,9 @@ export const BlindnessItem: FC<Props> = ({ colorState, listColors, info }) => {
 						{info.subtitle}
 					</p>
 				</div>
-				<Bage text='55% similar' brightness='light' />
+				<Bage text={info.bageInfo} brightness='light' />
 			</div>
-			<PaletteStripe
-				curentColor={colorState}
-				listColors={listColors}
-				howerWidth='80px'
-			/>
+			<PaletteStripe listColors={listColors} howerWidth='80px' />
 		</div>
 	)
 }

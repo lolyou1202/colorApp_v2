@@ -4,14 +4,15 @@ import { PaletteStripe } from '../PaletteStripe/PaletteStripe'
 interface Props {
 	title: string
 	description: string
-	colorState: string
-	listColors: string[]
+	listColors: {
+		color: string
+		current: boolean
+	}[]
 }
 
 export const VariationsItem: FC<Props> = ({
 	title,
 	description,
-	colorState,
 	listColors,
 }) => {
 	return (
@@ -22,11 +23,7 @@ export const VariationsItem: FC<Props> = ({
 					{description}
 				</p>
 			</div>
-			<PaletteStripe
-				curentColor={colorState}
-				listColors={listColors}
-				howerWidth='80px'
-			/>
+			<PaletteStripe listColors={listColors} howerWidth='80px' />
 		</div>
 	)
 }

@@ -10,15 +10,36 @@ interface Props {
 
 export const Variations: FC<Props> = ({ colorState }) => {
 	const listColorsShades = useMemo(
-		() => chroma.scale([colorState, '000000']).colors(15),
+		() =>
+			chroma
+				.scale([colorState, '000000'])
+				.colors(15)
+				.map((color, index) => ({
+					color: color.toUpperCase(),
+					current: index === 0 ? true : false,
+				})),
 		[colorState]
 	)
 	const listColorsTints = useMemo(
-		() => chroma.scale([colorState, 'FFFFFF']).colors(15),
+		() =>
+			chroma
+				.scale([colorState, 'FFFFFF'])
+				.colors(15)
+				.map((color, index) => ({
+					color: color.toUpperCase(),
+					current: index === 0 ? true : false,
+				})),
 		[colorState]
 	)
 	const listColorsTones = useMemo(
-		() => chroma.scale([colorState, '808080']).colors(15),
+		() =>
+			chroma
+				.scale([colorState, '808080'])
+				.colors(15)
+				.map((color, index) => ({
+					color: color.toUpperCase(),
+					current: index === 0 ? true : false,
+				})),
 		[colorState]
 	)
 	const listColorsHues = useMemo(() => {
@@ -30,12 +51,28 @@ export const Variations: FC<Props> = ({ colorState }) => {
 		const lastColor = chroma(currentColor)
 			.set('hsv.h', currentColorHue + 75)
 			.hex()
-		const firstHalfList = chroma.scale([firstColor, currentColor]).colors(8)
+		const firstHalfList = chroma
+			.scale([firstColor, currentColor])
+			.colors(8)
+			.map(color => ({
+				color: color.toUpperCase(),
+				current: false,
+			}))
 		firstHalfList.pop()
-		const secondHalfList = chroma.scale([currentColor, lastColor]).colors(8)
+		const secondHalfList = chroma
+			.scale([currentColor, lastColor])
+			.colors(8)
+			.map(color => ({
+				color: color.toUpperCase(),
+				current: false,
+			}))
 		secondHalfList.shift()
 
-		return [...firstHalfList, currentColor.hex(), ...secondHalfList]
+		return [
+			...firstHalfList,
+			{ color: currentColor.hex(), current: true },
+			...secondHalfList,
+		]
 	}, [colorState])
 
 	return (
@@ -48,25 +85,21 @@ export const Variations: FC<Props> = ({ colorState }) => {
 				<VariationsItem
 					title='Shades'
 					description='A shade is created by adding black to a base color, increasing its darkness. Shades appear more dramatic and richer.'
-					colorState={colorState}
 					listColors={listColorsShades}
 				/>
 				<VariationsItem
 					title='Tints'
 					description='A tint is created by adding white to a base color, increasing its lightness. Tints are likely to look pastel and less intense.'
-					colorState={colorState}
 					listColors={listColorsTints}
 				/>
 				<VariationsItem
 					title='Tones'
 					description='A tone is created by adding gray to a base color, increasing its lightness. Tones looks more sophisticated and complex than base colors.'
-					colorState={colorState}
 					listColors={listColorsTones}
 				/>
 				<VariationsItem
 					title='Tones'
 					description='A tone is created by adding gray to a base color, increasing its lightness. Tones looks more sophisticated and complex than base colors.'
-					colorState={colorState}
 					listColors={listColorsHues}
 				/>
 			</div>
