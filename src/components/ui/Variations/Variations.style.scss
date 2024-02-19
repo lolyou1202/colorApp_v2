@@ -1,0 +1,30 @@
+.variations {
+	&__list {
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+	}
+	&__item {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		width: 100%;
+		&-name {
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+			&-title {
+				font-weight: 500;
+				font-size: 24px;
+				line-height: 24px;
+				color: var(--text-dark);
+			}
+			&-description {
+				font-weight: 500;
+				font-size: 20px;
+				line-height: 24px;
+				color: var(--primary-dark-transparent-50);
+			}
+		}
+	}
+}

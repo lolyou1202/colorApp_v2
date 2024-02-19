@@ -34,7 +34,7 @@ export const CustomColorPicker: FC<Props> = ({
 	}
 
 	const onCopyClick = () => {
-		navigator.clipboard.writeText(colorState.toUpperCase())
+		navigator.clipboard.writeText(colorState)
 		dispatch(viewAlert({ alertText: 'Сolor copied to the clipboard' }))
 	}
 
@@ -73,7 +73,8 @@ export const CustomColorPicker: FC<Props> = ({
 					/>
 					<DefaultHoveredButton
 						brightness={brightness}
-						onClick={() => onCopyClick()}>
+						onClick={() => onCopyClick()}
+					>
 						<Copy stroke={contrastColor} />
 					</DefaultHoveredButton>
 				</div>

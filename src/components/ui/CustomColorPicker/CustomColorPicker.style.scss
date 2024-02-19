@@ -42,12 +42,20 @@
 			cursor: pointer;
 		}
 		&__pointer {
-			width: 20px;
-			height: 20px;
-			background-color: var(--primary-dark);
-			border: 4px solid var(--primary-dark);
+			width: 24px;
+			height: 24px;
+			background-color: var(--white);
+			border: 2px solid var(--primary-dark);
 			box-shadow: none;
 			cursor: pointer;
+			&-fill {
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%,-50%);
+				width: 12px;
+				height: 12px;
+				border: 2px solid var(--primary-dark);
+			}
 		}
 		&__hue {
 			height: 12px;
@@ -58,5 +66,5 @@
 	}
 }
 .react-colorful__interactive:focus .react-colorful__pointer {
-	transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%) !important;
 }

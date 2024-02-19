@@ -1,0 +1,22 @@
+.bage {
+	display: flex;
+	padding: 4px 8px;
+	border-radius: var(--borderRadius-short);
+	&-text {
+		font-weight: 500;
+		font-size: 16px;
+		line-height: 24px;
+	}
+	&.light {
+		background: var(--primary-dark-transparent-10);
+		.bage-text {
+			color: var(--text-dark);
+		}
+	}
+	&.dark {
+		background: var(--primary-light-transparent-10);
+		.bage-text {
+			color: var(--text-light);
+		}
+	}
+}

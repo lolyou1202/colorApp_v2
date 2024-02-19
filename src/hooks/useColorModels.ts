@@ -17,28 +17,28 @@ export type ColorModels = {
 	HSL: string
 }
 
-export const useColorModels = (HEXVithHash: string): ColorModels => {
-	const HEX = HEXVithHash.replace(/[^0-9A-Z]/g, '')
-	const RGB = chroma(HEXVithHash).rgb().join(', ')
-	const LAB = chroma(HEXVithHash)
+export const useColorModels = (HEXWithHash: string): ColorModels => {
+	const HEX = HEXWithHash.replace(/[^0-9A-Z]/g, '')
+	const RGB = chroma(HEXWithHash).rgb().join(', ')
+	const LAB = chroma(HEXWithHash)
 		.lab()
 		.map(value => Math.round(value))
 		.join(', ')
-	const HWB = useRGB2HWB(chroma(HEXVithHash).rgb())
+	const HWB = useRGB2HWB(chroma(HEXWithHash).rgb())
 		.map(value => Math.round(value))
 		.join(', ')
 	const LUV = useXYZ2LUV(
-		useRGB2XYZ(chroma(HEXVithHash).rgb()).map(value =>
+		useRGB2XYZ(chroma(HEXWithHash).rgb()).map(value =>
 			Math.round(value * 100)
 		)
 	)
 		.map(value => Math.round(value))
 		.join(', ')
-	const LCH = chroma(HEXVithHash)
+	const LCH = chroma(HEXWithHash)
 		.lch()
 		.map(value => (isNaN(value) ? 0 : Math.round(value)))
 		.join(', ')
-	const HSB = chroma(HEXVithHash)
+	const HSB = chroma(HEXWithHash)
 		.hsv()
 		.map((value, index) =>
 			isNaN(value)
@@ -48,13 +48,13 @@ export const useColorModels = (HEXVithHash: string): ColorModels => {
 					: Math.round(value * 100)
 		)
 		.join(', ')
-	const CMYK = useRGB2CMYK(chroma(HEXVithHash).rgb())
+	const CMYK = useRGB2CMYK(chroma(HEXWithHash).rgb())
 		.map(value => Math.round(value * 100))
 		.join(', ')
-	const XYZ = useRGB2XYZ(chroma(HEXVithHash).rgb())
+	const XYZ = useRGB2XYZ(chroma(HEXWithHash).rgb())
 		.map(value => Math.round(value * 100))
 		.join(', ')
-	const HSL = chroma(HEXVithHash)
+	const HSL = chroma(HEXWithHash)
 		.hsl()
 		.map((value, index) =>
 			isNaN(value)

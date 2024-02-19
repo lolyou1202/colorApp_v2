@@ -1,28 +1,29 @@
 import './ColorGenerator.style.scss'
 import { FC } from 'react'
 import { useContrast } from '../../../hooks/useContrast'
-import { useAppSelector } from '../../../redux/hooks/useAppRedux'
-import { ColorDisplay } from '../../ui/ColorDisplay/ColorDisplay'
-import { CustomColorPicker } from '../../ui/CustomColorPicker/CustomColorPicker'
-import { PickerBlock } from '../../ui/PickerBlock/PickerBlock'
-import { PickerControlPanel } from '../../ui/ControlPanel/PickerControlPanel'
+import { ColorDisplay } from '../ColorDisplay/ColorDisplay'
+import { CustomColorPicker } from '../CustomColorPicker/CustomColorPicker'
+import { PickerBlock } from '../PickerBlock/PickerBlock'
+import { PickerControlPanel } from '../ControlPanel/PickerControlPanel'
 
 interface Props {
+	colorState: string
 	inputState: string
 	setInputState: React.Dispatch<React.SetStateAction<string>>
 }
 
-export const ColorGenerator: FC<Props> = ({ inputState, setInputState }) => {
-	const colorState = useAppSelector(
-		state => state.pickerReducer.colorState.color
-	)
-
+export const ColorGenerator: FC<Props> = ({
+	colorState,
+	inputState,
+	setInputState,
+}) => {
 	return (
 		<PickerBlock
 			classNameBlock='pickerGenerate__block'
 			classNameContainer='pickerGenerate'
 			description='Get useful color information like conversion, combinations,
-	blindness simulation and more.'>
+	blindness simulation and more.'
+		>
 			<ColorDisplay
 				colorState={colorState}
 				inputState={inputState}

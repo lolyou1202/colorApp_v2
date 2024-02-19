@@ -1,0 +1,70 @@
+.paletteStripe {
+	display: flex;
+	background: none;
+	overflow: hidden;
+	width: 100%;
+	height: 80px;
+	&__color {
+		flex: 1;
+		position: relative;
+		width: 100%;
+		flex-basis: 10px;
+		cursor: pointer;
+		border-top: var(--border);
+		border-bottom: var(--border);
+		border-right: var(--border);
+		transition: flex-basis 0.1s ease-in-out;
+		&-dot {
+			opacity: 0;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			width: 8px;
+			height: 8px;
+			border-radius: 100%;
+			background: var(--primary-dark);
+			transition: opacity 0.1s ease-in-out;
+			&.show {
+				opacity: 1;
+			}
+		}
+		&-hex {
+			opacity: 0;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			font-weight: 500;
+			font-size: 20px;
+			line-height: 24px;
+			color: var(--primary-dark);
+			text-transform: uppercase;
+			transition: opacity 0.1s ease-in-out;
+			&.show {
+				opacity: 1;
+			}
+		}
+		&-check {
+			opacity: 0;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			transition:
+				opacity 0.2s ease-in-out,
+				transform 0.2s ease-in;
+			&.show {
+				opacity: 1;
+				transform: translate(-50%, -50%) scale(1.4);
+			}
+		}
+		&:first-child {
+			border-left: var(--border);
+			border-radius: var(--borderRadius-wide) 0 0 var(--borderRadius-wide);
+		}
+		&:last-child {
+			border-radius: 0 var(--borderRadius-wide) var(--borderRadius-wide) 0;
+		}
+	}
+}

@@ -16,6 +16,5 @@
 		"noEmit": true,
 		"jsx": "react-jsx"
 	},
-	"include": ["src", "src/components/icons/MoreHorizontal/.tsx"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }
