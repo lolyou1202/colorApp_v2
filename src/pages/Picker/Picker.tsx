@@ -1,19 +1,23 @@
 import { useEffect } from 'react'
 import './Picker.style.scss'
-import { useAppDispatch } from '../../redux/hooks/useAppRedux'
+import { useAppDispatch, useAppSelector } from '../../redux/hooks/useAppRedux'
 import { EnumLocation, setLocation } from '../../redux/slices/locationSlice'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { HeaderNavigation } from '../../components/ui/HeaderNavigation/HeaderNavigation'
 import { PickerMain } from '../../components/basic/PickerMain/PickerMain'
+import chroma from 'chroma-js'
+import { setColor } from '../../redux/slices/pickerSlice'
 
 export const Picker = () => {
-	
-
-	//const { pickerID } = useParams()
-
-	//const location = useLocation()
-	//const navigate = useNavigate()
+	const colorState = useAppSelector(
+		state => state.pickerReducer.colorState.color
+	)
 	const dispatch = useAppDispatch()
+
+	const { pickerID } = useParams()
+
+	const location = useLocation()
+	const navigate = useNavigate()
 
 	//const HEXToRGB = useCallback(
 	//	(value: string) => {
@@ -92,7 +96,6 @@ export const Picker = () => {
 	//const onClickCopy = () => {
 	//	dispatch(viewAlert({ alertText: 'Сolor copied to the clipboard' }))
 	//}
-	
 
 	useEffect(() => {
 		dispatch(setLocation({ locationType: EnumLocation.picker }))
@@ -106,12 +109,28 @@ export const Picker = () => {
 	//	}
 	//}, [HEXToRGB, color.HEX, colorId])
 
+	useEffect(() => {
+		if (colorState && location.pathname !== `/picker/${colorState}`) {
+			console.log(123)
+
+			navigate(`/picker/${colorState}`)
+		} else {
+			console.log(321)
+
+			dispatch(
+				setColor({
+					newColor: pickerID || chroma.random().hex().toUpperCase(),
+				})
+			)
+		}
+	}, [colorState, pickerID])
+
 	return (
 		<div className='picker'>
 			<header className='pickerHeader'>
 				<HeaderNavigation pageName='Color picker' />
 			</header>
-			<PickerMain />
+			{/*<PickerMain />*/}
 		</div>
 	)
 }

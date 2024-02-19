@@ -8,7 +8,8 @@ import { Blindness } from '../../ui/Blindness/Blindness'
 
 export const PickerMain: FC = () => {
 	const colorState = useAppSelector(state => state.pickerReducer.colorState)
-
+    console.log(colorState)
+    
 	const [inputState, setInputState] = useState(colorState.color.toUpperCase())
 
 	return (
