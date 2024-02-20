@@ -10,10 +10,8 @@ function App() {
 		<div className='App'>
 			<Routes>
 				<Route path='/' element={<Navigate to='/picker' />} />
-				<Route path='/picker'>
-					<Route index element={<Picker />} />
-					<Route path=':pickerID' element={<Picker />} />
-				</Route>
+				<Route path='/picker' element={<Picker />} />
+				<Route path='/picker/:pickerID' element={<Picker />} />
 				{/*<Route path='/generator'>
 						<Route index element={<Palette />} />
 						<Route path=':generatorID' element={<Palette />} />

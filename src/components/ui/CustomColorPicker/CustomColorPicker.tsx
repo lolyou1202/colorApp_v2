@@ -5,7 +5,6 @@ import { BorderedLayout } from '../../layout/BorderedLayout/BorderedLayout'
 import { DefaultHoveredButton } from '../DefaultHoveredButton/DefaultHoveredButton'
 import { Copy } from '../../icons/Copy'
 import { IColorVariant } from '../../../types'
-import { useValidateHEX } from '../../../hooks/useValidateHEX'
 import { useAppDispatch } from '../../../redux/hooks/useAppRedux'
 import { viewAlert } from '../../../redux/slices/alertSlice'
 import { setColor } from '../../../redux/slices/pickerSlice'
@@ -22,11 +21,9 @@ export const CustomColorPicker: FC<Props> = ({
 	inputState,
 	setInputState,
 }) => {
-	const debouncedValue = useDebounce<string>(inputState, 100)
-    
-	const dispatch = useAppDispatch()
+	const debounceValue = useDebounce(inputState, 100)
 
-	const validHEX = useValidateHEX(inputState)
+	const dispatch = useAppDispatch()
 
 	const { brightness, contrastColor }: IColorVariant = {
 		brightness: 'light',
@@ -34,15 +31,15 @@ export const CustomColorPicker: FC<Props> = ({
 	}
 
 	const onCopyClick = () => {
-		navigator.clipboard.writeText(colorState)
+		navigator.clipboard.writeText(inputState)
 		dispatch(viewAlert({ alertText: 'Сolor copied to the clipboard' }))
 	}
 
 	useEffect(() => {
-		if (validHEX && validHEX !== colorState) {
-			dispatch(setColor({ newColor: validHEX }))
+		if (debounceValue !== colorState) {
+			dispatch(setColor({ newColor: debounceValue }))
 		}
-	}, [debouncedValue])
+	}, [debounceValue])
 
 	return (
 		<BorderedLayout className='customColorPicker'>
@@ -68,7 +65,7 @@ export const CustomColorPicker: FC<Props> = ({
 					<BorderedLayout
 						className='customColorPicker__info-view'
 						style={{
-							background: validHEX ? validHEX : colorState,
+							background: inputState,
 						}}
 					/>
 					<DefaultHoveredButton

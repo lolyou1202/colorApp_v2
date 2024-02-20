@@ -1,6 +1,5 @@
 import './ColorGenerator.style.scss'
-import { FC } from 'react'
-import { useContrast } from '../../../hooks/useContrast'
+import { FC, useState } from 'react'
 import { ColorDisplay } from '../ColorDisplay/ColorDisplay'
 import { CustomColorPicker } from '../CustomColorPicker/CustomColorPicker'
 import { PickerBlock } from '../PickerBlock/PickerBlock'
@@ -8,15 +7,11 @@ import { PickerControlPanel } from '../ControlPanel/PickerControlPanel'
 
 interface Props {
 	colorState: string
-	inputState: string
-	setInputState: React.Dispatch<React.SetStateAction<string>>
 }
 
-export const ColorGenerator: FC<Props> = ({
-	colorState,
-	inputState,
-	setInputState,
-}) => {
+export const ColorGenerator: FC<Props> = ({ colorState }) => {
+	const [inputState, setInputState] = useState(colorState.toUpperCase())
+
 	return (
 		<PickerBlock
 			classNameBlock='pickerGenerate__block'
@@ -24,11 +19,7 @@ export const ColorGenerator: FC<Props> = ({
 			description='Get useful color information like conversion, combinations,
 	blindness simulation and more.'
 		>
-			<ColorDisplay
-				colorState={colorState}
-				inputState={inputState}
-				colorVariant={useContrast(inputState)}
-			/>
+			<ColorDisplay inputState={inputState} />
 			<div className='pickerGenerate__funcBlock'>
 				<CustomColorPicker
 					colorState={colorState}

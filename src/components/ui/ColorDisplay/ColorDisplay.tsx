@@ -4,22 +4,16 @@ import { FC } from 'react'
 import { Expand } from '../../icons/Expand'
 import { BorderedLayout } from '../../layout/BorderedLayout/BorderedLayout'
 import { DefaultHoveredButton } from '../DefaultHoveredButton/DefaultHoveredButton'
-import { IColorVariant } from '../../../types'
 import { useGetColorName } from '../../../hooks/useGetColorName'
 import { useValidateHEX } from '../../../hooks/useValidateHEX'
+import { useContrast } from '../../../hooks/useContrast'
 
 interface Props {
-	colorState: string
 	inputState: string
-	colorVariant: IColorVariant
 }
 
-export const ColorDisplay: FC<Props> = ({
-	colorState,
-	inputState,
-	colorVariant,
-}) => {
-	const { brightness, contrastColor } = colorVariant
+export const ColorDisplay: FC<Props> = ({ inputState }) => {
+	const { brightness, contrastColor } = useContrast(inputState)
 
 	const colorDisplayHEXClassNames = classNames({
 		'colorDisplay-HEX': true,
@@ -28,18 +22,20 @@ export const ColorDisplay: FC<Props> = ({
 
 	const validHEX = useValidateHEX(inputState)
 
-	const validColor = validHEX ? validHEX : colorState
+	const validColor = validHEX ? validHEX : ''
 
 	return (
 		<BorderedLayout
 			className='colorDisplay'
-			style={{ background: validColor }}>
+			style={{ background: validColor }}
+		>
 			<p className={colorDisplayHEXClassNames}>
 				{validColor.toUpperCase().replace(/[^0-9A-Z]/g, '')}
 			</p>
 			<p
 				className='colorDisplay-colorName'
-				style={{ color: contrastColor }}>
+				style={{ color: contrastColor }}
+			>
 				{useGetColorName(validColor)}
 			</p>
 			<div className='colorDisplay-iconBar'>
