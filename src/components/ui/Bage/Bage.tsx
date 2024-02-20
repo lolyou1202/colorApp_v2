@@ -1,11 +1,11 @@
 import './Bage.style.scss'
-import { FC } from 'react'
-import { IBrightness } from '../../../types'
 import classNames from 'classnames'
+import { FC } from 'react'
+import { BrightnessType } from '../../../types'
 
 interface Props {
 	text: string
-	brightness?: IBrightness
+	brightness?: BrightnessType
 	classNameBage?: string
 	classNameText?: string
 }

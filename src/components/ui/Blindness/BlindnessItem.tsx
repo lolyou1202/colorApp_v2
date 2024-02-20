@@ -3,12 +3,11 @@ import { PaletteStripe } from '../PaletteStripe/PaletteStripe'
 import { Bage } from '../Bage/Bage'
 
 interface Props {
-	colorState: string
 	listColors: { color: string; current: boolean }[]
 	info: { title: string; subtitle: string; bageInfo: string }
 }
 
-export const BlindnessItem: FC<Props> = ({ colorState, listColors, info }) => {
+export const BlindnessItem: FC<Props> = ({ listColors, info }) => {
 	return (
 		<div className='blindness__item'>
 			<div className='blindness__item-info'>

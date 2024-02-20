@@ -22,7 +22,11 @@ export const ColorModels: FC<Props> = ({ colorState }) => {
 	}
 
 	return (
-		<PickerBlock classNameBlock='colorModels__block' title='Conversion'>
+		<PickerBlock
+			classNameBlock='colorModels__block'
+			title='Conversion'
+			description='Convert the color to different color models.'
+		>
 			<BorderedLayout className='colorModels'>
 				<div className='colorModels-list'>
 					<div>

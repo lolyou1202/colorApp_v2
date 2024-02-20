@@ -1,8 +1,8 @@
 import './Picker.style.scss'
-import { useCallback, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks/useAppRedux'
 import { EnumLocation, setLocation } from '../../redux/slices/locationSlice'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { HeaderNavigation } from '../../components/ui/HeaderNavigation/HeaderNavigation'
 import { PickerMain } from '../../components/basic/PickerMain/PickerMain'
 import { setColor } from '../../redux/slices/pickerSlice'
@@ -16,20 +16,7 @@ export const Picker = () => {
 
 	const { pickerID } = useParams()
 
-	const location = useLocation()
 	const navigate = useNavigate()
-
-	const aaa = useCallback(
-		(value: string) => {
-			if (location.pathname !== `/picker/${value}`) {
-				navigate(`/picker/${value}`)
-			}
-			if (value !== colorState.replace(/[^\d\w]/g, '')) {
-				dispatch(setColor({ newColor: `#${value}` }))
-			}
-		},
-		[colorState]
-	)
 
 	useEffect(() => {
 		dispatch(setLocation({ locationType: EnumLocation.picker }))
@@ -37,21 +24,21 @@ export const Picker = () => {
 
 	useEffect(() => {
 		if (colorState) {
-			aaa(colorState.replace(/[^\d\w]/g, ''))
+			navigate(`/picker/${colorState.replace(/[^\d\w]/g, '')}`)
 		} else {
 			if (pickerID) {
-				aaa(pickerID)
+				dispatch(setColor({ newColor: `#${pickerID}` }))
 			} else {
-				aaa(
-					chroma
+				navigate(
+					`/picker/${chroma
 						.random()
 						.hex()
 						.toUpperCase()
-						.replace(/[^\d\w]/g, '')
+						.replace(/[^\d\w]/g, '')}`
 				)
 			}
 		}
-	}, [aaa, colorState, pickerID])
+	}, [colorState, pickerID])
 
 	return (
 		colorState && (

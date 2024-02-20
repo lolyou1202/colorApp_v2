@@ -8,23 +8,28 @@ import { Check } from '../../icons/Check'
 interface Props {
 	color: string
 	variant: IColorVariant
-	isCurrentColor: boolean
-	howerWidth: string
+	isCurrentColor?: boolean
+	howerWidth?: string
+	classNameWrapper?: string
+	children?: React.ReactNode
 }
 
 export const PaletteStripeColor: FC<Props> = ({
 	color,
 	variant,
 	isCurrentColor,
-	howerWidth,
+	howerWidth = '80px',
+	classNameWrapper,
+	children,
 }) => {
 	const [hover, setHover] = useState(false)
 	const [isChecked, setChecked] = useState(false)
 
 	const dispatch = useAppDispatch()
 
-	const paletteStripeColorClassNames = classNames({
+	const paletteStripeClassNames = classNames({
 		paletteStripe__color: true,
+		[classNameWrapper || '']: true,
 	})
 	const paletteStripeDotClassNames = classNames({
 		'paletteStripe__color-dot': true,
@@ -55,7 +60,7 @@ export const PaletteStripeColor: FC<Props> = ({
 
 	return (
 		<div
-			className={paletteStripeColorClassNames}
+			className={paletteStripeClassNames}
 			onMouseEnter={() => onMouseEnter()}
 			onMouseLeave={() => onMouseLeave()}
 			onClick={() => onClickColorCell(color)}
@@ -79,6 +84,7 @@ export const PaletteStripeColor: FC<Props> = ({
 				stroke={variant.contrastColor}
 				size={24}
 			/>
+			{children}
 		</div>
 	)
 }

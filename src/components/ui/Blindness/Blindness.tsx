@@ -21,7 +21,6 @@ export const Blindness: FC<Props> = ({ colorState }) => {
 				{blindnessList.map(blindness => (
 					<BlindnessItem
 						key={blindness.name}
-						colorState={colorState}
 						info={{
 							title: blindness.name,
 							subtitle: blindness.description,

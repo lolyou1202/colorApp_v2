@@ -1,0 +1,40 @@
+.colorCard {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	&__board {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		height: 120px;
+		cursor: pointer;
+		flex-basis: auto !important;
+		border-radius: var(--borderRadius-wide) !important;
+		&-hex {
+			font-size: 20px;
+			line-height: 24px;
+		}
+		&-bage {
+			position: absolute;
+			top: 8px;
+			right: 8px;
+			&-text {
+				font-size: 14px;
+				line-height: 16px;
+			}
+		}
+	}
+	&__info {
+		display: flex;
+		justify-content: space-between;
+		&-name {
+			font-size: 20px;
+			line-height: 32px;
+		}
+		&-buttons {
+			display: flex;
+			gap: 8px;
+		}
+	}
+}

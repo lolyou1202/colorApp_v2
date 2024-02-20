@@ -17,6 +17,7 @@ export const PickerMain: FC = () => {
 			<ColorModels colorState={colorState.color} />
 			<Variations colorState={colorState.color} />
 			<Blindness colorState={colorState.color} />
+			
 			<Similar />
 		</main>
 	)
