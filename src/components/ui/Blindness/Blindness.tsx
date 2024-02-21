@@ -1,14 +1,14 @@
 import './Blindness.style.scss'
-import { FC } from 'react'
 import { PickerBlock } from '../PickerBlock/PickerBlock'
 import { BlindnessItem } from './BlindnessItem'
 import { useBlindness } from '../../../hooks/useBlindness'
+import { useAppSelector } from '../../../redux/hooks/useAppRedux'
 
-interface Props {
-	colorState: string
-}
+export const Blindness = () => {
+	const colorState = useAppSelector(
+		state => state.pickerReducer.colorState.color
+	).toUpperCase()
 
-export const Blindness: FC<Props> = ({ colorState }) => {
 	const blindnessList = useBlindness(colorState)
 
 	return (
@@ -24,7 +24,7 @@ export const Blindness: FC<Props> = ({ colorState }) => {
 						info={{
 							title: blindness.name,
 							subtitle: blindness.description,
-							bageInfo: blindness.similar,
+							bageInfo: `${blindness.similar}% similar`,
 						}}
 						listColors={[
 							{ color: colorState, current: true },

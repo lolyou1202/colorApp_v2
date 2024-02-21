@@ -1,6 +1,7 @@
 import chroma from 'chroma-js'
 import { getBlindnessColor } from './getBlindnessColor'
 import { blindnessScheme } from '../constants/blindnessScheme'
+import { getSimilarPercent } from './getSimilarPercent'
 
 export const useBlindness = (currentColor: string) =>
 	Object.values(blindnessScheme).map(blindness => {
@@ -20,9 +21,10 @@ export const useBlindness = (currentColor: string) =>
 			).map(color => Math.round(color))
 		).hex()
 
-		const similarPercent = `${
-			100 - Math.round(chroma.deltaE(currentColor, blindnessColorHex))
-		}% similar`
+		const similarPercent = getSimilarPercent(
+			currentColor,
+			blindnessColorHex
+		)
 
 		return {
 			name: blindness.name,

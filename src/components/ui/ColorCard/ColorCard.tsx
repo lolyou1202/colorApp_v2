@@ -1,19 +1,21 @@
 import './ColorCard.style.scss'
 import { FC } from 'react'
 import { useContrast } from '../../../hooks/useContrast'
+import { PaletteStripeColor } from '../PaletteStripe/PaletteStripeColor'
 import { Bage } from '../Bage/Bage'
 import { DefaultHoveredButton } from '../DefaultHoveredButton/DefaultHoveredButton'
 import { MoreHorizontal } from '../../icons/MoreHorizontal'
-import { PaletteStripeColor } from '../PaletteStripe/PaletteStripeColor'
+import { Eye } from '../../icons/Eye'
 
 interface Props {
 	color: string
 	name: string
-	similar: string
+	similar: number
 }
 
 export const ColorCard: FC<Props> = ({ color, name, similar }) => {
 	const variant = useContrast(color)
+
 	const {
 		brightness: brightnessInfo,
 		contrastColor: contrastColorInfo,
@@ -33,7 +35,7 @@ export const ColorCard: FC<Props> = ({ color, name, similar }) => {
 				classNameWrapper='colorCard__board'
 			>
 				<Bage
-					text={similar}
+					text={`${similar}% similar`}
 					brightness={variant.brightness}
 					classNameBage='colorCard__board-bage'
 					classNameText='colorCard__board-bage-text'
@@ -48,7 +50,7 @@ export const ColorCard: FC<Props> = ({ color, name, similar }) => {
 				</p>
 				<div className='colorCard__info-buttons'>
 					<DefaultHoveredButton brightness={brightnessInfo}>
-						<MoreHorizontal stroke={contrastColorInfo} />
+						<Eye stroke={contrastColorInfo} />
 					</DefaultHoveredButton>
 					<DefaultHoveredButton brightness={brightnessInfo}>
 						<MoreHorizontal stroke={contrastColorInfo} />

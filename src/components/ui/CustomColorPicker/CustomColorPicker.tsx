@@ -1,5 +1,5 @@
 import './CustomColorPicker.style.scss'
-import { FC, useEffect } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { HexColorPicker } from 'react-colorful'
 import { BorderedLayout } from '../../layout/BorderedLayout/BorderedLayout'
 import { DefaultHoveredButton } from '../DefaultHoveredButton/DefaultHoveredButton'
@@ -21,31 +21,49 @@ export const CustomColorPicker: FC<Props> = ({
 	inputState,
 	setInputState,
 }) => {
+	const [internalInputState, setInternalInputState] = useState(inputState)
+
 	const debounceValue = useDebounce(inputState, 100)
 
 	const dispatch = useAppDispatch()
-
-	const { brightness, contrastColor }: IColorVariant = {
-		brightness: 'light',
-		contrastColor: '#353535',
-	}
 
 	const onCopyClick = () => {
 		navigator.clipboard.writeText(inputState)
 		dispatch(viewAlert({ alertText: 'Сolor copied to the clipboard' }))
 	}
 
+	const onChangeInternalInput = (value: string) => {
+		setInternalInputState(value)
+
+		const validValue = /^#[A-Fa-f0-9]{3}([A-Fa-f0-9]{3})?$/g.test(value)
+
+		if (validValue) {
+			setInputState(value)
+		}
+	}
+
 	useEffect(() => {
-		if (debounceValue !== colorState) {
+		if (internalInputState !== inputState) {
+			setInternalInputState(inputState)
+		}
+	}, [inputState, setInternalInputState])
+
+	useEffect(() => {
+		if (colorState !== debounceValue) {
 			dispatch(setColor({ newColor: debounceValue }))
 		}
 	}, [debounceValue])
+
+	const { brightness, contrastColor }: IColorVariant = {
+		brightness: 'light',
+		contrastColor: '#353535',
+	}
 
 	return (
 		<BorderedLayout className='customColorPicker'>
 			<div className='customColorPicker__interactive'>
 				<HexColorPicker
-					color={colorState}
+					color={inputState}
 					onChange={newColor => setInputState(newColor.toUpperCase())}
 				/>
 			</div>
@@ -54,12 +72,8 @@ export const CustomColorPicker: FC<Props> = ({
 				<input
 					type='text'
 					className='customColorPicker__info-value'
-					value={inputState}
-					onChange={e =>
-						setInputState(
-							e.target.value.replace(/[^#0-9A-Fa-f]/g, '')
-						)
-					}
+					value={internalInputState}
+					onChange={e => onChangeInternalInput(e.target.value)}
 				/>
 				<div className='customColorPicker__info-currentColor'>
 					<BorderedLayout

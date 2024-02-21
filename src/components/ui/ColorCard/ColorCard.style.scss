@@ -3,9 +3,6 @@
 	flex-direction: column;
 	gap: 4px;
 	&__board {
-		display: flex;
-		align-items: center;
-		justify-content: center;
 		position: relative;
 		height: 120px;
 		cursor: pointer;

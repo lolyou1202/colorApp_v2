@@ -1,14 +1,33 @@
 import './Similar.style.scss'
+import { useMemo } from 'react'
 import { ColorCard } from '../ColorCard/ColorCard'
 import { PickerBlock } from '../PickerBlock/PickerBlock'
+import { colorNames } from '../../../constants/colorNames'
+import { getSimilarPercent } from '../../../hooks/getSimilarPercent'
+import { getRandomItemsFromArr } from '../../../hooks/getRandomItemsFromArr'
+import { useAppSelector } from '../../../redux/hooks/useAppRedux'
 
 export const Similar = () => {
-	const similarList = [
-		{ name: 'Yellow Green', color: '#b246ac', similar: '55% similar' },
-		{ name: 'Yellow Green', color: '#727272', similar: '55% similar' },
-		{ name: 'Yellow Green', color: '#FF11F3', similar: '55% similar' },
-		{ name: 'Yellow Green', color: '#f39188', similar: '55% similar' },
-	]
+	const colorState = useAppSelector(
+		state => state.pickerReducer.colorState.color
+	).toUpperCase()
+
+	const similarList = useMemo(() => {
+		return colorNames
+			.map(color => ({
+				color: color.hex.toUpperCase(),
+				name: color.name,
+				similar: getSimilarPercent(colorState, color.hex.toUpperCase()),
+			}))
+			.filter(color => color.similar > 90 && color.color !== colorState)
+			.sort((a, b) => b.similar - a.similar)
+	}, [colorState, colorNames])
+
+	const randomSimilarList = useMemo(
+		() => getRandomItemsFromArr(similarList, 12),
+		[similarList, getRandomItemsFromArr]
+	)
+
 	return (
 		<PickerBlock
 			classNameBlock='similar__block'
@@ -16,7 +35,7 @@ export const Similar = () => {
 			description='View the most similar matches of this color with shades from the library.'
 		>
 			<div className='similar__list'>
-				{similarList.map(similarColor => (
+				{randomSimilarList.map(similarColor => (
 					<ColorCard
 						key={similarColor.color}
 						color={similarColor.color}

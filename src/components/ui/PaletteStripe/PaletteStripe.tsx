@@ -1,8 +1,8 @@
 import './PaletteStripe.style.scss'
+import classNames from 'classnames'
 import { FC } from 'react'
 import { PaletteStripeColor } from './PaletteStripeColor'
 import { useContrast } from '../../../hooks/useContrast'
-import classNames from 'classnames'
 
 interface Props {
 	listColors: {

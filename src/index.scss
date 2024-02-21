@@ -32,21 +32,32 @@
 	--borderRadius-circle: 100%;
 }
 
+body {
+	&::-webkit-scrollbar {
+		width: 22px;
+	}
+	&::-webkit-scrollbar-track {
+		background: var(--light);
+	}
+	&::-webkit-scrollbar-thumb {
+		background-color: var(--primary-dark-transparent-50);
+		border: 8px solid transparent;
+		border-radius: 100px;
+		background-clip: content-box;
+	}
+}
+
 .App {
-	display: flex;
-	flex-direction: column;
-	gap: 24px;
 	background: var(--light);
-	padding: 24px;
 	min-height: 100vh;
-	//overflow: hidden;
 }
 
 a {
 	text-decoration: none;
 }
 
-svg, img {
+svg,
+img {
 	flex-shrink: 0;
 }
 

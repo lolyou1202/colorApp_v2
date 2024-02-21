@@ -1,5 +1,5 @@
 import nearestColor from 'nearest-color'
-import colorNames from '../colorNames.json'
+import { colorNames } from '../constants/colorNames'
 
 export const useGetColorName = (HEX: string): string | null => {
 	const colors = colorNames.reduce(

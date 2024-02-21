@@ -1,16 +1,23 @@
 import './ColorGenerator.style.scss'
-import { FC, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ColorDisplay } from '../ColorDisplay/ColorDisplay'
 import { CustomColorPicker } from '../CustomColorPicker/CustomColorPicker'
 import { PickerBlock } from '../PickerBlock/PickerBlock'
-import { PickerControlPanel } from '../ControlPanel/PickerControlPanel'
+import { PickerControlPanel } from '../../basic/ControlPanel/PickerControlPanel'
+import { useAppSelector } from '../../../redux/hooks/useAppRedux'
 
-interface Props {
-	colorState: string
-}
+export const ColorGenerator = () => {
+	const colorState = useAppSelector(
+		state => state.pickerReducer.colorState.color
+	).toUpperCase()
 
-export const ColorGenerator: FC<Props> = ({ colorState }) => {
-	const [inputState, setInputState] = useState(colorState.toUpperCase())
+	const [inputState, setInputState] = useState(colorState)
+
+	useEffect(() => {
+		if (colorState !== inputState) {
+			setInputState(colorState)
+		}
+	}, [colorState, setInputState])
 
 	return (
 		<PickerBlock
@@ -22,7 +29,7 @@ export const ColorGenerator: FC<Props> = ({ colorState }) => {
 			<ColorDisplay inputState={inputState} />
 			<div className='pickerGenerate__funcBlock'>
 				<CustomColorPicker
-					colorState={colorState}
+				colorState={colorState}
 					inputState={inputState}
 					setInputState={setInputState}
 				/>

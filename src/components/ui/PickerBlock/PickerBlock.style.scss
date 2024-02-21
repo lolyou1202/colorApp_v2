@@ -24,3 +24,11 @@
 		color: var(--primary-dark-transparent-50);
 	}
 }
+
+@media (max-width: 1268px) {
+	.picker__block {
+		&-name {
+			gap: 12px;
+		}
+	}
+}

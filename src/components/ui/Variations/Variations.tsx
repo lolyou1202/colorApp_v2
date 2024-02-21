@@ -1,14 +1,16 @@
 import './Variations.style.scss'
-import { FC, useMemo } from 'react'
+import chroma from 'chroma-js'
+import { useMemo } from 'react'
 import { PickerBlock } from '../PickerBlock/PickerBlock'
 import { VariationsItem } from './VariationsItem'
-import chroma from 'chroma-js'
+import { useAppSelector } from '../../../redux/hooks/useAppRedux'
+import { colorVariations } from '../../../constants/colorVariations'
 
-interface Props {
-	colorState: string
-}
+export const Variations = () => {
+	const colorState = useAppSelector(
+		state => state.pickerReducer.colorState.color
+	).toUpperCase()
 
-export const Variations: FC<Props> = ({ colorState }) => {
 	const listColorsShades = useMemo(
 		() =>
 			chroma
@@ -75,6 +77,13 @@ export const Variations: FC<Props> = ({ colorState }) => {
 		]
 	}, [colorState])
 
+	const listColors = {
+		shades: listColorsShades,
+		tints: listColorsTints,
+		tones: listColorsTones,
+		hues: listColorsHues,
+	}
+
 	return (
 		<PickerBlock
 			classNameBlock='variations__block'
@@ -82,26 +91,17 @@ export const Variations: FC<Props> = ({ colorState }) => {
 			description='View this color variations of shades, tints, tones and hues.'
 		>
 			<div className='variations__list'>
-				<VariationsItem
-					title='Shades'
-					description='A shade is created by adding black to a base color, increasing its darkness. Shades appear more dramatic and richer.'
-					listColors={listColorsShades}
-				/>
-				<VariationsItem
-					title='Tints'
-					description='A tint is created by adding white to a base color, increasing its lightness. Tints are likely to look pastel and less intense.'
-					listColors={listColorsTints}
-				/>
-				<VariationsItem
-					title='Tones'
-					description='A tone is created by adding gray to a base color, increasing its lightness. Tones looks more sophisticated and complex than base colors.'
-					listColors={listColorsTones}
-				/>
-				<VariationsItem
-					title='Tones'
-					description='A tone is created by adding gray to a base color, increasing its lightness. Tones looks more sophisticated and complex than base colors.'
-					listColors={listColorsHues}
-				/>
+				{Object.keys(listColors).map(key => {
+					const typedKey = key as keyof typeof listColors
+					return (
+						<VariationsItem
+							key={key}
+							title={colorVariations[typedKey].title}
+							description={colorVariations[typedKey].description}
+							listColors={listColors[typedKey]}
+						/>
+					)
+				})}
 			</div>
 		</PickerBlock>
 	)

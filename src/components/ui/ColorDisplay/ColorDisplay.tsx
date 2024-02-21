@@ -15,14 +15,16 @@ interface Props {
 export const ColorDisplay: FC<Props> = ({ inputState }) => {
 	const { brightness, contrastColor } = useContrast(inputState)
 
+	const validHEX = useValidateHEX(inputState)
+
+	const validColor = validHEX ? validHEX : ''
+
+	const colorName = useGetColorName(validColor)
+
 	const colorDisplayHEXClassNames = classNames({
 		'colorDisplay-HEX': true,
 		[brightness]: true,
 	})
-
-	const validHEX = useValidateHEX(inputState)
-
-	const validColor = validHEX ? validHEX : ''
 
 	return (
 		<BorderedLayout
@@ -36,7 +38,7 @@ export const ColorDisplay: FC<Props> = ({ inputState }) => {
 				className='colorDisplay-colorName'
 				style={{ color: contrastColor }}
 			>
-				{useGetColorName(validColor)}
+				{colorName}
 			</p>
 			<div className='colorDisplay-iconBar'>
 				<DefaultHoveredButton brightness={brightness}>
