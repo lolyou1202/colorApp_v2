@@ -14,16 +14,55 @@
 			flex-direction: column;
 			gap: 8px;
 			&-title {
-				font-weight: 500;
 				font-size: 24px;
 				line-height: 24px;
 				color: var(--text-dark);
 			}
 			&-description {
-				font-weight: 500;
 				font-size: 20px;
 				line-height: 24px;
 				color: var(--primary-dark-transparent-50);
+			}
+		}
+	}
+}
+@media (max-width: 1268px) {
+	.variations {
+		&__list {
+			gap: 16px;
+		}
+		&__item {
+			gap: 12px;
+			&-name {
+				gap: 4px;
+				&-title {
+					font-size: 20px;
+					line-height: 20px;
+				}
+				&-description {
+					font-size: 16px;
+					line-height: 20px;
+				}
+			}
+		}
+	}
+}
+@media (max-width: 560px) {
+	.variations {
+		&__list {
+			gap: 16px;
+		}
+		&__item {
+			gap: 8px;
+			&-name {
+				&-title {
+					font-size: 16px;
+					line-height: 20px;
+				}
+				&-description {
+					font-size: 14px;
+					line-height: 16px;
+				}
 			}
 		}
 	}

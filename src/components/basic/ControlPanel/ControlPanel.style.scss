@@ -1,5 +1,5 @@
 .controlPanel {
-	padding:4px;
+	padding: 4px;
 	gap: 4px;
 	&__option {
 		display: flex;
@@ -9,6 +9,13 @@
 			font-weight: 500;
 			line-height: 24px;
 			margin-right: 4px;
+		}
+	}
+}
+@media (max-width: 560px) {
+	.controlPanel__option {
+		& > p {
+			display: none;
 		}
 	}
 }

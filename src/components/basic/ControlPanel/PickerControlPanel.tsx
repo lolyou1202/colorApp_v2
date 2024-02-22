@@ -25,20 +25,20 @@ export const PickerControlPanel = () => {
 	return (
 		<BorderedLayout className='controlPanel'>
 			<DefaultHoveredButton
-				className='controlPanel__option'
+				className='controlPanel__option undo'
 				brightness={brightness}
 			>
 				<Undo stroke={contrastColor} />
 			</DefaultHoveredButton>
 			<DefaultHoveredButton
-				className='controlPanel__option'
+				className='controlPanel__option redo'
 				brightness={brightness}
 			>
 				<Redo stroke={contrastColor} />
 			</DefaultHoveredButton>
 			<div className='divider vertical'></div>
 			<DefaultHoveredButton
-				className='controlPanel__option'
+				className='controlPanel__option generate'
 				brightness={brightness}
 				onClick={generateCkickHandler}
 			>
@@ -52,7 +52,7 @@ export const PickerControlPanel = () => {
 			</DefaultHoveredButton>
 			<div className='divider vertical'></div>
 			<DefaultHoveredButton
-				className='controlPanel__option'
+				className='controlPanel__option share'
 				brightness={brightness}
 			>
 				<Share stroke={contrastColor} />

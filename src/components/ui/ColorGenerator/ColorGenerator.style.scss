@@ -6,8 +6,56 @@
 		display: flex;
 		flex-direction: column;
 		gap: 24px;
+		@media (max-width: 768px) {
+			.customColorPicker {
+				width: 100%;
+				&__interactive {
+					display: none;
+				}
+				.divider {
+					display: none;
+				}
+				&__info {
+					padding: 4px 4px 4px 8px;
+					gap: 12px;
+					&-value {
+						font-size: 16px;
+						line-height: 24px;
+					}
+					&-functional {
+						gap: 4px;
+					}
+				}
+			}
+		}
+		@media (max-width: 400px) {
+			.customColorPicker__info-copy {
+				display: none;
+			}
+		}
 	}
-	&__block {
-		gap: 48px !important;
+}
+@media (max-width: 1268px) {
+	.pickerGenerate {
+		gap: 16px;
+		&__funcBlock {
+			gap: 16px;
+		}
+	}
+}
+@media (max-width: 768px) {
+	.pickerGenerate {
+		flex-direction: column-reverse;
+		&__funcBlock {
+			flex-direction: row;
+		}
+	}
+}
+@media (max-width: 400px) {
+	.pickerGenerate {
+		gap: 8px;
+		&__funcBlock {
+			gap: 8px;
+		}
 	}
 }

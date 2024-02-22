@@ -75,19 +75,20 @@ export const CustomColorPicker: FC<Props> = ({
 					value={internalInputState}
 					onChange={e => onChangeInternalInput(e.target.value)}
 				/>
-				<div className='customColorPicker__info-currentColor'>
+				<div className='customColorPicker__info-functional'>
+					<DefaultHoveredButton
+						className='customColorPicker__info-copy'
+						brightness={brightness}
+						onClick={() => onCopyClick()}
+					>
+						<Copy stroke={contrastColor} />
+					</DefaultHoveredButton>
 					<BorderedLayout
 						className='customColorPicker__info-view'
 						style={{
 							background: inputState,
 						}}
 					/>
-					<DefaultHoveredButton
-						brightness={brightness}
-						onClick={() => onCopyClick()}
-					>
-						<Copy stroke={contrastColor} />
-					</DefaultHoveredButton>
 				</div>
 			</div>
 		</BorderedLayout>

@@ -34,17 +34,18 @@
 
 body {
 	&::-webkit-scrollbar {
-		width: 22px;
+		display: none;
+		//width: 16px;
 	}
-	&::-webkit-scrollbar-track {
-		background: var(--light);
-	}
-	&::-webkit-scrollbar-thumb {
-		background-color: var(--primary-dark-transparent-50);
-		border: 8px solid transparent;
-		border-radius: 100px;
-		background-clip: content-box;
-	}
+	//&::-webkit-scrollbar-track {
+	//	background: var(--light);
+	//}
+	//&::-webkit-scrollbar-thumb {
+	//	background-color: var(--primary-dark-transparent-50);
+	//	border: 6px solid transparent;
+	//	border-radius: 100px;
+	//	background-clip: content-box;
+	//}
 }
 
 .App {

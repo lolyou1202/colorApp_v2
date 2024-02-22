@@ -22,7 +22,7 @@ export const ColorDisplay: FC<Props> = ({ inputState }) => {
 	const colorName = useGetColorName(validColor)
 
 	const colorDisplayHEXClassNames = classNames({
-		'colorDisplay-HEX': true,
+		'colorDisplay-hex': true,
 		[brightness]: true,
 	})
 
