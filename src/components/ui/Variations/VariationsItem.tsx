@@ -23,7 +23,7 @@ export const VariationsItem: FC<Props> = ({
 					{description}
 				</p>
 			</div>
-			<PaletteStripe listColors={listColors} howerWidth='80px' />
+			<PaletteStripe listColors={listColors} />
 		</div>
 	)
 }

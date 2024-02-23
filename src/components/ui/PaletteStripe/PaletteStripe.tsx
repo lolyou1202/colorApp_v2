@@ -9,13 +9,11 @@ interface Props {
 		color: string
 		current: boolean
 	}[]
-	howerWidth?: string
 	className?: string
 }
 
 export const PaletteStripe: FC<Props> = ({
 	listColors,
-	howerWidth = '80px',
 	className,
 }) => {
 	const paletteStripeClassNames = classNames({
@@ -30,7 +28,6 @@ export const PaletteStripe: FC<Props> = ({
 					isCurrentColor={color.current}
 					color={color.color}
 					variant={useContrast(color.color)}
-					howerWidth={howerWidth}
 				/>
 			))}
 		</div>

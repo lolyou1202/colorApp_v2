@@ -9,7 +9,6 @@ interface Props {
 	color: string
 	variant: IColorVariant
 	isCurrentColor?: boolean
-	howerWidth?: string
 	classNameWrapper?: string
 	children?: React.ReactNode
 }
@@ -18,37 +17,14 @@ export const PaletteStripeColor: FC<Props> = ({
 	color,
 	variant,
 	isCurrentColor,
-	howerWidth = '80px',
 	classNameWrapper,
 	children,
 }) => {
-	const [hover, setHover] = useState(false)
 	const [isChecked, setChecked] = useState(false)
 
 	const dispatch = useAppDispatch()
 
-	const paletteStripeClassNames = classNames({
-		paletteStripe__color: true,
-		[classNameWrapper || '']: true,
-	})
-	const paletteStripeDotClassNames = classNames({
-		'paletteStripe__color-dot': true,
-		show: !hover && isCurrentColor,
-	})
-	const paletteStripeHexClassNames = classNames({
-		'paletteStripe__color-hex': true,
-		show: hover && !isChecked,
-	})
-	const paletteStripeCheckClassNames = classNames({
-		'paletteStripe__color-check': true,
-		show: isChecked,
-	})
-
-	const onMouseEnter = () => {
-		setHover(true)
-	}
 	const onMouseLeave = () => {
-		setHover(false)
 		setChecked(false)
 	}
 
@@ -58,29 +34,34 @@ export const PaletteStripeColor: FC<Props> = ({
 		setChecked(true)
 	}
 
+	const paletteStripeClassNames = classNames({
+		paletteStripe__color: true,
+		current: isCurrentColor,
+		checked: isChecked,
+		[classNameWrapper || '']: true,
+	})
+
 	return (
 		<div
 			className={paletteStripeClassNames}
-			onMouseEnter={() => onMouseEnter()}
 			onMouseLeave={() => onMouseLeave()}
 			onClick={() => onClickColorCell(color)}
 			style={{
 				backgroundColor: color,
-				flexBasis: hover ? howerWidth : '',
 			}}
 		>
 			<p
-				className={paletteStripeHexClassNames}
+				className='paletteStripe__color-hex'
 				style={{ color: variant.contrastColor }}
 			>
 				{color.replace(/[^\d\w]/g, '')}
 			</p>
 			<div
-				className={paletteStripeDotClassNames}
+				className='paletteStripe__color-dot'
 				style={{ backgroundColor: variant.contrastColor }}
 			></div>
 			<Check
-				className={paletteStripeCheckClassNames}
+				className='paletteStripe__color-check'
 				stroke={variant.contrastColor}
 				size={24}
 			/>
