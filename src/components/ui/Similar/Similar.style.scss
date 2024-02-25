@@ -5,3 +5,27 @@
 		gap: 24px;
 	}
 }
+
+@media (max-width: 1268px) {
+	.similar {
+		&__list {
+			grid-template-columns: repeat(3, 1fr);
+			gap: 16px;
+		}
+	}
+}
+@media (max-width: 768px) {
+	.similar {
+		&__list {
+			grid-template-columns: repeat(2, 1fr);
+			gap: 12px;
+		}
+	}
+}
+@media (max-width: 560px) {
+	.similar {
+		&__list {
+			grid-template-columns: repeat(1, 1fr);
+		}
+	}
+}

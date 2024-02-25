@@ -23,8 +23,8 @@ export const Bage: FC<Props> = ({
 	})
 	const bageTextClassNames = classNames({
 		'bage-text': true,
-		[brightness]: true,
 		[classNameText || '']: true,
+		[brightness]: true,
 	})
 	return (
 		<div className={bageClassNames}>

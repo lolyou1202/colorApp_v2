@@ -17,9 +17,14 @@ export const BlindnessItem: FC<Props> = ({ listColors, info }) => {
 						{info.subtitle}
 					</p>
 				</div>
-				<Bage text={info.bageInfo} brightness='light' />
+				<Bage
+					text={info.bageInfo}
+					brightness='light'
+					classNameBage='blindness__item-info-bage'
+					classNameText='blindness__item-info-bage-text'
+				/>
 			</div>
-			<PaletteStripe listColors={listColors} howerWidth='80px' />
+			<PaletteStripe listColors={listColors} />
 		</div>
 	)
 }

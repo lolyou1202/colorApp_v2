@@ -25,13 +25,32 @@
 	&__info {
 		display: flex;
 		justify-content: space-between;
+		align-items: center;
 		&-name {
 			font-size: 20px;
-			line-height: 32px;
+			line-height: 16px;
 		}
 		&-buttons {
 			display: flex;
 			gap: 8px;
+		}
+	}
+}
+
+@media (max-width: 1268px) {
+	.colorCard {
+		&__board {
+			height: 100px;
+			&-hex {
+				font-size: 16px;
+				line-height: 16px;
+			}
+		}
+		&__info {
+			&-name {
+				font-size: 16px;
+				line-height: 16px;
+			}
 		}
 	}
 }
