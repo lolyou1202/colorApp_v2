@@ -1,0 +1,14 @@
+.borderedSection {
+	&.top {
+		border-top: var(--border);
+	}
+	&.bottom {
+		border-bottom: var(--border);
+	}
+	&.right {
+		border-right: var(--border);
+	}
+	&.left {
+		border-left: var(--border);
+	}
+}

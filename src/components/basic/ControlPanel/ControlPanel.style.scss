@@ -11,6 +11,10 @@
 			margin-right: 4px;
 		}
 	}
+	&-section {
+		display: flex;
+		gap: 4px;
+	}
 }
 @media (max-width: 560px) {
 	.controlPanel__option {

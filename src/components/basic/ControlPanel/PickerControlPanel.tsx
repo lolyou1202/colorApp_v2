@@ -9,6 +9,7 @@ import { Redo } from '../../icons/Redo'
 import { Share } from '../../icons/Share'
 import { Box } from '../../icons/Box'
 import { setColor } from '../../../redux/slices/pickerSlice'
+import { BorderedSection } from '../../ui/BorderedSection/BorderedSection'
 
 export const PickerControlPanel = () => {
 	const dispatch = useAppDispatch()
@@ -24,45 +25,49 @@ export const PickerControlPanel = () => {
 
 	return (
 		<BorderedLayout className='controlPanel'>
-			<DefaultHoveredButton
-				className='controlPanel__option undo'
-				brightness={brightness}
-			>
-				<Undo stroke={contrastColor} />
-			</DefaultHoveredButton>
-			<DefaultHoveredButton
-				className='controlPanel__option redo'
-				brightness={brightness}
-			>
-				<Redo stroke={contrastColor} />
-			</DefaultHoveredButton>
-			<div className='divider vertical'></div>
-			<DefaultHoveredButton
-				className='controlPanel__option generate'
-				brightness={brightness}
-				onClick={generateCkickHandler}
-			>
-				<Box stroke={contrastColor} />
-				<p
-					className='controlPanel__option-name'
-					style={{ color: contrastColor }}
+			<BorderedSection className='controlPanel-section' direction='right'>
+				<DefaultHoveredButton
+					className='controlPanel__option undo'
+					brightness={brightness}
 				>
-					Generate
-				</p>
-			</DefaultHoveredButton>
-			<div className='divider vertical'></div>
-			<DefaultHoveredButton
-				className='controlPanel__option share'
-				brightness={brightness}
-			>
-				<Share stroke={contrastColor} />
-				<p
-					className='controlPanel__option-name'
-					style={{ color: contrastColor }}
+					<Undo stroke={contrastColor} />
+				</DefaultHoveredButton>
+				<DefaultHoveredButton
+					className='controlPanel__option redo'
+					brightness={brightness}
 				>
-					Export
-				</p>
-			</DefaultHoveredButton>
+					<Redo stroke={contrastColor} />
+				</DefaultHoveredButton>
+			</BorderedSection>
+			<BorderedSection className='controlPanel-section' direction='right'>
+				<DefaultHoveredButton
+					className='controlPanel__option generate'
+					brightness={brightness}
+					onClick={generateCkickHandler}
+				>
+					<Box stroke={contrastColor} />
+					<p
+						className='controlPanel__option-name'
+						style={{ color: contrastColor }}
+					>
+						Generate
+					</p>
+				</DefaultHoveredButton>
+			</BorderedSection>
+			<BorderedSection className='controlPanel-section'>
+				<DefaultHoveredButton
+					className='controlPanel__option share'
+					brightness={brightness}
+				>
+					<Share stroke={contrastColor} />
+					<p
+						className='controlPanel__option-name'
+						style={{ color: contrastColor }}
+					>
+						Export
+					</p>
+				</DefaultHoveredButton>
+			</BorderedSection>
 		</BorderedLayout>
 	)
 }
