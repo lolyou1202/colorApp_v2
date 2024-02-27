@@ -40,7 +40,7 @@
 @media (max-width: 1268px) {
 	.colorCard {
 		&__board {
-			height: 100px;
+			height: 100px !important;
 			&-hex {
 				font-size: 16px;
 				line-height: 16px;

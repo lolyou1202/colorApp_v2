@@ -43,7 +43,6 @@ export const Picker = () => {
 	return (
 		colorState && (
 			<div className='picker'>
-				исправить отображение бордеров
 				<header className='pickerHeader'>
 					<HeaderNavigation pageName='Color picker' />
 				</header>

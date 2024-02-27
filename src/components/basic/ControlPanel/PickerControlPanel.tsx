@@ -1,5 +1,6 @@
 import './ControlPanel.style.scss'
 import chroma from 'chroma-js'
+import Divider from '@mui/material/Divider'
 import { useAppDispatch } from '../../../redux/hooks/useAppRedux'
 import { IColorVariant } from '../../../types'
 import { BorderedLayout } from '../../layout/BorderedLayout/BorderedLayout'
@@ -9,7 +10,6 @@ import { Redo } from '../../icons/Redo'
 import { Share } from '../../icons/Share'
 import { Box } from '../../icons/Box'
 import { setColor } from '../../../redux/slices/pickerSlice'
-import { BorderedSection } from '../../ui/BorderedSection/BorderedSection'
 
 export const PickerControlPanel = () => {
 	const dispatch = useAppDispatch()
@@ -25,49 +25,63 @@ export const PickerControlPanel = () => {
 
 	return (
 		<BorderedLayout className='controlPanel'>
-			<BorderedSection className='controlPanel-section' direction='right'>
-				<DefaultHoveredButton
-					className='controlPanel__option undo'
-					brightness={brightness}
+			<DefaultHoveredButton
+				className='controlPanel__option undo'
+				brightness={brightness}
+			>
+				<Undo stroke={contrastColor} />
+			</DefaultHoveredButton>
+			<DefaultHoveredButton
+				className='controlPanel__option redo'
+				brightness={brightness}
+			>
+				<Redo stroke={contrastColor} />
+			</DefaultHoveredButton>
+			<Divider
+				orientation='vertical'
+				variant='fullWidth'
+				sx={{
+					borderWidth: '1px',
+					borderColor: 'var(--primary-dark)',
+					borderRadius: 'var(--borderRadius-short)',
+				}}
+				flexItem
+			/>
+			<DefaultHoveredButton
+				className='controlPanel__option generate'
+				brightness={brightness}
+				onClick={generateCkickHandler}
+			>
+				<Box stroke={contrastColor} />
+				<p
+					className='controlPanel__option-name'
+					style={{ color: contrastColor }}
 				>
-					<Undo stroke={contrastColor} />
-				</DefaultHoveredButton>
-				<DefaultHoveredButton
-					className='controlPanel__option redo'
-					brightness={brightness}
+					Generate
+				</p>
+			</DefaultHoveredButton>
+			<Divider
+				orientation='vertical'
+				variant='fullWidth'
+				sx={{
+					borderWidth: '1px',
+					borderColor: 'var(--primary-dark)',
+					borderRadius: 'var(--borderRadius-short)',
+				}}
+				flexItem
+			/>
+			<DefaultHoveredButton
+				className='controlPanel__option share'
+				brightness={brightness}
+			>
+				<Share stroke={contrastColor} />
+				<p
+					className='controlPanel__option-name'
+					style={{ color: contrastColor }}
 				>
-					<Redo stroke={contrastColor} />
-				</DefaultHoveredButton>
-			</BorderedSection>
-			<BorderedSection className='controlPanel-section' direction='right'>
-				<DefaultHoveredButton
-					className='controlPanel__option generate'
-					brightness={brightness}
-					onClick={generateCkickHandler}
-				>
-					<Box stroke={contrastColor} />
-					<p
-						className='controlPanel__option-name'
-						style={{ color: contrastColor }}
-					>
-						Generate
-					</p>
-				</DefaultHoveredButton>
-			</BorderedSection>
-			<BorderedSection className='controlPanel-section'>
-				<DefaultHoveredButton
-					className='controlPanel__option share'
-					brightness={brightness}
-				>
-					<Share stroke={contrastColor} />
-					<p
-						className='controlPanel__option-name'
-						style={{ color: contrastColor }}
-					>
-						Export
-					</p>
-				</DefaultHoveredButton>
-			</BorderedSection>
+					Export
+				</p>
+			</DefaultHoveredButton>
 		</BorderedLayout>
 	)
 }

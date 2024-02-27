@@ -1,8 +1,11 @@
-import { FC, useState, MouseEvent } from 'react'
 import './HeaderNavigation.style.scss'
-import { BorderedLayout } from '../../layout/BorderedLayout/BorderedLayout'
 import Popover from '@mui/material/Popover'
+import { FC, useState, MouseEvent } from 'react'
+import { BorderedLayout } from '../../layout/BorderedLayout/BorderedLayout'
 import { HeaderNavigationLink } from './HeaderNavigationLink'
+import { DefaultHoveredButton } from '../DefaultHoveredButton/DefaultHoveredButton'
+import { Burger } from '../../icons/Burger'
+import { IColorVariant } from '../../../types'
 
 interface Props {
 	pageName: string
@@ -19,14 +22,21 @@ export const HeaderNavigation: FC<Props> = ({ pageName }) => {
 		setAnchorEl(null)
 	}
 
+	const { brightness, contrastColor }: IColorVariant = {
+		brightness: 'light',
+		contrastColor: '#353535',
+	}
+
 	return (
 		<div className='header'>
 			<nav className='header__navigation'>
-				<BorderedLayout
+				<DefaultHoveredButton
 					className='header__navigation-pointButton'
-					onClick={handlePopoverClick}>
-					<p className='header__navigation-pointButton-text'>Tools</p>
-				</BorderedLayout>
+					brightness={brightness}
+					onClick={handlePopoverClick}
+				>
+					<Burger stroke={contrastColor} size={32} strokeWidth={3} />
+				</DefaultHoveredButton>
 				<Popover
 					id='mouse-over-popover'
 					sx={{
@@ -38,7 +48,8 @@ export const HeaderNavigation: FC<Props> = ({ pageName }) => {
 						vertical: 60,
 						horizontal: 'left',
 					}}
-					onClose={handlePopoverClose}>
+					onClose={handlePopoverClose}
+				>
 					<BorderedLayout className='header__menuPopover'>
 						<ul className='header__menuPopover-pages firstPages'>
 							<HeaderNavigationLink name='Color picker' link='' />

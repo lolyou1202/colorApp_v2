@@ -93,6 +93,7 @@
 		height: 100%;
 		&__color {
 			flex-basis: auto !important;
+			width: 100% !important;
 			height: 44px;
 			border-top: none;
 			border-bottom: var(--border);
@@ -116,6 +117,7 @@
 				}
 			}
 			&:first-child {
+				height: 46px;
 				border-top: var(--border);
 				border-radius: var(--borderRadius-wide) var(--borderRadius-wide)
 					0 0;
@@ -141,6 +143,9 @@
 			&-check {
 				width: 16px;
 				height: 16px;
+			}
+			&:first-child {
+				height: 34px;
 			}
 		}
 	}
