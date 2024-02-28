@@ -1,11 +1,12 @@
 import './ColorCard.style.scss'
-import { FC } from 'react'
+import { FC, useState, MouseEvent } from 'react'
 import { useContrast } from '../../../hooks/useContrast'
 import { PaletteStripeColor } from '../PaletteStripe/PaletteStripeColor'
 import { Bage } from '../Bage/Bage'
 import { DefaultHoveredButton } from '../DefaultHoveredButton/DefaultHoveredButton'
 import { MoreHorizontal } from '../../icons/MoreHorizontal'
 import { Eye } from '../../icons/Eye'
+import { ColorCardPopover } from '../../basic/Popover/ColorCardPopover/ColorCardPopover'
 
 interface Props {
 	color: string
@@ -14,7 +15,17 @@ interface Props {
 }
 
 export const ColorCard: FC<Props> = ({ color, name, similar }) => {
-	const variant = useContrast(color)
+	const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
+
+	const handlePopoverClick = (event: MouseEvent<HTMLElement>) => {
+		setAnchorEl(event.currentTarget)
+	}
+
+	const handlePopoverClose = () => {
+		setAnchorEl(null)
+	}
+
+	const { brightness, contrastColor } = useContrast(color)
 
 	const {
 		brightness: brightnessInfo,
@@ -31,12 +42,12 @@ export const ColorCard: FC<Props> = ({ color, name, similar }) => {
 		<div className='colorCard'>
 			<PaletteStripeColor
 				color={color}
-				variant={variant}
+				variant={{ brightness, contrastColor }}
 				classNameWrapper='colorCard__board'
 			>
 				<Bage
 					text={`${similar}% similar`}
-					brightness={variant.brightness}
+					brightness={brightness}
 					classNameBage='colorCard__board-bage'
 					classNameText='colorCard__board-bage-text'
 				/>
@@ -52,9 +63,19 @@ export const ColorCard: FC<Props> = ({ color, name, similar }) => {
 					<DefaultHoveredButton brightness={brightnessInfo}>
 						<Eye stroke={contrastColorInfo} />
 					</DefaultHoveredButton>
-					<DefaultHoveredButton brightness={brightnessInfo}>
-						<MoreHorizontal stroke={contrastColorInfo} />
-					</DefaultHoveredButton>
+					<>
+						<DefaultHoveredButton
+							brightness={brightnessInfo}
+							onClick={handlePopoverClick}
+						>
+							<MoreHorizontal stroke={contrastColorInfo} />
+						</DefaultHoveredButton>
+						<ColorCardPopover
+							color={color}
+							anchorEl={anchorEl}
+							handlePopoverClose={handlePopoverClose}
+						/>
+					</>
 				</div>
 			</div>
 		</div>

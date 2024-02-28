@@ -38,10 +38,7 @@ export const HeaderNavigation: FC<Props> = ({ pageName }) => {
 					<Burger stroke={contrastColor} size={32} strokeWidth={3} />
 				</DefaultHoveredButton>
 				<Popover
-					id='mouse-over-popover'
-					sx={{
-						pointerEvents: 'none',
-					}}
+					id='headerNavigation-popover'
 					open={!!anchorEl}
 					anchorEl={anchorEl}
 					anchorOrigin={{

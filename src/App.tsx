@@ -1,11 +1,9 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { Picker } from './pages/Picker/Picker'
 import { CustomAlert } from './components/ui/CustomAlert/CustomAlert'
-import { useAppSelector } from './redux/hooks/useAppRedux'
+import { FullScreen } from './components/ui/FullScreen/FullScreen'
 
 function App() {
-	const alert = useAppSelector(store => store.alertReducer)
-
 	return (
 		<div className='App'>
 			<Routes>
@@ -18,7 +16,8 @@ function App() {
 					</Route>*/}
 				<Route path='*' element={<div>The page does not exist</div>} />
 			</Routes>
-			<CustomAlert open={alert.open} text={alert.text} />
+			<CustomAlert />
+			<FullScreen />
 		</div>
 	)
 }

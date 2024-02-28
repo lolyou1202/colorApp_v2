@@ -1,21 +1,20 @@
 import './CustomAlert.style.scss'
-import { FC, useEffect } from 'react'
-import { useAppDispatch } from '../../../redux/hooks/useAppRedux'
-import { closeAlert } from '../../../redux/slices/alertSlice'
-import { Success } from '../../icons/Success'
 import Snackbar from '@mui/material/Snackbar'
 import Alert from '@mui/material/Alert'
+import {
+	useAppDispatch,
+	useAppSelector,
+} from '../../../redux/hooks/useAppRedux'
+import { closeAlert } from '../../../redux/slices/alertSlice'
+import { Success } from '../../icons/Success'
 
-interface ICustomAlert {
-	open: boolean
-	text?: string
-}
+export const CustomAlert = () => {
+	const { open, text } = useAppSelector(state => state.alertReducer)
 
-export const CustomAlert: FC<ICustomAlert> = ({ open, text }) => {
 	const dispatch = useAppDispatch()
 
 	const handleCloseAlert = (
-		event: React.SyntheticEvent | Event,
+		_: React.SyntheticEvent | Event,
 		reason?: string
 	) => {
 		if (reason === 'clickaway') {
@@ -29,9 +28,11 @@ export const CustomAlert: FC<ICustomAlert> = ({ open, text }) => {
 			open={open}
 			anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
 			autoHideDuration={2000}
-			onClose={handleCloseAlert}>
+			onClose={handleCloseAlert}
+		>
 			<Alert
-				icon={<Success size={32} stroke='#ffffff' strokeWidth={3} />}>
+				icon={<Success size={32} stroke='#ffffff' strokeWidth={3} />}
+			>
 				{text}
 			</Alert>
 		</Snackbar>

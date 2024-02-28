@@ -7,38 +7,42 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { HeaderNavigation } from '../../components/ui/HeaderNavigation/HeaderNavigation'
 import { PickerMain } from '../../components/basic/PickerMain/PickerMain'
 import { setColor } from '../../redux/slices/pickerSlice'
+import ScrollToTop from '../../components/helpers/ScrollToTop'
 
 export const Picker = () => {
 	const colorState = useAppSelector(
 		state => state.pickerReducer.colorState.color
 	)
-	const dispatch = useAppDispatch()
-
 	const { pickerID } = useParams()
+
+	const dispatch = useAppDispatch()
 
 	const navigate = useNavigate()
 
 	useEffect(() => {
-		dispatch(setLocation({ locationType: EnumLocation.picker }))
-	}, [])
+		if (pickerID && pickerID !== colorState.replace(/[^\d\w]/g, '')) {
+			dispatch(setColor({ newColor: `#${pickerID}` }))
+		}
+	}, [pickerID])
 
 	useEffect(() => {
-		if (colorState && colorState !== pickerID) {
-			navigate(`/picker/${colorState.replace(/[^\d\w]/g, '')}`)
-		} else {
-			if (pickerID && colorState !== pickerID) {
-				dispatch(setColor({ newColor: `#${pickerID}` }))
-			} else {
-				navigate(
-					`/picker/${chroma
-						.random()
-						.hex()
-						.toUpperCase()
-						.replace(/[^\d\w]/g, '')}`
-				)
-			}
+		if (!pickerID) {
+			navigate(
+				`/picker/${chroma
+					.random()
+					.hex()
+					.toUpperCase()
+					.replace(/[^\d\w]/g, '')}`
+			)
 		}
-	}, [colorState, pickerID])
+		if (colorState && pickerID !== colorState.replace(/[^\d\w]/g, '')) {
+			navigate(`/picker/${colorState.replace(/[^\d\w]/g, '')}`)
+		}
+	}, [colorState])
+
+	useEffect(() => {
+		dispatch(setLocation({ locationType: EnumLocation.picker }))
+	}, [])
 
 	return (
 		colorState && (
@@ -47,6 +51,7 @@ export const Picker = () => {
 					<HeaderNavigation pageName='Color picker' />
 				</header>
 				<PickerMain />
+				<ScrollToTop />
 			</div>
 		)
 	)

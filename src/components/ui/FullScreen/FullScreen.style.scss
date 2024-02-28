@@ -1,0 +1,15 @@
+.fullScreen {
+	&-wrapper {
+		position: relative;
+		display: flex;
+		height: 100vh;
+	}
+	&-item {
+		width: 100%;
+	}
+	&-button {
+		position: absolute;
+		right: 24px;
+		top: 24px;
+	}
+}
