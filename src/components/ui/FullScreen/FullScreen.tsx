@@ -1,17 +1,16 @@
 import './FullScreen.style.scss'
-import { FC } from 'react'
+import { useCallback, useEffect } from 'react'
 import {
 	useAppDispatch,
 	useAppSelector,
 } from '../../../redux/hooks/useAppRedux'
-import { Modal } from '@mui/material'
+import { Fade, Modal } from '@mui/material'
 import { closeScreenMode } from '../../../redux/slices/screenModeSlice'
 import { DefaultHoveredButton } from '../DefaultHoveredButton/DefaultHoveredButton'
 import { useContrast } from '../../../hooks/useContrast'
+import { Cross } from '../../icons/Cross'
 
-interface Props {}
-
-export const FullScreen: FC<Props> = () => {
+export const FullScreen = () => {
 	const { open, content } = useAppSelector(
 		state => state.screenModeReducer.screenModeState
 	)
@@ -21,25 +20,44 @@ export const FullScreen: FC<Props> = () => {
 	const handleClose = () => {
 		dispatch(closeScreenMode())
 	}
-	const { brightness } = useContrast(content[content.length - 1])
+	const { brightness, contrastColor } = useContrast(
+		content[content.length - 1]
+	)
+
+	const escClickHandler = useCallback((event: KeyboardEvent) => {
+		if (event.key === 'Escape') {
+			handleClose()
+		}
+	}, [])
+
+	useEffect(() => {
+		document.addEventListener('keydown', escClickHandler, false)
+
+		return () => {
+			document.removeEventListener('keydown', escClickHandler, false)
+		}
+	}, [escClickHandler])
 
 	return (
 		<Modal open={open} onClose={handleClose}>
-			<div className='fullScreen-wrapper'>
-				{content.map(item => (
-					<div
-						className='fullScreen-item'
-						style={{ backgroundColor: item }}
-					/>
-				))}
-				<DefaultHoveredButton
-					className='fullScreen-button'
-					brightness={brightness}
-					onClick={handleClose}
-				>
-					X
-				</DefaultHoveredButton>
-			</div>
+			<Fade in={open}>
+				<div className='fullScreen-wrapper'>
+					{content.map(item => (
+						<div
+							key={item}
+							className='fullScreen-item'
+							style={{ backgroundColor: item }}
+						/>
+					))}
+					<DefaultHoveredButton
+						className='fullScreen-button'
+						brightness={brightness}
+						onClick={handleClose}
+					>
+						<Cross stroke={contrastColor} />
+					</DefaultHoveredButton>
+				</div>
+			</Fade>
 		</Modal>
 	)
 }

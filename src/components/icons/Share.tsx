@@ -1,19 +1,15 @@
-import { FC } from 'react'
-
-interface Props {
-	className?: string
-	size?: number
-	stroke?: string
-	strokeWidth?: number
-	fill?: string
-}
-
-export const Share: FC<Props> = ({
+export const Share = ({
 	className,
 	size = 24,
 	stroke,
 	strokeWidth = 2,
 	fill = 'none',
+}: {
+	className?: string
+	size?: number
+	stroke?: string
+	strokeWidth?: number
+	fill?: string
 }) => {
 	return (
 		<svg

@@ -11,5 +11,16 @@
 		position: absolute;
 		right: 24px;
 		top: 24px;
+		svg {
+			width: 32px;
+			height: 32px;
+		}
+	}
+}
+
+@media (max-width: 1268px) {
+	.fullScreen-button svg {
+		width: 24px;
+		height: 24px;
 	}
 }

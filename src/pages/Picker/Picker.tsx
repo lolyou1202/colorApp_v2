@@ -7,12 +7,13 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { HeaderNavigation } from '../../components/ui/HeaderNavigation/HeaderNavigation'
 import { PickerMain } from '../../components/basic/PickerMain/PickerMain'
 import { setColor } from '../../redux/slices/pickerSlice'
-import ScrollToTop from '../../components/helpers/ScrollToTop'
+import { ScrollToTop } from '../../components/helpers/ScrollToTop'
 
 export const Picker = () => {
 	const colorState = useAppSelector(
 		state => state.pickerReducer.colorState.color
 	)
+
 	const { pickerID } = useParams()
 
 	const dispatch = useAppDispatch()

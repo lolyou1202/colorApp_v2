@@ -6,6 +6,11 @@ import { viewAlert } from '../../../../redux/slices/alertSlice'
 import { useAppDispatch } from '../../../../redux/hooks/useAppRedux'
 import { useNavigate } from 'react-router-dom'
 import { openScreenMode } from '../../../../redux/slices/screenModeSlice'
+import { Drop } from '../../../icons/Drop'
+import { Hyperlink } from '../../../icons/Hyperlink'
+import { Expand } from '../../../icons/Expand'
+import { Image } from '../../../icons/Image'
+import { useColorVariant } from '../../../../hooks/useColorVariant'
 
 interface Props {
 	color: string
@@ -21,7 +26,6 @@ export const ColorCardPopover: FC<Props> = ({
 	className,
 }) => {
 	const dispatch = useAppDispatch()
-
 	const navigate = useNavigate()
 
 	const onClickOpen = () => {
@@ -42,20 +46,17 @@ export const ColorCardPopover: FC<Props> = ({
 	}
 	const onClickExport = () => {}
 
-	const { contrastColor }: IColorVariant = {
-		brightness: 'light',
-		contrastColor: '#353535',
-	}
+	const { contrastColor } = useColorVariant({ colorToken: 'primaryDark' })
 
 	const menuList: MenuListType = [
 		{
 			name: 'Open in the Color Picker',
-			icon: <Eye stroke={contrastColor} />,
+			icon: <Drop stroke={contrastColor} />,
 			onClick: onClickOpen,
 		},
 		{
 			name: 'Copy URL',
-			icon: <Eye stroke={contrastColor} />,
+			icon: <Hyperlink stroke={contrastColor} />,
 			onClick: onClickCopy,
 		},
 		'',
@@ -66,16 +67,17 @@ export const ColorCardPopover: FC<Props> = ({
 		},
 		{
 			name: 'View fullscreen',
-			icon: <Eye stroke={contrastColor} />,
+			icon: <Expand stroke={contrastColor} />,
 			onClick: onClickViewFull,
 		},
 		'',
 		{
 			name: 'Export as image',
-			icon: <Eye stroke={contrastColor} />,
+			icon: <Image stroke={contrastColor} />,
 			onClick: onClickExport,
 		},
 	]
+
 	return (
 		<CustomPopoverMenu
 			id='colorCard-popover'
