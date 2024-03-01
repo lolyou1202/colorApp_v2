@@ -5,7 +5,7 @@ import { BorderedLayout } from '../../layout/BorderedLayout/BorderedLayout'
 import { HeaderNavigationLink } from './HeaderNavigationLink'
 import { DefaultHoveredButton } from '../DefaultHoveredButton/DefaultHoveredButton'
 import { Burger } from '../../icons/Burger'
-import { IColorVariant } from '../../../types'
+import { useColorVariant } from '../../../hooks/useColorVariant'
 
 interface Props {
 	pageName: string
@@ -22,10 +22,10 @@ export const HeaderNavigation: FC<Props> = ({ pageName }) => {
 		setAnchorEl(null)
 	}
 
-	const { brightness, contrastColor }: IColorVariant = {
+	const { brightness, contrastColor } = useColorVariant({
 		brightness: 'light',
-		contrastColor: '#353535',
-	}
+		colorToken: 'primaryDark',
+	})
 
 	return (
 		<div className='header'>

@@ -7,6 +7,7 @@ import { DefaultHoveredButton } from '../DefaultHoveredButton/DefaultHoveredButt
 import { MoreHorizontal } from '../../icons/MoreHorizontal'
 import { Eye } from '../../icons/Eye'
 import { ColorCardPopover } from '../../basic/Popover/ColorCardPopover/ColorCardPopover'
+import { useColorVariant } from '../../../hooks/useColorVariant'
 
 interface Props {
 	color: string
@@ -25,29 +26,21 @@ export const ColorCard: FC<Props> = ({ color, name, similar }) => {
 		setAnchorEl(null)
 	}
 
-	const { brightness, contrastColor } = useContrast(color)
+	const colorVariant = useContrast(color)
 
-	const {
-		brightness: brightnessInfo,
-		contrastColor: contrastColorInfo,
-	}: {
-		brightness: 'light' | 'dark'
-		contrastColor: string
-	} = {
-		brightness: 'light',
-		contrastColor: '#353535',
-	}
+	const { brightness: brightnessInfo, contrastColor: contrastColorInfo } =
+		useColorVariant({ brightness: 'light', colorToken: 'primaryDark' })
 
 	return (
 		<div className='colorCard'>
 			<PaletteStripeColor
 				color={color}
-				variant={{ brightness, contrastColor }}
+				variant={colorVariant}
 				classNameWrapper='colorCard__board'
 			>
 				<Bage
 					text={`${similar}% similar`}
-					brightness={brightness}
+					brightness={colorVariant.brightness}
 					classNameBage='colorCard__board-bage'
 					classNameText='colorCard__board-bage-text'
 				/>

@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { CustomPopoverMenu } from '../../../ui/CustomMenu/CustomPopoverMenu'
 import { Eye } from '../../../icons/Eye'
-import { IColorVariant, MenuListType } from '../../../../types'
+import { MenuListType } from '../../../../types'
 import { viewAlert } from '../../../../redux/slices/alertSlice'
 import { useAppDispatch } from '../../../../redux/hooks/useAppRedux'
 import { useNavigate } from 'react-router-dom'
@@ -46,7 +46,9 @@ export const ColorCardPopover: FC<Props> = ({
 	}
 	const onClickExport = () => {}
 
-	const { contrastColor } = useColorVariant({ colorToken: 'primaryDark' })
+	const { contrastColor } = useColorVariant({
+		colorToken: 'primaryDark',
+	})
 
 	const menuList: MenuListType = [
 		{

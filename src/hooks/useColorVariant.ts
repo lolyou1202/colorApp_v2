@@ -1,16 +1,13 @@
 import { colorTokens } from '../constants/colorTokens'
 
-export const useColorVariant = ({
-	brightness,
-	colorToken,
-}: {
-	brightness?: 'light' | 'dark'
-	colorToken?: keyof typeof colorTokens
-}) => {
-	const contrastColor = colorTokens[colorToken]
+export function useColorVariant<
+	B extends 'light' | 'dark',
+	C extends keyof typeof colorTokens,
+>({ brightness, colorToken }: { brightness?: B; colorToken?: C }) {
+	const contrastColor = colorToken && colorTokens[colorToken]
 
 	return {
-		brightness,
-		contrastColor,
+		brightness: brightness!,
+		contrastColor: contrastColor!,
 	}
 }
