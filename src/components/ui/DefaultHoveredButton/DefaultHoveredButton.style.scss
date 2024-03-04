@@ -12,4 +12,7 @@
 			background: var(--primary-light-transparent-10);
 		}
 	}
+	&:disabled {
+		pointer-events: none;
+	}
 }

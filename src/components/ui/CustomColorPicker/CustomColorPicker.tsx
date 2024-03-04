@@ -4,11 +4,11 @@ import { HexColorPicker } from 'react-colorful'
 import { BorderedLayout } from '../../layout/BorderedLayout/BorderedLayout'
 import { DefaultHoveredButton } from '../DefaultHoveredButton/DefaultHoveredButton'
 import { Copy } from '../../icons/Copy'
-import { IColorVariant } from '../../../types'
 import { useAppDispatch } from '../../../redux/hooks/useAppRedux'
 import { viewAlert } from '../../../redux/slices/alertSlice'
 import { setColor } from '../../../redux/slices/pickerSlice'
 import { useDebounce } from '../../../hooks/useDebounce'
+import { colorTokens } from '../../../constants/colorTokens'
 
 interface Props {
 	colorState: string
@@ -54,10 +54,8 @@ export const CustomColorPicker: FC<Props> = ({
 		}
 	}, [debounceValue])
 
-	const { brightness, contrastColor }: IColorVariant = {
-		brightness: 'light',
-		contrastColor: '#353535',
-	}
+	const contrastColor = colorTokens.primaryDark
+	const brightness = 'light'
 
 	return (
 		<BorderedLayout className='customColorPicker'>

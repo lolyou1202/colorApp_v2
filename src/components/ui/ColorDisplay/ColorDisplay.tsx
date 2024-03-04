@@ -7,12 +7,16 @@ import { DefaultHoveredButton } from '../DefaultHoveredButton/DefaultHoveredButt
 import { useGetColorName } from '../../../hooks/useGetColorName'
 import { useValidateHEX } from '../../../hooks/useValidateHEX'
 import { useContrast } from '../../../hooks/useContrast'
+import { useAppDispatch } from '../../../redux/hooks/useAppRedux'
+import { openScreenMode } from '../../../redux/slices/screenModeSlice'
 
 interface Props {
 	inputState: string
 }
 
 export const ColorDisplay: FC<Props> = ({ inputState }) => {
+	const dispatch = useAppDispatch()
+
 	const { brightness, contrastColor } = useContrast(inputState)
 
 	const validHEX = useValidateHEX(inputState)
@@ -20,6 +24,10 @@ export const ColorDisplay: FC<Props> = ({ inputState }) => {
 	const validColor = validHEX ? validHEX : ''
 
 	const colorName = useGetColorName(validColor)
+
+	const onClickViewFull = () => {
+		dispatch(openScreenMode({ content: [validColor] }))
+	}
 
 	const colorDisplayHEXClassNames = classNames({
 		'colorDisplay-hex': true,
@@ -41,7 +49,10 @@ export const ColorDisplay: FC<Props> = ({ inputState }) => {
 				{colorName}
 			</p>
 			<div className='colorDisplay-iconBar'>
-				<DefaultHoveredButton brightness={brightness}>
+				<DefaultHoveredButton
+					brightness={brightness}
+					onClick={onClickViewFull}
+				>
 					<Expand stroke={contrastColor} />
 				</DefaultHoveredButton>
 			</div>

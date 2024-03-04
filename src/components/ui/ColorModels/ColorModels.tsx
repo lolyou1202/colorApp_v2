@@ -1,11 +1,11 @@
 import './ColorModels.style.scss'
-import Divider from '@mui/material/Divider'
 import { BorderedLayout } from '../../layout/BorderedLayout/BorderedLayout'
 import { PickerBlock } from '../PickerBlock/PickerBlock'
 import {
 	useAppDispatch,
 	useAppSelector,
 } from '../../../redux/hooks/useAppRedux'
+import { Divider } from '@mui/material'
 import { useColorModels } from '../../../hooks/useColorModels'
 import { viewAlert } from '../../../redux/slices/alertSlice'
 import { ColorModelHalf } from './ColorModelHalf'

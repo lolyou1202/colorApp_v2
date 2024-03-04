@@ -1,11 +1,11 @@
 import './CustomPopoverMenu.style.scss'
 import classNames from 'classnames'
-import Popover, { PopoverProps } from '@mui/material/Popover'
-import Divider from '@mui/material/Divider'
+import { Popover, PopoverProps } from '@mui/material'
+import { Divider } from '@mui/material'
 import { FC } from 'react'
 import { BorderedLayout } from '../../layout/BorderedLayout/BorderedLayout'
 import { DefaultHoveredButton } from '../DefaultHoveredButton/DefaultHoveredButton'
-import { IColorVariant, MenuListType } from '../../../types'
+import { MenuListType } from '../../../types'
 
 interface Props extends PopoverProps {
 	menuList: MenuListType
@@ -29,10 +29,7 @@ export const CustomPopoverMenu: FC<Props> = ({
 		[className]: true,
 	})
 
-	const { brightness }: IColorVariant = {
-		brightness: 'light',
-		contrastColor: '#353535',
-	}
+	const brightness = 'light'
 
 	return (
 		<Popover

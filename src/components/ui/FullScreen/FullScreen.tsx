@@ -20,9 +20,6 @@ export const FullScreen = () => {
 	const handleClose = () => {
 		dispatch(closeScreenMode())
 	}
-	const { brightness, contrastColor } = useContrast(
-		content[content.length - 1]
-	)
 
 	const escClickHandler = useCallback((event: KeyboardEvent) => {
 		if (event.key === 'Escape') {
@@ -37,6 +34,10 @@ export const FullScreen = () => {
 			document.removeEventListener('keydown', escClickHandler, false)
 		}
 	}, [escClickHandler])
+
+	const { brightness, contrastColor } = useContrast(
+		content[content.length - 1]
+	)
 
 	return (
 		<Modal open={open} onClose={handleClose}>

@@ -21,11 +21,13 @@ export const Bage: FC<Props> = ({
 		[brightness]: true,
 		[classNameBage || '']: true,
 	})
+	
 	const bageTextClassNames = classNames({
 		'bage-text': true,
 		[classNameText || '']: true,
 		[brightness]: true,
 	})
+	
 	return (
 		<div className={bageClassNames}>
 			<p className={bageTextClassNames}>{text}</p>

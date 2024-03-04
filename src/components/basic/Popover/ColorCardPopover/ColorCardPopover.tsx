@@ -10,7 +10,7 @@ import { Drop } from '../../../icons/Drop'
 import { Hyperlink } from '../../../icons/Hyperlink'
 import { Expand } from '../../../icons/Expand'
 import { Image } from '../../../icons/Image'
-import { useColorVariant } from '../../../../hooks/useColorVariant'
+import { colorTokens } from '../../../../constants/colorTokens'
 
 interface Props {
 	color: string
@@ -46,9 +46,7 @@ export const ColorCardPopover: FC<Props> = ({
 	}
 	const onClickExport = () => {}
 
-	const { contrastColor } = useColorVariant({
-		colorToken: 'primaryDark',
-	})
+	const contrastColor = colorTokens.primaryDark
 
 	const menuList: MenuListType = [
 		{

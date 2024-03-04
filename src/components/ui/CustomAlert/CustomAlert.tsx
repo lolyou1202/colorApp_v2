@@ -1,10 +1,10 @@
 import './CustomAlert.style.scss'
-import Snackbar from '@mui/material/Snackbar'
-import Alert from '@mui/material/Alert'
 import {
 	useAppDispatch,
 	useAppSelector,
 } from '../../../redux/hooks/useAppRedux'
+import { Snackbar } from '@mui/material'
+import { Alert } from '@mui/material'
 import { closeAlert } from '../../../redux/slices/alertSlice'
 import { Success } from '../../icons/Success'
 

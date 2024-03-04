@@ -4,6 +4,7 @@ import { CSSProperties, ComponentProps, FC, ReactNode } from 'react'
 
 interface Props extends ComponentProps<'button'> {
 	brightness: 'light' | 'dark'
+	disabled?: boolean
 	borderRadius?: number
 	padding?: string
 	className?: string
@@ -13,6 +14,7 @@ interface Props extends ComponentProps<'button'> {
 
 export const DefaultHoveredButton: FC<Props> = ({
 	brightness,
+	disabled,
 	children,
 	className,
 	borderRadius = 4,
@@ -24,12 +26,14 @@ export const DefaultHoveredButton: FC<Props> = ({
 		[brightness]: true,
 		[className || '']: className,
 	})
-
+	
 	return (
 		<button
 			className={defaultHoveredButtonClassNames}
 			style={{ borderRadius: `${borderRadius}px`, padding: padding }}
-			{...rest}>
+			disabled={disabled}
+			{...rest}
+		>
 			{children}
 		</button>
 	)

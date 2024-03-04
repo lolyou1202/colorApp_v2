@@ -1,11 +1,11 @@
 import './HeaderNavigation.style.scss'
-import Popover from '@mui/material/Popover'
 import { FC, useState, MouseEvent } from 'react'
 import { BorderedLayout } from '../../layout/BorderedLayout/BorderedLayout'
 import { HeaderNavigationLink } from './HeaderNavigationLink'
 import { DefaultHoveredButton } from '../DefaultHoveredButton/DefaultHoveredButton'
+import { Popover } from '@mui/material'
 import { Burger } from '../../icons/Burger'
-import { useColorVariant } from '../../../hooks/useColorVariant'
+import { colorTokens } from '../../../constants/colorTokens'
 
 interface Props {
 	pageName: string
@@ -22,10 +22,8 @@ export const HeaderNavigation: FC<Props> = ({ pageName }) => {
 		setAnchorEl(null)
 	}
 
-	const { brightness, contrastColor } = useColorVariant({
-		brightness: 'light',
-		colorToken: 'primaryDark',
-	})
+	const contrastColor = colorTokens.primaryDark
+	const brightness = 'light'
 
 	return (
 		<div className='header'>
