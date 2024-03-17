@@ -15,9 +15,7 @@ export const Picker = () => {
 	)
 
 	const { pickerID } = useParams()
-
 	const dispatch = useAppDispatch()
-
 	const navigate = useNavigate()
 
 	useEffect(() => {

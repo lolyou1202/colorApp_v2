@@ -1,5 +1,6 @@
 import './ControlPanel.style.scss'
 import chroma from 'chroma-js'
+import { memo } from 'react'
 import {
 	useAppDispatch,
 	useAppSelector,
@@ -14,7 +15,7 @@ import { setPositionStack, setColor } from '../../../redux/slices/pickerSlice'
 import { Divider } from '@mui/material'
 import { colorTokens } from '../../../constants/colorTokens'
 
-export const PickerControlPanel = () => {
+export const PickerControlPanel = memo(() => {
 	const stackOfStates = useAppSelector(
 		state => state.pickerReducer.stackOfStates
 	)
@@ -115,4 +116,4 @@ export const PickerControlPanel = () => {
 			</DefaultHoveredButton>
 		</BorderedLayout>
 	)
-}
+})

@@ -1,6 +1,6 @@
 import './ColorDisplay.style.scss'
 import classNames from 'classnames'
-import { FC } from 'react'
+import { FC, memo } from 'react'
 import { Expand } from '../../icons/Expand'
 import { BorderedLayout } from '../../layout/BorderedLayout/BorderedLayout'
 import { DefaultHoveredButton } from '../DefaultHoveredButton/DefaultHoveredButton'
@@ -14,7 +14,7 @@ interface Props {
 	inputState: string
 }
 
-export const ColorDisplay: FC<Props> = ({ inputState }) => {
+export const ColorDisplay: FC<Props> = memo(({ inputState }) => {
 	const dispatch = useAppDispatch()
 
 	const { brightness, contrastColor } = useContrast(inputState)
@@ -58,4 +58,4 @@ export const ColorDisplay: FC<Props> = ({ inputState }) => {
 			</div>
 		</BorderedLayout>
 	)
-}
+})
