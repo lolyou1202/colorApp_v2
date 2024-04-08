@@ -4,33 +4,18 @@ import { ColorDisplay } from '../ColorDisplay/ColorDisplay'
 import { CustomColorPicker } from '../CustomColorPicker/CustomColorPicker'
 import { PickerBlock } from '../PickerBlock/PickerBlock'
 import { PickerControlPanel } from '../../basic/ControlPanel/PickerControlPanel'
-import {
-	useAppDispatch,
-	useAppSelector,
-} from '../../../redux/hooks/useAppRedux'
-import { useDebounce } from '../../../hooks/useDebounce'
-import { setColor } from '../../../redux/slices/pickerSlice'
+import { useAppSelector } from '../../../redux/hooks/useAppRedux'
 
 export const ColorGenerator = () => {
 	const colorState = useAppSelector(
 		state => state.pickerReducer.colorState.color
 	).toUpperCase()
 
-	const [inputState, setInputState] = useState(colorState)
-
-	const dispatch = useAppDispatch()
-
-	const debounceValue = useDebounce(inputState, 100)
+	const [colorGeneratorState, setColorGeneratorState] = useState(colorState)
 
 	useEffect(() => {
-		if (colorState !== debounceValue) {
-			dispatch(setColor({ newColor: debounceValue }))
-		}
-	}, [debounceValue])
-
-	useEffect(() => {
-		if (colorState !== inputState) {
-			setInputState(colorState)
+		if (colorState !== colorGeneratorState) {
+			setColorGeneratorState(colorState)
 		}
 	}, [colorState])
 
@@ -41,11 +26,11 @@ export const ColorGenerator = () => {
 			description='Get useful color information like conversion, combinations,
 	blindness simulation and more.'
 		>
-			<ColorDisplay inputState={inputState} />
+			<ColorDisplay colorGeneratorState={colorGeneratorState} />
 			<div className='pickerGenerate__funcBlock'>
 				<CustomColorPicker
-					inputState={inputState}
-					setInputState={setInputState}
+					colorGeneratorState={colorGeneratorState}
+					setColorGeneratorState={setColorGeneratorState}
 				/>
 				<PickerControlPanel />
 			</div>

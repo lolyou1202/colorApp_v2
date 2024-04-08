@@ -74,7 +74,7 @@ export const PickerControlPanel = memo(() => {
 				variant='fullWidth'
 				sx={{
 					borderWidth: '1px',
-					borderColor: 'var(--primary-dark)',
+					borderColor: primaryDark,
 					borderRadius: 'var(--borderRadius-short)',
 				}}
 				flexItem
@@ -97,7 +97,7 @@ export const PickerControlPanel = memo(() => {
 				variant='fullWidth'
 				sx={{
 					borderWidth: '1px',
-					borderColor: 'var(--primary-dark)',
+					borderColor: primaryDark,
 					borderRadius: 'var(--borderRadius-short)',
 				}}
 				flexItem

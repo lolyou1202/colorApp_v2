@@ -1,15 +1,16 @@
 import './CustomPopoverMenu.style.scss'
 import classNames from 'classnames'
-import { Popover, PopoverProps } from '@mui/material'
-import { Divider } from '@mui/material'
 import { FC } from 'react'
+import { Popover, PopoverProps } from '@mui/material'
 import { BorderedLayout } from '../../layout/BorderedLayout/BorderedLayout'
 import { DefaultHoveredButton } from '../DefaultHoveredButton/DefaultHoveredButton'
 import { MenuListType } from '../../../types'
+import { Divider } from '@mui/material'
+import { colorTokens } from '../../../constants/colorTokens'
 
 interface Props extends PopoverProps {
 	menuList: MenuListType
-	handlePopoverClose: () => void
+	handleClosePopover: () => void
 	className?: string
 }
 
@@ -19,7 +20,7 @@ export const CustomPopoverMenu: FC<Props> = ({
 	anchorEl,
 	anchorOrigin,
 	transformOrigin,
-	handlePopoverClose,
+	handleClosePopover,
 	menuList,
 	className = '',
 	...rest
@@ -29,6 +30,7 @@ export const CustomPopoverMenu: FC<Props> = ({
 		[className]: true,
 	})
 
+	const primaryDark = colorTokens.primaryDark
 	const brightness = 'light'
 
 	return (
@@ -38,7 +40,7 @@ export const CustomPopoverMenu: FC<Props> = ({
 			anchorEl={anchorEl}
 			anchorOrigin={anchorOrigin}
 			transformOrigin={transformOrigin}
-			onClose={handlePopoverClose}
+			onClose={handleClosePopover}
 			{...rest}
 		>
 			<BorderedLayout className={menuClassNames}>
@@ -50,7 +52,7 @@ export const CustomPopoverMenu: FC<Props> = ({
 							variant='fullWidth'
 							sx={{
 								borderWidth: '1px',
-								borderColor: 'var(--primary-dark)',
+								borderColor: primaryDark,
 								borderRadius: 'var(--borderRadius-short)',
 							}}
 							flexItem
@@ -62,7 +64,7 @@ export const CustomPopoverMenu: FC<Props> = ({
 							brightness={brightness}
 							onClick={() => {
 								menuItem.onClick()
-								handlePopoverClose()
+								handleClosePopover()
 							}}
 						>
 							{menuItem.icon}

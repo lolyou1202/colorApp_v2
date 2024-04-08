@@ -7,38 +7,61 @@ import { Copy } from '../../icons/Copy'
 import { useAppDispatch } from '../../../redux/hooks/useAppRedux'
 import { viewAlert } from '../../../redux/slices/alertSlice'
 import { colorTokens } from '../../../constants/colorTokens'
+import { useDebounce } from '../../../hooks/useDebounce'
+import { setColor } from '../../../redux/slices/pickerSlice'
 
 interface Props {
-	inputState: string
-	setInputState: React.Dispatch<React.SetStateAction<string>>
+	colorGeneratorState: string
+	setColorGeneratorState: React.Dispatch<React.SetStateAction<string>>
 }
 
 export const CustomColorPicker: FC<Props> = memo(
-	({ inputState, setInputState }) => {
-		const [internalInputState, setInternalInputState] = useState(inputState)
-		console.log(333333)
+	({ colorGeneratorState, setColorGeneratorState }) => {
+		const [localInputState, setLocalInputState] =
+			useState(colorGeneratorState)
+		const [localPickerState, setLocalPickerState] =
+			useState(colorGeneratorState)
+
 		const dispatch = useAppDispatch()
 
+		const debounceValue = useDebounce(localPickerState, 100)
+
 		const onChangeInternalInput = (value: string) => {
-			setInternalInputState(value)
+			setLocalInputState(value)
 
 			const validValue = /^#[A-Fa-f0-9]{3}([A-Fa-f0-9]{3})?$/g.test(value)
 
 			if (validValue) {
-				setInputState(value)
+				setColorGeneratorState(value)
 			}
 		}
 
 		const onCopyClick = () => {
-			navigator.clipboard.writeText(inputState)
+			navigator.clipboard.writeText(localPickerState)
 			dispatch(viewAlert({ alertText: 'Сolor copied to the clipboard' }))
 		}
 
 		useEffect(() => {
-			if (inputState !== internalInputState) {
-				setInputState(internalInputState)
+			if (colorGeneratorState !== debounceValue) {
+				dispatch(setColor({ newColor: debounceValue }))
 			}
-		}, [internalInputState])
+		}, [debounceValue])
+
+		useEffect(() => {
+			if (localPickerState !== localInputState) {
+				setLocalInputState(localPickerState)
+			}
+		}, [localPickerState])
+
+		useEffect(() => {
+			if (
+				colorGeneratorState !== localInputState &&
+				colorGeneratorState !== localPickerState
+			) {
+				setLocalInputState(colorGeneratorState)
+				setLocalPickerState(colorGeneratorState)
+			}
+		}, [colorGeneratorState])
 
 		const contrastColor = colorTokens.primaryDark
 		const brightness = 'light'
@@ -47,9 +70,9 @@ export const CustomColorPicker: FC<Props> = memo(
 			<BorderedLayout className='customColorPicker'>
 				<div className='customColorPicker__interactive'>
 					<HexColorPicker
-						color={inputState}
+						color={localPickerState}
 						onChange={newColor =>
-							setInternalInputState(newColor.toUpperCase())
+							setLocalPickerState(newColor.toUpperCase())
 						}
 					/>
 				</div>
@@ -58,7 +81,7 @@ export const CustomColorPicker: FC<Props> = memo(
 					<input
 						type='text'
 						className='customColorPicker__info-value'
-						value={internalInputState}
+						value={localInputState}
 						onChange={e => onChangeInternalInput(e.target.value)}
 					/>
 					<div className='customColorPicker__info-functional'>
@@ -72,7 +95,7 @@ export const CustomColorPicker: FC<Props> = memo(
 						<BorderedLayout
 							className='customColorPicker__info-view'
 							style={{
-								background: inputState,
+								background: localPickerState,
 							}}
 						/>
 					</div>

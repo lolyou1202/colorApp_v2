@@ -1,28 +1,28 @@
 import { FC } from 'react'
-import { CustomPopoverMenu } from '../../../ui/CustomMenu/CustomPopoverMenu'
-import { Eye } from '../../../icons/Eye'
-import { MenuListType } from '../../../../types'
-import { viewAlert } from '../../../../redux/slices/alertSlice'
-import { useAppDispatch } from '../../../../redux/hooks/useAppRedux'
+import { CustomPopoverMenu } from '../../ui/CustomMenu/CustomPopoverMenu'
+import { Eye } from '../../icons/Eye'
+import { MenuListType } from '../../../types'
+import { viewAlert } from '../../../redux/slices/alertSlice'
+import { useAppDispatch } from '../../../redux/hooks/useAppRedux'
 import { useNavigate } from 'react-router-dom'
-import { openScreenMode } from '../../../../redux/slices/screenModeSlice'
-import { Drop } from '../../../icons/Drop'
-import { Hyperlink } from '../../../icons/Hyperlink'
-import { Expand } from '../../../icons/Expand'
-import { Image } from '../../../icons/Image'
-import { colorTokens } from '../../../../constants/colorTokens'
+import { openScreenMode } from '../../../redux/slices/screenModeSlice'
+import { Drop } from '../../icons/Drop'
+import { Hyperlink } from '../../icons/Hyperlink'
+import { Expand } from '../../icons/Expand'
+import { Image } from '../../icons/Image'
+import { colorTokens } from '../../../constants/colorTokens'
 
 interface Props {
 	color: string
-	anchorEl: HTMLElement | null
-	handlePopoverClose: () => void
+	anchorMorePopover: HTMLElement | null
+	handleClosePopover: () => void
 	className?: string
 }
 
-export const ColorCardPopover: FC<Props> = ({
+export const ColorCardMorePopover: FC<Props> = ({
 	color,
-	anchorEl,
-	handlePopoverClose,
+	anchorMorePopover,
+	handleClosePopover,
 	className,
 }) => {
 	const dispatch = useAppDispatch()
@@ -80,9 +80,9 @@ export const ColorCardPopover: FC<Props> = ({
 
 	return (
 		<CustomPopoverMenu
-			id='colorCard-popover'
-			open={!!anchorEl}
-			anchorEl={anchorEl}
+			id='colorCardMore-popover'
+			open={!!anchorMorePopover}
+			anchorEl={anchorMorePopover}
 			anchorOrigin={{
 				vertical: 'top',
 				horizontal: 'right',
@@ -91,7 +91,7 @@ export const ColorCardPopover: FC<Props> = ({
 				vertical: 216,
 				horizontal: 'right',
 			}}
-			handlePopoverClose={handlePopoverClose}
+			handleClosePopover={handleClosePopover}
 			menuList={menuList}
 			className={className}
 		/>

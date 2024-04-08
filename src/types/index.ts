@@ -1,3 +1,5 @@
+import { ReactNode } from 'react'
+
 export type PositionType = 'first' | 'between' | 'last'
 export type BrightnessType = 'light' | 'dark'
 export type DirectionType = 'right' | 'left'
@@ -13,7 +15,7 @@ export type BlindnessScheme =
 	| 'Achromatopsia'
 	| 'Achromatomaly'
 export type MenuListType = (
-	| { name: string; icon: React.ReactNode; onClick: () => void }
+	| { name: string; icon: ReactNode; onClick: () => void }
 	| ''
 )[]
 

@@ -6,8 +6,9 @@ import { Bage } from '../Bage/Bage'
 import { DefaultHoveredButton } from '../DefaultHoveredButton/DefaultHoveredButton'
 import { MoreHorizontal } from '../../icons/MoreHorizontal'
 import { Eye } from '../../icons/Eye'
-import { ColorCardPopover } from '../../basic/Popover/ColorCardPopover/ColorCardPopover'
+import { ColorCardMorePopover } from '../../basic/Popover/ColorCardMorePopover'
 import { colorTokens } from '../../../constants/colorTokens'
+import { QuickViewColorModal } from '../../basic/QuickView/QuickViewColorModal'
 
 interface Props {
 	color: string
@@ -16,14 +17,18 @@ interface Props {
 }
 
 export const ColorCard: FC<Props> = ({ color, name, similar }) => {
-	const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
+	const [isOpenModal, setOpenModal] = useState(false)
+	const [anchorMorePopover, setAnchorMorePopover] =
+		useState<HTMLElement | null>(null)
 
-	const handlePopoverClick = (event: MouseEvent<HTMLElement>) => {
-		setAnchorEl(event.currentTarget)
+	const handleOpenModal = () => setOpenModal(true)
+	const handleCloseModal = () => setOpenModal(false)
+
+	const handleClickPopover = (event: MouseEvent<HTMLElement>) => {
+		setAnchorMorePopover(event.currentTarget)
 	}
-
-	const handlePopoverClose = () => {
-		setAnchorEl(null)
+	const handleClosePopover = () => {
+		setAnchorMorePopover(null)
 	}
 
 	const contarstColorVariant = useContrast(color)
@@ -53,20 +58,31 @@ export const ColorCard: FC<Props> = ({ color, name, similar }) => {
 					{name}
 				</p>
 				<div className='colorCard__info-buttons'>
-					<DefaultHoveredButton brightness={brightnessInfo}>
-						<Eye stroke={contrastColorInfo} />
-					</DefaultHoveredButton>
 					<>
 						<DefaultHoveredButton
 							brightness={brightnessInfo}
-							onClick={handlePopoverClick}
+							onClick={handleOpenModal}
+						>
+							<Eye stroke={contrastColorInfo} />
+						</DefaultHoveredButton>
+						<QuickViewColorModal
+							color={color}
+							variant={contarstColorVariant}
+							isOpenModal={isOpenModal}
+							handleCloseModal={handleCloseModal}
+						/>
+					</>
+					<>
+						<DefaultHoveredButton
+							brightness={brightnessInfo}
+							onClick={handleClickPopover}
 						>
 							<MoreHorizontal stroke={contrastColorInfo} />
 						</DefaultHoveredButton>
-						<ColorCardPopover
+						<ColorCardMorePopover
 							color={color}
-							anchorEl={anchorEl}
-							handlePopoverClose={handlePopoverClose}
+							anchorMorePopover={anchorMorePopover}
+							handleClosePopover={handleClosePopover}
 						/>
 					</>
 				</div>

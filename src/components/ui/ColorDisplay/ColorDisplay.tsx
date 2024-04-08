@@ -11,15 +11,15 @@ import { useAppDispatch } from '../../../redux/hooks/useAppRedux'
 import { openScreenMode } from '../../../redux/slices/screenModeSlice'
 
 interface Props {
-	inputState: string
+	colorGeneratorState: string
 }
 
-export const ColorDisplay: FC<Props> = memo(({ inputState }) => {
+export const ColorDisplay: FC<Props> = memo(({ colorGeneratorState }) => {
 	const dispatch = useAppDispatch()
 
-	const { brightness, contrastColor } = useContrast(inputState)
+	const { brightness, contrastColor } = useContrast(colorGeneratorState)
 
-	const validHEX = useValidateHEX(inputState)
+	const validHEX = useValidateHEX(colorGeneratorState)
 
 	const validColor = validHEX ? validHEX : ''
 
