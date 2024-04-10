@@ -1,5 +1,5 @@
 import './Blindness.style.scss'
-import { PickerBlock } from '../PickerBlock/PickerBlock'
+import { PickerBlock } from '../../ui/PickerBlock/PickerBlock'
 import { BlindnessItem } from './BlindnessItem'
 import { useBlindness } from '../../../hooks/useBlindness'
 import { useAppSelector } from '../../../redux/hooks/useAppRedux'

@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { PaletteStripe } from '../PaletteStripe/PaletteStripe'
+import { PaletteStripe } from '../../ui/PaletteStripe/PaletteStripe'
 
 interface Props {
 	title: string

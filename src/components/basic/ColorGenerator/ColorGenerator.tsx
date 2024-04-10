@@ -1,9 +1,9 @@
 import './ColorGenerator.style.scss'
 import { useEffect, useState } from 'react'
-import { ColorDisplay } from '../ColorDisplay/ColorDisplay'
-import { CustomColorPicker } from '../CustomColorPicker/CustomColorPicker'
-import { PickerBlock } from '../PickerBlock/PickerBlock'
-import { PickerControlPanel } from '../../basic/ControlPanel/PickerControlPanel'
+import { ColorDisplay } from '../../ui/ColorDisplay/ColorDisplay'
+import { CustomColorPicker } from '../../ui/CustomColorPicker/CustomColorPicker'
+import { PickerBlock } from '../../ui/PickerBlock/PickerBlock'
+import { PickerControlPanel } from '../ControlPanel/PickerControlPanel'
 import { useAppSelector } from '../../../redux/hooks/useAppRedux'
 
 export const ColorGenerator = () => {

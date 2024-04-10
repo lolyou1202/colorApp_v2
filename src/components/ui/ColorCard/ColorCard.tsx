@@ -1,14 +1,17 @@
 import './ColorCard.style.scss'
 import { FC, useState, MouseEvent } from 'react'
+import { colorTokens } from '../../../constants/colorTokens'
 import { useContrast } from '../../../hooks/useContrast'
 import { PaletteStripeColor } from '../PaletteStripe/PaletteStripeColor'
+import { QuickViewColorModal } from '../QuickView/QuickViewColorModal'
 import { Bage } from '../Bage/Bage'
 import { DefaultHoveredButton } from '../DefaultHoveredButton/DefaultHoveredButton'
 import { MoreHorizontal } from '../../icons/MoreHorizontal'
 import { Eye } from '../../icons/Eye'
-import { ColorCardMorePopover } from '../../basic/Popover/ColorCardMorePopover'
-import { colorTokens } from '../../../constants/colorTokens'
-import { QuickViewColorModal } from '../../basic/QuickView/QuickViewColorModal'
+import { ColorCardMorePopover } from '../Popover/ColorCardMorePopover'
+
+const contrastColorInfo = colorTokens.primaryDark
+const brightnessInfo = 'light'
 
 interface Props {
 	color: string
@@ -32,9 +35,6 @@ export const ColorCard: FC<Props> = ({ color, name, similar }) => {
 	}
 
 	const contarstColorVariant = useContrast(color)
-
-	const contrastColorInfo = colorTokens.primaryDark
-	const brightnessInfo = 'light'
 
 	return (
 		<div className='colorCard'>
@@ -83,6 +83,7 @@ export const ColorCard: FC<Props> = ({ color, name, similar }) => {
 							color={color}
 							anchorMorePopover={anchorMorePopover}
 							handleClosePopover={handleClosePopover}
+							handleOpenModal={handleOpenModal}
 						/>
 					</>
 				</div>

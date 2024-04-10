@@ -2,12 +2,12 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 const initialState: {
 	screenModeState: {
-		open: boolean
+		isOpen: boolean
 		content: string[]
 	}
 } = {
 	screenModeState: {
-		open: false,
+		isOpen: false,
 		content: [],
 	},
 }
@@ -20,10 +20,10 @@ const screenModeSlice = createSlice({
 			state,
 			{ payload }: PayloadAction<{ content: string[] }>
 		) {
-			state.screenModeState = { open: true, content: payload.content }
+			state.screenModeState = { isOpen: true, content: payload.content }
 		},
 		closeScreenMode(state) {
-			state.screenModeState = { open: false, content: [] }
+			state.screenModeState = { isOpen: false, content: [] }
 		},
 	},
 })

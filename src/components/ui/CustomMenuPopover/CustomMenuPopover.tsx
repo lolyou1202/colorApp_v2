@@ -1,4 +1,4 @@
-import './CustomPopoverMenu.style.scss'
+import './CustomMenuPopover.style.scss'
 import classNames from 'classnames'
 import { FC } from 'react'
 import { Popover, PopoverProps } from '@mui/material'
@@ -14,7 +14,7 @@ interface Props extends PopoverProps {
 	className?: string
 }
 
-export const CustomPopoverMenu: FC<Props> = ({
+export const CustomMenuPopover: FC<Props> = ({
 	id,
 	open,
 	anchorEl,

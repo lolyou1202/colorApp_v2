@@ -1,7 +1,7 @@
 import { FC, useState, MouseEvent } from 'react'
 import { QuickViewModal } from './QuickViewModal'
 import { IColorVariant } from '../../../types'
-import { ColorQuickViewPopover } from '../Popover/ColorQuickPopover'
+import { ColorQuickViewPopover } from '../Popover/ColorQuickViewPopover'
 
 interface Props {
 	color: string
@@ -33,6 +33,7 @@ export const QuickViewColorModal: FC<Props> = ({
 			variant={variant}
 			isOpenModal={isOpenModal}
 			handleCloseModal={handleCloseModal}
+			handleClickPopover={handleClickPopover}
 			morePopoverMenu={
 				<ColorQuickViewPopover
 					color={color}
@@ -40,7 +41,6 @@ export const QuickViewColorModal: FC<Props> = ({
 					handleClosePopover={handlePopoverClose}
 				/>
 			}
-			//morePopoverMenu={}
 		/>
 	)
 }

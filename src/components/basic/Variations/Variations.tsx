@@ -1,7 +1,7 @@
 import './Variations.style.scss'
 import chroma from 'chroma-js'
 import { useMemo } from 'react'
-import { PickerBlock } from '../PickerBlock/PickerBlock'
+import { PickerBlock } from '../../ui/PickerBlock/PickerBlock'
 import { VariationsItem } from './VariationsItem'
 import { useAppSelector } from '../../../redux/hooks/useAppRedux'
 import { colorVariations } from '../../../constants/colorVariations'

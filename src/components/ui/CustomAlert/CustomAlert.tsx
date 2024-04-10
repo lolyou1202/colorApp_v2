@@ -3,10 +3,13 @@ import {
 	useAppDispatch,
 	useAppSelector,
 } from '../../../redux/hooks/useAppRedux'
+import { colorTokens } from '../../../constants/colorTokens'
+import { closeAlert } from '../../../redux/slices/alertSlice'
 import { Snackbar } from '@mui/material'
 import { Alert } from '@mui/material'
-import { closeAlert } from '../../../redux/slices/alertSlice'
 import { Success } from '../../icons/Success'
+
+const primaryWhite = colorTokens.primaryWhite
 
 export const CustomAlert = () => {
 	const { open, text } = useAppSelector(state => state.alertReducer)
@@ -31,7 +34,9 @@ export const CustomAlert = () => {
 			onClose={handleCloseAlert}
 		>
 			<Alert
-				icon={<Success size={32} stroke='#ffffff' strokeWidth={3} />}
+				icon={
+					<Success size={32} stroke={primaryWhite} strokeWidth={3} />
+				}
 			>
 				{text}
 			</Alert>

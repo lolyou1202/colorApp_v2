@@ -1,6 +1,6 @@
 import './ColorModels.style.scss'
 import { BorderedLayout } from '../../layout/BorderedLayout/BorderedLayout'
-import { PickerBlock } from '../PickerBlock/PickerBlock'
+import { PickerBlock } from '../../ui/PickerBlock/PickerBlock'
 import {
 	useAppDispatch,
 	useAppSelector,

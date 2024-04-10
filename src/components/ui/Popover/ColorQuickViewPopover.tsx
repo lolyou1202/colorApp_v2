@@ -1,15 +1,17 @@
 import { FC } from 'react'
-import { CustomPopoverMenu } from '../../ui/CustomMenu/CustomPopoverMenu'
-import { MenuListType } from '../../../types'
-import { Drop } from '../../icons/Drop'
-import { Hyperlink } from '../../icons/Hyperlink'
-import { Image } from '../../icons/Image'
-import { Expand } from '../../icons/Expand'
 import { colorTokens } from '../../../constants/colorTokens'
+import { MenuListType } from '../../../types'
 import { useAppDispatch } from '../../../redux/hooks/useAppRedux'
 import { useNavigate } from 'react-router-dom'
 import { viewAlert } from '../../../redux/slices/alertSlice'
 import { openScreenMode } from '../../../redux/slices/screenModeSlice'
+import { Drop } from '../../icons/Drop'
+import { Hyperlink } from '../../icons/Hyperlink'
+import { Image } from '../../icons/Image'
+import { Expand } from '../../icons/Expand'
+import { CustomMenuPopover } from '../CustomMenuPopover/CustomMenuPopover'
+
+const contrastColor = colorTokens.primaryDark
 
 interface Props {
 	color: string
@@ -43,9 +45,7 @@ export const ColorQuickViewPopover: FC<Props> = ({
 		dispatch(openScreenMode({ content: [color] }))
 	}
 	const onClickExport = () => {}
-	
-	const contrastColor = colorTokens.primaryDark
-	
+
 	const menuList: MenuListType = [
 		{
 			name: 'Open in the Color Picker',
@@ -71,17 +71,17 @@ export const ColorQuickViewPopover: FC<Props> = ({
 	]
 
 	return (
-		<CustomPopoverMenu
+		<CustomMenuPopover
 			id='colorQuick-popover'
 			open={!!anchorMorePopover}
 			anchorEl={anchorMorePopover}
 			anchorOrigin={{
-				vertical: 'top',
-				horizontal: 'right',
+				vertical: 'bottom',
+				horizontal: 'left',
 			}}
 			transformOrigin={{
-				vertical: 216,
-				horizontal: 'right',
+				vertical: 158 + 48,
+				horizontal: 10,
 			}}
 			handleClosePopover={handleClosePopover}
 			menuList={menuList}

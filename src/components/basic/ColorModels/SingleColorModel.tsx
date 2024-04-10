@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { DefaultHoveredButton } from '../DefaultHoveredButton/DefaultHoveredButton'
+import { DefaultHoveredButton } from '../../ui/DefaultHoveredButton/DefaultHoveredButton'
 
 interface Props {
 	colorModel: string

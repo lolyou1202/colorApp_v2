@@ -1,6 +1,6 @@
 import { FC } from 'react'
-import { PaletteStripe } from '../PaletteStripe/PaletteStripe'
-import { Bage } from '../Bage/Bage'
+import { PaletteStripe } from '../../ui/PaletteStripe/PaletteStripe'
+import { Bage } from '../../ui/Bage/Bage'
 
 interface Props {
 	listColors: { color: string; current: boolean }[]
