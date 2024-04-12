@@ -10,7 +10,7 @@ import { MenuListType } from '../../../types'
 import { Drop } from '../../icons/Drop'
 import { Hyperlink } from '../../icons/Hyperlink'
 import { Expand } from '../../icons/Expand'
-import { Image } from '../../icons/Image'
+import { Share } from '../../icons/Share'
 
 const contrastColor = colorTokens.primaryDark
 
@@ -18,7 +18,8 @@ interface Props {
 	color: string
 	anchorMorePopover: HTMLElement | null
 	handleClosePopover: () => void
-	handleOpenModal: () => void
+	handleOpenQuickViewModal: () => void
+	handleOpenExportModal: () => void
 	className?: string
 }
 
@@ -26,7 +27,8 @@ export const ColorCardMorePopover: FC<Props> = ({
 	color,
 	anchorMorePopover,
 	handleClosePopover,
-	handleOpenModal,
+	handleOpenQuickViewModal,
+	handleOpenExportModal,
 	className,
 }) => {
 	const dispatch = useAppDispatch()
@@ -45,14 +47,16 @@ export const ColorCardMorePopover: FC<Props> = ({
 		dispatch(viewAlert({ alertText: 'URL copied to the clipboard' }))
 	}
 	const onClickQuickView = () => {
-		handleOpenModal()
+		handleOpenQuickViewModal()
 	}
 	const onClickViewFull = () => {
 		dispatch(openScreenMode({ content: [color] }))
 	}
-	const onClickExport = () => {}
+	const onClickExport = () => {
+		handleOpenExportModal()
+	}
 
-	const menuList: MenuListType = [
+	const menuList: MenuListType[] = [
 		{
 			name: 'Open in the Color Picker',
 			icon: <Drop stroke={contrastColor} />,
@@ -76,8 +80,8 @@ export const ColorCardMorePopover: FC<Props> = ({
 		},
 		'',
 		{
-			name: 'Export as image',
-			icon: <Image stroke={contrastColor} />,
+			name: 'Export color',
+			icon: <Share stroke={contrastColor} />,
 			onClick: onClickExport,
 		},
 	]

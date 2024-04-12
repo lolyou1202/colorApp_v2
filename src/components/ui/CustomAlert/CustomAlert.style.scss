@@ -5,6 +5,7 @@
 	line-height: 32px !important;
 	color: var(--white) !important;
 	pointer-events: none !important;
+	user-select: none;
 }
 .MuiAlert-icon {
 	padding: 0 !important;

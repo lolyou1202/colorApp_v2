@@ -29,7 +29,12 @@ export const FullScreen = () => {
 			<Fade in={isOpen}>
 				<div className='fullScreen-wrapper'>
 					{content.map((color, index) => (
-						<Slide key={index} in={isOpen} direction='up'>
+						<Slide
+							key={index}
+							in={isOpen}
+							direction='up'
+							timeout={400}
+						>
 							<div
 								className='fullScreen-item'
 								style={{ backgroundColor: color }}

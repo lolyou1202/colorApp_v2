@@ -18,3 +18,16 @@
 		rgba(0, 0, 0, 0.1) 0 0 0 1px,
 		rgba(0, 0, 0, 0.15) 0 15px 30px 0px !important;
 }
+
+@media (max-width: 768px) {
+	.MuiPopover-paper {
+		width: 100vw !important;
+		top: auto !important;
+		right: auto !important;
+		left: 0 !important;
+		bottom: 0 !important;
+	}
+	//.customMenu {
+	//	width: 100vw;
+	//}
+}

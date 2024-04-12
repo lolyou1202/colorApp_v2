@@ -8,12 +8,14 @@
 		flex-direction: column;
 		align-items: center;
 		gap: 16px;
+		user-select: none;
 	}
 	&-title {
 		font-size: 48px;
 		font-weight: 700;
 		line-height: 48px;
 		color: var(--primary-dark);
+		user-select: none;
 	}
 	&-description {
 		text-align: center;
@@ -21,6 +23,7 @@
 		font-weight: 500;
 		line-height: 40px;
 		color: var(--primary-dark-transparent-50);
+		user-select: none;
 	}
 }
 

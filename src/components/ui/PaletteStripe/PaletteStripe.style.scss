@@ -35,6 +35,7 @@
 			line-height: 24px;
 			text-transform: uppercase;
 			transition: opacity 0.1s ease-in-out;
+			user-select: none;
 		}
 		&-check {
 			opacity: 0;

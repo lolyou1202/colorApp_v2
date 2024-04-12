@@ -9,7 +9,7 @@ import { Divider } from '@mui/material'
 import { colorTokens } from '../../../constants/colorTokens'
 
 interface Props extends PopoverProps {
-	menuList: MenuListType
+	menuList: MenuListType[]
 	handleClosePopover: () => void
 	className?: string
 }
@@ -32,7 +32,7 @@ export const CustomMenuPopover: FC<Props> = ({
 
 	const primaryDark = colorTokens.primaryDark
 	const brightness = 'light'
-
+	console.log(window.innerWidth)
 	return (
 		<Popover
 			id={id}

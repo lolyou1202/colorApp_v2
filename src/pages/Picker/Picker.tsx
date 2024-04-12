@@ -42,7 +42,8 @@ export const Picker = () => {
 	useEffect(() => {
 		dispatch(setLocation({ locationType: EnumLocation.picker }))
 	}, [])
-
+	//Сделать отдельную функцию для копирования в буфер обмена
+	//Сделать одинаковые наименования всех хендлеров и переменных
 	return (
 		colorState && (
 			<div className='picker'>

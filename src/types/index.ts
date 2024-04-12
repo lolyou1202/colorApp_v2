@@ -14,10 +14,11 @@ export type BlindnessScheme =
 	| 'Tritanomaly'
 	| 'Achromatopsia'
 	| 'Achromatomaly'
-export type MenuListType = (
+
+export type MenuListType =
 	| { name: string; icon: ReactNode; onClick: () => void }
 	| ''
-)[]
+export type ExportListType = Exclude<MenuListType, ''>
 
 export interface IColor {
 	color: string

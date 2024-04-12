@@ -46,7 +46,7 @@ export const ColorQuickViewPopover: FC<Props> = ({
 	}
 	const onClickExport = () => {}
 
-	const menuList: MenuListType = [
+	const menuList: MenuListType[] = [
 		{
 			name: 'Open in the Color Picker',
 			icon: <Drop stroke={contrastColor} />,

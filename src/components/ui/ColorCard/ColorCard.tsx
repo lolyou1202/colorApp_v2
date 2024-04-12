@@ -9,6 +9,7 @@ import { DefaultHoveredButton } from '../DefaultHoveredButton/DefaultHoveredButt
 import { MoreHorizontal } from '../../icons/MoreHorizontal'
 import { Eye } from '../../icons/Eye'
 import { ColorCardMorePopover } from '../Popover/ColorCardMorePopover'
+import { ExportColor } from '../Export/ExportColor'
 
 const contrastColorInfo = colorTokens.primaryDark
 const brightnessInfo = 'light'
@@ -20,13 +21,15 @@ interface Props {
 }
 
 export const ColorCard: FC<Props> = ({ color, name, similar }) => {
-	const [isOpenModal, setOpenModal] = useState(false)
+	const [isOpenQuickViewModal, setOpenQuickViewModal] = useState(false)
+	const [isOpenExportModal, setOpenExportModal] = useState(false)
 	const [anchorMorePopover, setAnchorMorePopover] =
 		useState<HTMLElement | null>(null)
 
-	const handleOpenModal = () => setOpenModal(true)
-	const handleCloseModal = () => setOpenModal(false)
-
+	const handleOpenQuickViewModal = () => setOpenQuickViewModal(true)
+	const handleCloseQuickViewModal = () => setOpenQuickViewModal(false)
+	const handleOpenExportModal = () => setOpenExportModal(true)
+	const handleCloseExportModal = () => setOpenExportModal(false)
 	const handleClickPopover = (event: MouseEvent<HTMLElement>) => {
 		setAnchorMorePopover(event.currentTarget)
 	}
@@ -58,36 +61,40 @@ export const ColorCard: FC<Props> = ({ color, name, similar }) => {
 					{name}
 				</p>
 				<div className='colorCard__info-buttons'>
-					<>
-						<DefaultHoveredButton
-							brightness={brightnessInfo}
-							onClick={handleOpenModal}
-						>
-							<Eye stroke={contrastColorInfo} />
-						</DefaultHoveredButton>
-						<QuickViewColorModal
-							color={color}
-							variant={contarstColorVariant}
-							isOpenModal={isOpenModal}
-							handleCloseModal={handleCloseModal}
-						/>
-					</>
-					<>
-						<DefaultHoveredButton
-							brightness={brightnessInfo}
-							onClick={handleClickPopover}
-						>
-							<MoreHorizontal stroke={contrastColorInfo} />
-						</DefaultHoveredButton>
-						<ColorCardMorePopover
-							color={color}
-							anchorMorePopover={anchorMorePopover}
-							handleClosePopover={handleClosePopover}
-							handleOpenModal={handleOpenModal}
-						/>
-					</>
+					<DefaultHoveredButton
+						brightness={brightnessInfo}
+						onClick={handleOpenQuickViewModal}
+					>
+						<Eye stroke={contrastColorInfo} />
+					</DefaultHoveredButton>
+					<DefaultHoveredButton
+						brightness={brightnessInfo}
+						onClick={handleClickPopover}
+					>
+						<MoreHorizontal stroke={contrastColorInfo} />
+					</DefaultHoveredButton>
 				</div>
 			</div>
+			<>
+				<QuickViewColorModal
+					color={color}
+					variant={contarstColorVariant}
+					isOpenModal={isOpenQuickViewModal}
+					handleCloseModal={handleCloseQuickViewModal}
+				/>
+				<ColorCardMorePopover
+					color={color}
+					anchorMorePopover={anchorMorePopover}
+					handleClosePopover={handleClosePopover}
+					handleOpenQuickViewModal={handleOpenQuickViewModal}
+					handleOpenExportModal={handleOpenExportModal}
+				/>
+				<ExportColor
+					color={color}
+					isOpenModal={isOpenExportModal}
+					handleCloseModal={handleCloseExportModal}
+				/>
+			</>
 		</div>
 	)
 }

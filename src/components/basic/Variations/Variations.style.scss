@@ -17,11 +17,13 @@
 				font-size: 24px;
 				line-height: 24px;
 				color: var(--text-dark);
+				user-select: none;
 			}
 			&-description {
 				font-size: 20px;
 				line-height: 24px;
 				color: var(--primary-dark-transparent-50);
+				user-select: none;
 			}
 		}
 	}
