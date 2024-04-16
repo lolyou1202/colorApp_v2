@@ -9,7 +9,7 @@ import { Drop } from '../../icons/Drop'
 import { Hyperlink } from '../../icons/Hyperlink'
 import { Image } from '../../icons/Image'
 import { Expand } from '../../icons/Expand'
-import { CustomMenuPopover } from '../CustomMenuPopover/CustomMenuPopover'
+import { CustomMenuPopover } from '../Popover/CustomMenuPopover'
 
 const contrastColor = colorTokens.primaryDark
 
@@ -80,7 +80,7 @@ export const ColorQuickViewPopover: FC<Props> = ({
 				horizontal: 'left',
 			}}
 			transformOrigin={{
-				vertical: 158 + 48,
+				vertical: 206,
 				horizontal: 10,
 			}}
 			handleClosePopover={handleClosePopover}

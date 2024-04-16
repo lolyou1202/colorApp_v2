@@ -7,6 +7,7 @@ import { DefaultHoveredButton } from '../DefaultHoveredButton/DefaultHoveredButt
 import { MenuListType } from '../../../types'
 import { Divider } from '@mui/material'
 import { colorTokens } from '../../../constants/colorTokens'
+import { useResize } from '../../../hooks/useResize'
 
 interface Props extends PopoverProps {
 	menuList: MenuListType[]
@@ -32,7 +33,9 @@ export const CustomMenuPopover: FC<Props> = ({
 
 	const primaryDark = colorTokens.primaryDark
 	const brightness = 'light'
-	console.log(window.innerWidth)
+	const { width } = useResize()
+	console.log(width)
+
 	return (
 		<Popover
 			id={id}

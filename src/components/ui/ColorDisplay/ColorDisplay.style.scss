@@ -36,6 +36,7 @@
 @media (max-width: 1268px) {
 	.colorDisplay {
 		height: 360px;
+		gap: 12px;
 		&-colorName {
 			font-size: 36px;
 			line-height: 40px;
@@ -45,6 +46,7 @@
 @media (max-width: 768px) {
 	.colorDisplay {
 		height: 240px;
+		gap: 8px;
 		&-hex {
 			font-size: 20px;
 			line-height: 20px;
@@ -57,6 +59,7 @@
 @media (max-width: 560px) {
 	.colorDisplay {
 		height: 200px;
+		gap: 4px;
 		&-hex {
 			font-size: 16px;
 			line-height: 16px;

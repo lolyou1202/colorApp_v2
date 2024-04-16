@@ -34,5 +34,12 @@
 	&__main {
 		display: flex;
 		overflow: hidden;
+		width: 100%;
+	}
+}
+
+@media (max-width: 768px) {
+	.customModal {
+		width: calc(100% - 64px) !important;
 	}
 }

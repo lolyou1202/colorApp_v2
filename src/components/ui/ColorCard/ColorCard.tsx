@@ -8,7 +8,7 @@ import { Bage } from '../Bage/Bage'
 import { DefaultHoveredButton } from '../DefaultHoveredButton/DefaultHoveredButton'
 import { MoreHorizontal } from '../../icons/MoreHorizontal'
 import { Eye } from '../../icons/Eye'
-import { ColorCardMorePopover } from '../Popover/ColorCardMorePopover'
+import { ColorCardMorePopover } from '../MenuPopover/ColorCardMorePopover'
 import { ExportColor } from '../Export/ExportColor'
 
 const contrastColorInfo = colorTokens.primaryDark

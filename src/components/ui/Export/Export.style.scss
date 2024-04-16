@@ -1,6 +1,6 @@
 .export__grid {
 	display: grid;
-	grid-template-columns: repeat(3, 120px);
+	grid-template-columns: repeat(3, 1fr);
 	gap: 8px;
 	width: 100%;
 	background: var(--white);
@@ -19,6 +19,25 @@
 			font-size: 16px;
 			line-height: 20px;
 			color: var(--text-dark);
+		}
+	}
+}
+
+@media (max-width: 768px) {
+	.customModal:has(.export__grid) {
+		width: auto !important;
+	}
+}
+@media (max-width: 560px) {
+	.export__grid-cell {
+		width: 100px !important;
+	}
+}
+@media (max-width: 400px) {
+	.export__grid {
+		grid-template-columns: repeat(2, 1fr) !important;
+		&-cell {
+			width: 120px !important;
 		}
 	}
 }
