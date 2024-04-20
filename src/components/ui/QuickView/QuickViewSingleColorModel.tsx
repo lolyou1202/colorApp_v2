@@ -1,7 +1,7 @@
 import { FC, useState } from 'react'
 import classNames from 'classnames'
 import { colorTokens } from '../../../constants/colorTokens'
-import { IColorVariant } from '../../../types'
+import { IColorVariant } from '../../../types/types'
 import { useAppDispatch } from '../../../redux/hooks/useAppRedux'
 import { viewAlert } from '../../../redux/slices/alertSlice'
 import { DefaultHoveredButton } from '../DefaultHoveredButton/DefaultHoveredButton'

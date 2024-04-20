@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import { FC, useState } from 'react'
-import { IColorVariant } from '../../../types'
+import { IColorVariant } from '../../../types/types'
 import { useAppDispatch } from '../../../redux/hooks/useAppRedux'
 import { viewAlert } from '../../../redux/slices/alertSlice'
 import { Check } from '../../icons/Check'

@@ -2,12 +2,12 @@ import { FC } from 'react'
 import { colorTokens } from '../../../constants/colorTokens'
 import { useAppDispatch } from '../../../redux/hooks/useAppRedux'
 import { viewAlert } from '../../../redux/slices/alertSlice'
-import { ExportListType } from '../../../types'
+import { ExportListType } from '../../../types/types'
 import { Export } from './Export'
-import { Css } from '../../icons/CSS'
 import { Image } from '../../icons/Image'
 import { Code } from '../../icons/Code'
 import { Hyperlink } from '../../icons/Hyperlink'
+import { Css } from '../../icons/Css'
 
 const contrastColor = colorTokens.primaryDark
 

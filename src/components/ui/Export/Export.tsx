@@ -2,7 +2,7 @@ import './Export.style.scss'
 import { FC, ReactNode } from 'react'
 import { CustomModal } from '../Modal/CustomModal'
 import { DefaultHoveredButton } from '../DefaultHoveredButton/DefaultHoveredButton'
-import { ExportListType } from '../../../types'
+import { ExportListType } from '../../../types/types'
 
 const brightness = 'light'
 

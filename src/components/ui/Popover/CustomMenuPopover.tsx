@@ -4,7 +4,7 @@ import { FC } from 'react'
 import { Popover, PopoverProps } from '@mui/material'
 import { BorderedLayout } from '../../layout/BorderedLayout/BorderedLayout'
 import { DefaultHoveredButton } from '../DefaultHoveredButton/DefaultHoveredButton'
-import { MenuListType } from '../../../types'
+import { MenuListType } from '../../../types/types'
 import { Divider } from '@mui/material'
 import { colorTokens } from '../../../constants/colorTokens'
 import { useResize } from '../../../hooks/useResize'
@@ -33,8 +33,7 @@ export const CustomMenuPopover: FC<Props> = ({
 
 	const primaryDark = colorTokens.primaryDark
 	const brightness = 'light'
-	const { width } = useResize()
-	console.log(width)
+	//const { width } = useResize()
 
 	return (
 		<Popover

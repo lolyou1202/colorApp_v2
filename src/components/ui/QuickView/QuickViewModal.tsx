@@ -1,6 +1,6 @@
 import './QuickViewModal.style.scss'
 import { FC, ReactNode, MouseEvent } from 'react'
-import { IColorVariant } from '../../../types'
+import { IColorVariant } from '../../../types/types'
 import { useColorModels } from '../../../hooks/useColorModels'
 import { CustomModal } from '../Modal/CustomModal'
 import { QuickViewSingleColorModel } from './QuickViewSingleColorModel'

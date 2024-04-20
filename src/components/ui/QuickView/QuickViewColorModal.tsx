@@ -1,6 +1,6 @@
 import { FC, useState, MouseEvent } from 'react'
 import { QuickViewModal } from './QuickViewModal'
-import { IColorVariant } from '../../../types'
+import { IColorVariant } from '../../../types/types'
 import { ColorQuickViewPopover } from '../MenuPopover/ColorQuickViewPopover'
 
 interface Props {

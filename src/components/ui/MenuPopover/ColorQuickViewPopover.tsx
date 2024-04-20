@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { colorTokens } from '../../../constants/colorTokens'
-import { MenuListType } from '../../../types'
+import { MenuListType } from '../../../types/types'
 import { useAppDispatch } from '../../../redux/hooks/useAppRedux'
 import { useNavigate } from 'react-router-dom'
 import { viewAlert } from '../../../redux/slices/alertSlice'

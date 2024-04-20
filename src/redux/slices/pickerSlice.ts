@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { IColor } from '../../types'
+import { IColor } from '../../types/types'
 import { useContrast } from '../../hooks/useContrast'
 import { colorTokens } from '../../constants/colorTokens'
 
