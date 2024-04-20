@@ -1,24 +1,43 @@
-import { FC } from 'react'
 import './CustomAlert.style.scss'
+import {
+	useAppDispatch,
+	useAppSelector,
+} from '../../../redux/hooks/useAppRedux'
+import { colorTokens } from '../../../constants/colorTokens'
+import { closeAlert } from '../../../redux/slices/alertSlice'
+import { Snackbar } from '@mui/material'
+import { Alert } from '@mui/material'
 import { Success } from '../../icons/Success'
-import Snackbar from '@mui/material/Snackbar'
-import Alert from '@mui/material/Alert'
 
-interface ICustomAlert {
-	open: boolean
-	onClose?: () => void
-	text?: string
-}
+const primaryWhite = colorTokens.primaryWhite
 
-export const CustomAlert: FC<ICustomAlert> = ({ open, onClose, text }) => {
+export const CustomAlert = () => {
+	const { open, text } = useAppSelector(state => state.alertReducer)
+
+	const dispatch = useAppDispatch()
+
+	const handleCloseAlert = (
+		_: React.SyntheticEvent | Event,
+		reason?: string
+	) => {
+		if (reason === 'clickaway') {
+			return
+		}
+		dispatch(closeAlert())
+	}
+
 	return (
 		<Snackbar
 			open={open}
 			anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
 			autoHideDuration={2000}
-			onClose={onClose}>
+			onClose={handleCloseAlert}
+		>
 			<Alert
-				icon={<Success size={32} stroke='#ffffff' strokeWidth={3} />}>
+				icon={
+					<Success size={32} stroke={primaryWhite} strokeWidth={3} />
+				}
+			>
 				{text}
 			</Alert>
 		</Snackbar>

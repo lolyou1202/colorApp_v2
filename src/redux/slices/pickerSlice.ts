@@ -1,46 +1,63 @@
-import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { IColor } from '../../types/types'
 import { useContrast } from '../../hooks/useContrast'
-import { IColor } from '../../types'
-import chroma from 'chroma-js'
+import { colorTokens } from '../../constants/colorTokens'
 
-interface IInitialState {
-	color: IColor
-}
-
-const initialState: IInitialState = {
-	color: {
-		HEX: '',
+const initialState: {
+	colorState: IColor
+	stackOfStates: { position: number; stack: string[] }
+} = {
+	colorState: {
+		color: '',
 		variant: {
 			brightness: 'light',
-			contrastHEX: '#353535',
+			contrastColor: colorTokens.primaryDark,
 		},
+	},
+	stackOfStates: {
+		position: -1,
+		stack: [],
 	},
 }
 
-const colorSlice = createSlice({
-	name: 'color',
+const pickerSlice = createSlice({
+	name: 'picker',
 	initialState,
 	reducers: {
-		setColor(state, { payload }: PayloadAction<{ color: string }>) {
-			state.color = {
-				HEX: payload.color,
-				variant: useContrast(payload.color),
+		setColor(state, { payload }: PayloadAction<{ newColor: string }>) {
+			state.colorState = {
+				color: payload.newColor,
+				variant: useContrast(payload.newColor),
 			}
+			state.stackOfStates.position = state.stackOfStates.stack.length
+			state.stackOfStates.stack.push(payload.newColor)
 		},
-		getRandom(state) {
-			const HEX = chroma
-				.random()
-				.hex()
-				.replace(/[^\d\w]/g, '')
-				.toUpperCase()
-			state.color = {
-				HEX: HEX,
-				variant: useContrast(HEX),
+		setPositionStack(
+			state,
+			{ payload }: PayloadAction<{ type: 'undo' | 'redo' }>
+		) {
+			let undoPosition
+
+			switch (payload.type) {
+				case 'undo':
+					undoPosition = state.stackOfStates.position - 1
+					break
+				case 'redo':
+					undoPosition = state.stackOfStates.position + 1
+					break
+			}
+
+			const undoColor = state.stackOfStates.stack[undoPosition]
+
+			state.stackOfStates.position = undoPosition
+			state.colorState = {
+				color: undoColor,
+				variant: useContrast(undoColor),
 			}
 		},
 	},
 })
 
-const { actions, reducer } = colorSlice
-export const { setColor, getRandom } = actions
+const { actions, reducer } = pickerSlice
+export const { setColor, setPositionStack } = actions
 export default reducer

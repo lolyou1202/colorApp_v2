@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-interface ICheck {
+interface Props {
 	className?: string
 	size?: number
 	stroke?: string
@@ -8,25 +8,26 @@ interface ICheck {
 	fill?: string
 }
 
-export const Check: FC<ICheck> = ({
+export const Check: FC<Props> = ({
 	className,
-	size = 32,
+	size = 24,
 	stroke,
-	strokeWidth,
+	strokeWidth = 2,
 	fill = 'none',
 }) => {
 	return (
 		<svg
 			className={className}
-			width={`${size}`}
-			height={`${size}`}
-			viewBox='0 0 32 32'
+			width={size}
+			height={size}
+			viewBox='0 0 24 24'
 			fill={fill}
-			xmlns='http://www.w3.org/2000/svg'>
+			xmlns='http://www.w3.org/2000/svg'
+		>
 			<path
-				d='M27 10L14.2833 22L7 15.1272'
+				d='M20.25 7.5L10.7125 16.5L5.25 11.3454'
 				stroke={stroke}
-				strokeWidth={`${strokeWidth}`}
+				strokeWidth={strokeWidth}
 				strokeLinecap='round'
 				strokeLinejoin='round'
 			/>

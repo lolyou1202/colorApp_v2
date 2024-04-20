@@ -1,32 +1,29 @@
-import { FC } from 'react'
-
-interface ICross {
+export const Cross = ({
+	className,
+	size = 24,
+	stroke,
+	strokeWidth = 2,
+	fill = 'none',
+}: {
 	className?: string
 	size?: number
 	stroke?: string
 	strokeWidth?: number
 	fill?: string
-}
-
-export const Cross: FC<ICross> = ({
-	className,
-	size = 32,
-	stroke,
-	strokeWidth,
-	fill = 'none',
 }) => {
 	return (
 		<svg
 			className={className}
-			width={`${size}`}
-			height={`${size}`}
-			viewBox='0 0 32 32'
+			width={size}
+			height={size}
+			viewBox='0 0 24 24'
 			fill={fill}
-			xmlns='http://www.w3.org/2000/svg'>
+			xmlns='http://www.w3.org/2000/svg'
+		>
 			<path
-				d='M7 25L16 16M16 16L25 7M16 16L25 25M16 16L7 7'
+				d='M6 18L12 12M12 12L18 6M12 12L18 18M12 12L6 6'
 				stroke={stroke}
-				strokeWidth={`${strokeWidth}`}
+				strokeWidth={strokeWidth}
 				strokeLinecap='round'
 				strokeLinejoin='round'
 			/>

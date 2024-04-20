@@ -1,0 +1,18 @@
+.defaultHoveredButton {
+	display: flex;
+	transition: background 0.2s ease-in-out;
+	background: none;
+	border: none;
+	cursor: pointer;
+	&:hover {
+		&.light {
+			background: var(--primary-dark-transparent-10);
+		}
+		&.dark {
+			background: var(--primary-light-transparent-10);
+		}
+	}
+	&:disabled {
+		pointer-events: none;
+	}
+}

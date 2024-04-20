@@ -1,4 +1,4 @@
-import { IPosition } from '../types'
+import { IPosition } from '../types/types'
 
 export const usePosition = (
 	positionIndex: number,

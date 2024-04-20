@@ -1,0 +1,58 @@
+.colorCard {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	&__board {
+		position: relative;
+		height: 120px;
+		cursor: pointer;
+		flex-basis: auto !important;
+		border-radius: var(--borderRadius-wide) !important;
+		&-hex {
+			font-size: 20px;
+			line-height: 24px;
+			user-select: none;
+		}
+		&-bage {
+			position: absolute;
+			top: 8px;
+			right: 8px;
+			&-text {
+				font-size: 14px;
+				line-height: 16px;
+			}
+		}
+	}
+	&__info {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		&-name {
+			font-size: 20px;
+			line-height: 16px;
+			padding-left: 4px;
+		}
+		&-buttons {
+			display: flex;
+			gap: 8px;
+		}
+	}
+}
+
+@media (max-width: 1268px) {
+	.colorCard {
+		&__board {
+			height: 100px !important;
+			&-hex {
+				font-size: 16px;
+				line-height: 16px;
+			}
+		}
+		&__info {
+			&-name {
+				font-size: 16px;
+				line-height: 16px;
+			}
+		}
+	}
+}
