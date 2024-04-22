@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import sass from 'sass'
 
 export default defineConfig({
-	base: 'colorApp_v2',
+	base: 'https://github.com/lolyou1202/colorApp_v2',
 	plugins: [react()],
 	css: {
 		preprocessorOptions: {
